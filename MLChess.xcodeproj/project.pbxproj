@@ -13,7 +13,25 @@
 		174BD9AD224C0A3100C7D48A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 174BD9AB224C0A3100C7D48A /* Main.storyboard */; };
 		174BD9AF224C0A3400C7D48A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 174BD9AE224C0A3400C7D48A /* Assets.xcassets */; };
 		174BD9B2224C0A3400C7D48A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 174BD9B0224C0A3400C7D48A /* LaunchScreen.storyboard */; };
+		174BD9BA224C0A7000C7D48A /* MonteCarloKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174BD9B9224C0A7000C7D48A /* MonteCarloKit.framework */; };
+		174BD9BB224C0A7000C7D48A /* MonteCarloKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 174BD9B9224C0A7000C7D48A /* MonteCarloKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		174BD9BF224C0D0F00C7D48A /* MLChessboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9BE224C0D0F00C7D48A /* MLChessboard.swift */; };
+		174BD9C1224D598700C7D48A /* WhiteKing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C0224D598700C7D48A /* WhiteKing.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		174BD9BC224C0A7000C7D48A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				174BD9BB224C0A7000C7D48A /* MonteCarloKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		174BD9A2224C0A3100C7D48A /* MLChess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLChess.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,6 +42,9 @@
 		174BD9AE224C0A3400C7D48A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		174BD9B1224C0A3400C7D48A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		174BD9B3224C0A3400C7D48A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		174BD9B9224C0A7000C7D48A /* MonteCarloKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MonteCarloKit.framework; sourceTree = "<group>"; };
+		174BD9BE224C0D0F00C7D48A /* MLChessboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessboard.swift; sourceTree = "<group>"; };
+		174BD9C0224D598700C7D48A /* WhiteKing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteKing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				174BD9BA224C0A7000C7D48A /* MonteCarloKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +62,7 @@
 		174BD999224C0A3100C7D48A = {
 			isa = PBXGroup;
 			children = (
+				174BD9B9224C0A7000C7D48A /* MonteCarloKit.framework */,
 				174BD9A4224C0A3100C7D48A /* MLChess */,
 				174BD9A3224C0A3100C7D48A /* Products */,
 			);
@@ -56,6 +79,7 @@
 		174BD9A4224C0A3100C7D48A /* MLChess */ = {
 			isa = PBXGroup;
 			children = (
+				174BD9BD224C0CCE00C7D48A /* Views */,
 				174BD9A5224C0A3100C7D48A /* AppDelegate.swift */,
 				174BD9A7224C0A3100C7D48A /* FirstViewController.swift */,
 				174BD9A9224C0A3100C7D48A /* SecondViewController.swift */,
@@ -65,6 +89,15 @@
 				174BD9B3224C0A3400C7D48A /* Info.plist */,
 			);
 			path = MLChess;
+			sourceTree = "<group>";
+		};
+		174BD9BD224C0CCE00C7D48A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				174BD9BE224C0D0F00C7D48A /* MLChessboard.swift */,
+				174BD9C0224D598700C7D48A /* WhiteKing.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,6 +110,7 @@
 				174BD99E224C0A3100C7D48A /* Sources */,
 				174BD99F224C0A3100C7D48A /* Frameworks */,
 				174BD9A0224C0A3100C7D48A /* Resources */,
+				174BD9BC224C0A7000C7D48A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -138,6 +172,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				174BD9BF224C0D0F00C7D48A /* MLChessboard.swift in Sources */,
+				174BD9C1224D598700C7D48A /* WhiteKing.swift in Sources */,
 				174BD9AA224C0A3100C7D48A /* SecondViewController.swift in Sources */,
 				174BD9A6224C0A3100C7D48A /* AppDelegate.swift in Sources */,
 				174BD9A8224C0A3100C7D48A /* FirstViewController.swift in Sources */,
@@ -288,7 +324,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BR2M9RRNF6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MLChess/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -306,7 +347,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BR2M9RRNF6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MLChess/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
