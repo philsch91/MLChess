@@ -32,7 +32,7 @@ class MLChessboard: UIView {
         let squareSize: CGFloat = (rect.width-40)/8
         let origin = CGPoint(x: 20, y: rect.height-squareSize-20)
         let context = UIGraphicsGetCurrentContext()
-        var tst: WhiteKing
+        var tst: MLWhiteKing
         
         print(origin)
         
@@ -50,7 +50,7 @@ class MLChessboard: UIView {
                 }
                 
                 context?.fill(square)
-                tst = WhiteKing(frame: square)
+                tst = MLWhiteKing(frame: square)
                 self.addSubview(tst)
             }
         }

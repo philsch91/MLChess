@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WhiteKing: UILabel {
+class MLWhiteKing: UILabel {
     
     override init(frame: CGRect) {
         //self.size=Float(frame.size.width-20.0)

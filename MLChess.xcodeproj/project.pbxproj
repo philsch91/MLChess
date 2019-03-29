@@ -16,7 +16,7 @@
 		174BD9BA224C0A7000C7D48A /* MonteCarloKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174BD9B9224C0A7000C7D48A /* MonteCarloKit.framework */; };
 		174BD9BB224C0A7000C7D48A /* MonteCarloKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 174BD9B9224C0A7000C7D48A /* MonteCarloKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		174BD9BF224C0D0F00C7D48A /* MLChessboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9BE224C0D0F00C7D48A /* MLChessboard.swift */; };
-		174BD9C1224D598700C7D48A /* WhiteKing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C0224D598700C7D48A /* WhiteKing.swift */; };
+		174BD9C1224D598700C7D48A /* MLWhiteKing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C0224D598700C7D48A /* MLWhiteKing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,7 +44,7 @@
 		174BD9B3224C0A3400C7D48A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		174BD9B9224C0A7000C7D48A /* MonteCarloKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MonteCarloKit.framework; sourceTree = "<group>"; };
 		174BD9BE224C0D0F00C7D48A /* MLChessboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessboard.swift; sourceTree = "<group>"; };
-		174BD9C0224D598700C7D48A /* WhiteKing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteKing.swift; sourceTree = "<group>"; };
+		174BD9C0224D598700C7D48A /* MLWhiteKing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLWhiteKing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				174BD9BE224C0D0F00C7D48A /* MLChessboard.swift */,
-				174BD9C0224D598700C7D48A /* WhiteKing.swift */,
+				174BD9C0224D598700C7D48A /* MLWhiteKing.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -173,7 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				174BD9BF224C0D0F00C7D48A /* MLChessboard.swift in Sources */,
-				174BD9C1224D598700C7D48A /* WhiteKing.swift in Sources */,
+				174BD9C1224D598700C7D48A /* MLWhiteKing.swift in Sources */,
 				174BD9AA224C0A3100C7D48A /* SecondViewController.swift in Sources */,
 				174BD9A6224C0A3100C7D48A /* AppDelegate.swift in Sources */,
 				174BD9A8224C0A3100C7D48A /* FirstViewController.swift in Sources */,
