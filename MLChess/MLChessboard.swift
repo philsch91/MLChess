@@ -86,6 +86,10 @@ class MLChessboard: UIView {
             }
         }
         
+        //let u = UnicodeScalar(97)
+        //let char = Character(u ?? 97)
+        //print(char)
+        //print(Unicode.Scalar(97))
     }
     
 
