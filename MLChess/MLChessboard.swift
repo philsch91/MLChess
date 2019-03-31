@@ -36,13 +36,54 @@ class MLChessboard: UIView {
         var tst: MLWhiteKing
         
         print(origin)
-        
+        /*
+        for col in 1...8{
+            let centerx: CGPoint = CGPoint(x: squareSize*CGFloat(col), y: 5)
+            let framex: CGRect = CGRect(origin: centerx, size: CGSize(width: 10, height: 10))
+            //----
+            let labelx: UILabel = UILabel(frame: framex)
+            labelx.center.x -= (labelx.frame.size.width/2)
+            labelx.text="A"
+            //let t = Unicode.Scalar(97+col)
+            //print(t?.description)
+            //labelx.text=t as? String
+            labelx.textColor = UIColor.white
+            self.addSubview(labelx)
+ 
+            let labelx2: UILabel = UILabel(frame: framex)
+            labelx2.center.x -= (labelx2.frame.size.width/2)
+            labelx2.center.y = rect.height-labelx2.frame.size.width
+            labelx2.text = "A"
+            labelx2.textColor = UIColor.white
+            self.addSubview(labelx2)
+        }
+        */
         for row in 1...8 {
+            let centerx: CGPoint = CGPoint(x: squareSize*CGFloat(row), y: 5)
+            let framex: CGRect = CGRect(origin: centerx, size: CGSize(width: 10, height: 10))
+            //----
+            let labelx: UILabel = UILabel(frame: framex)
+            labelx.center.x -= (labelx.frame.size.width/2)
+            labelx.text=String(row)
+            //let t = Unicode.Scalar(97+col)
+            //print(t?.description)
+            //labelx.text=t as? String
+            labelx.textColor = UIColor.white
+            self.addSubview(labelx)
+            
+            let labelx2: UILabel = UILabel(frame: framex)
+            labelx2.center.x -= (labelx2.frame.size.width/2)
+            labelx2.center.y = rect.height-labelx2.frame.size.width
+            labelx2.text = "A"
+            labelx2.textColor = UIColor.white
+            self.addSubview(labelx2)
+            
             //let center: CGPoint = CGPoint(x: 5, y: rect.height-(squareSize*CGFloat(row))-20)
             let center: CGPoint = CGPoint(x: 5, y: squareSize*CGFloat(row))
             print("center",center)
             //let frame: CGRect = CGRect(x: 5, y: squareSize*CGFloat(row), width: 10, height: 10)
             let frame: CGRect = CGRect(origin: center, size: CGSize(width: 10, height: 10))
+            //----
             let label: UILabel = UILabel(frame: frame)  //(10.0, 46.875)
             //label.layer.borderWidth=1     //debug
             //print("label.center",label.center)
