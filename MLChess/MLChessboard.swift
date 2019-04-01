@@ -64,17 +64,17 @@ class MLChessboard: UIView {
             //----
             let labelx: UILabel = UILabel(frame: framex)
             labelx.center.x -= (labelx.frame.size.width/2)
-            labelx.text=String(row)
-            //let t = Unicode.Scalar(97+col)
-            //print(t?.description)
-            //labelx.text=t as? String
+            //labelx.text=String(row)
+            labelx.text = String(format: "%c", row+64) //as String
+            //labelx.text = String(UnicodeScalar(row+64)!.value)
+            //labelx.text=String(UnicodeScalar(row + 64))
             labelx.textColor = UIColor.white
             self.addSubview(labelx)
             
             let labelx2: UILabel = UILabel(frame: framex)
             labelx2.center.x -= (labelx2.frame.size.width/2)
             labelx2.center.y = rect.height-labelx2.frame.size.width
-            labelx2.text = "A"
+            labelx2.text = String(format: "%c", row+64)
             labelx2.textColor = UIColor.white
             self.addSubview(labelx2)
             
@@ -126,11 +126,6 @@ class MLChessboard: UIView {
                 self.addSubview(tst)
             }
         }
-        
-        //let u = UnicodeScalar(97)
-        //let char = Character(u ?? 97)
-        //print(char)
-        //print(Unicode.Scalar(97))
     }
     
 
