@@ -9,7 +9,7 @@
 import UIKit
 //import CoreGraphics
 
-class MLChessboard: UIView {
+class MLChessBoardView: UIView {
     
     let size: Float = 0
     

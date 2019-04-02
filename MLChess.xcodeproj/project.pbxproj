@@ -15,9 +15,10 @@
 		174BD9B2224C0A3400C7D48A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 174BD9B0224C0A3400C7D48A /* LaunchScreen.storyboard */; };
 		174BD9BA224C0A7000C7D48A /* MonteCarloKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174BD9B9224C0A7000C7D48A /* MonteCarloKit.framework */; };
 		174BD9BB224C0A7000C7D48A /* MonteCarloKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 174BD9B9224C0A7000C7D48A /* MonteCarloKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		174BD9BF224C0D0F00C7D48A /* MLChessboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9BE224C0D0F00C7D48A /* MLChessboard.swift */; };
+		174BD9BF224C0D0F00C7D48A /* MLChessBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9BE224C0D0F00C7D48A /* MLChessBoardView.swift */; };
 		174BD9C1224D598700C7D48A /* MLWhiteKingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C0224D598700C7D48A /* MLWhiteKingView.swift */; };
 		174BD9C32253580500C7D48A /* MLBlackKingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C22253580500C7D48A /* MLBlackKingView.swift */; };
+		174BD9C72253BBEC00C7D48A /* MLChessPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C62253BBEC00C7D48A /* MLChessPiece.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,9 +45,10 @@
 		174BD9B1224C0A3400C7D48A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		174BD9B3224C0A3400C7D48A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		174BD9B9224C0A7000C7D48A /* MonteCarloKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MonteCarloKit.framework; sourceTree = "<group>"; };
-		174BD9BE224C0D0F00C7D48A /* MLChessboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessboard.swift; sourceTree = "<group>"; };
+		174BD9BE224C0D0F00C7D48A /* MLChessBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessBoardView.swift; sourceTree = "<group>"; };
 		174BD9C0224D598700C7D48A /* MLWhiteKingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLWhiteKingView.swift; sourceTree = "<group>"; };
 		174BD9C22253580500C7D48A /* MLBlackKingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackKingView.swift; sourceTree = "<group>"; };
+		174BD9C62253BBEC00C7D48A /* MLChessPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessPiece.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,9 @@
 		174BD9A4224C0A3100C7D48A /* MLChess */ = {
 			isa = PBXGroup;
 			children = (
+				174BD9C82253C2C000C7D48A /* Protocols */,
+				174BD9C52253BBD200C7D48A /* Models */,
+				174BD9C42253B3D300C7D48A /* Controllers */,
 				174BD9BD224C0CCE00C7D48A /* Views */,
 				174BD9A5224C0A3100C7D48A /* AppDelegate.swift */,
 				174BD9A7224C0A3100C7D48A /* MainViewController.swift */,
@@ -96,11 +101,33 @@
 		174BD9BD224C0CCE00C7D48A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				174BD9BE224C0D0F00C7D48A /* MLChessboard.swift */,
+				174BD9BE224C0D0F00C7D48A /* MLChessBoardView.swift */,
 				174BD9C0224D598700C7D48A /* MLWhiteKingView.swift */,
 				174BD9C22253580500C7D48A /* MLBlackKingView.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		174BD9C42253B3D300C7D48A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		174BD9C52253BBD200C7D48A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				174BD9C62253BBEC00C7D48A /* MLChessPiece.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		174BD9C82253C2C000C7D48A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,10 +202,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				174BD9BF224C0D0F00C7D48A /* MLChessboard.swift in Sources */,
+				174BD9BF224C0D0F00C7D48A /* MLChessBoardView.swift in Sources */,
 				174BD9C1224D598700C7D48A /* MLWhiteKingView.swift in Sources */,
 				174BD9AA224C0A3100C7D48A /* SecondViewController.swift in Sources */,
 				174BD9A6224C0A3100C7D48A /* AppDelegate.swift in Sources */,
+				174BD9C72253BBEC00C7D48A /* MLChessPiece.swift in Sources */,
 				174BD9A8224C0A3100C7D48A /* MainViewController.swift in Sources */,
 				174BD9C32253580500C7D48A /* MLBlackKingView.swift in Sources */,
 			);

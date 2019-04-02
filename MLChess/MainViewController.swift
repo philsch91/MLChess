@@ -26,7 +26,7 @@ class MainViewController: UIViewController {
         
         frame.origin.y+=CGFloat(100)
         
-        let board = MLChessboard(frame: frame)
+        let board = MLChessBoardView(frame: frame)
         /*
         if let navBar = self.navigationController {
             // pin containerView to *bottom* of navBar view
