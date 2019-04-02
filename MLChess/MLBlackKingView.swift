@@ -1,27 +1,27 @@
 //
-//  WhiteKing.swift
+//  MLBlackKing.swift
 //  MLChess
 //
-//  Created by Philipp Schunker on 28.03.19.
+//  Created by Philipp Schunker on 02.04.19.
 //  Copyright © 2019 Philipp Schunker. All rights reserved.
 //
 
 import UIKit
 
-class MLWhiteKing: UILabel {
+class MLBlackKingView: UILabel {
     
     override init(frame: CGRect) {
         //self.size=Float(frame.size.width-20.0)
         super.init(frame: frame)
         self.backgroundColor = UIColor.clear
         self.font = UIFont.boldSystemFont(ofSize: 42)
-        self.text="♔"
+        self.text="♚"
     }
     
     required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
     }
-    
+
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

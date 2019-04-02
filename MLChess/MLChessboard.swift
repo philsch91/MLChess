@@ -33,7 +33,8 @@ class MLChessboard: UIView {
         print("squareSize",squareSize)
         let origin = CGPoint(x: 20, y: rect.height-squareSize-20)
         let context = UIGraphicsGetCurrentContext()
-        var tst: MLWhiteKing
+        var tst: MLWhiteKingView
+        var tst2: MLBlackKingView
         
         print(origin)
         /*
@@ -73,7 +74,7 @@ class MLChessboard: UIView {
             
             let labelx2: UILabel = UILabel(frame: framex)
             labelx2.center.x -= (labelx2.frame.size.width/2)
-            labelx2.center.y = rect.height-labelx2.frame.size.width
+            labelx2.center.y = rect.height-labelx2.frame.size.height
             labelx2.text = String(format: "%c", row+64)
             labelx2.textColor = UIColor.white
             self.addSubview(labelx2)
@@ -116,14 +117,23 @@ class MLChessboard: UIView {
                     context?.setFillColor(UIColor.white.cgColor)
                 } else {
                     print("row ",row," col ",col," black")
-                    context?.setFillColor(UIColor.black.cgColor)
+                    context?.setFillColor(UIColor.darkGray.cgColor)
                 }
                 
                 context?.fill(square)
-                var frame: CGRect = square
-                frame.origin.x = square.origin.x + square.width/7
-                tst = MLWhiteKing(frame: frame)
-                self.addSubview(tst)
+                if col == 0{
+                    var frame: CGRect = square
+                    frame.origin.x = square.origin.x + square.width/7
+                    tst = MLWhiteKingView(frame: frame)
+                    self.addSubview(tst)
+                }
+                if col == 1 {
+                    var frame: CGRect = square
+                    frame.origin.x = square.origin.x + square.width/7
+                    tst2 = MLBlackKingView(frame: frame)
+                    self.addSubview(tst2)
+                }
+                
             }
         }
     }
