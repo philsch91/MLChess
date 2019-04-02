@@ -122,15 +122,20 @@ class MLChessboard: UIView {
                 
                 context?.fill(square)
                 if col == 0{
-                    var frame: CGRect = square
-                    frame.origin.x = square.origin.x + square.width/7
+                    let frame: CGRect = square
+                    //print(square.origin)
                     tst = MLWhiteKingView(frame: frame)
+                    tst.center = CGPoint(x: square.origin.x+(square.size.width/2), y: square.origin.y+(square.size.height/2))
+                    //print(tst.center)
+                    tst.center.x += 3
                     self.addSubview(tst)
                 }
                 if col == 1 {
-                    var frame: CGRect = square
-                    frame.origin.x = square.origin.x + square.width/7
-                    tst2 = MLBlackKingView(frame: frame)
+                    tst2 = MLBlackKingView(frame: square)
+                    print(tst2.center)
+                    tst2.center = CGPoint(x: square.origin.x+(square.size.width/2), y: square.origin.y+(square.size.height/2))
+                    tst2.center.x += 3
+                    print(tst2.center)
                     self.addSubview(tst2)
                 }
                 
