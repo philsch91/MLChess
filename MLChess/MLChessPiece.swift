@@ -9,8 +9,17 @@
 import UIKit
 
 class MLChessPiece: NSObject {
+    var board: [[MLChessPiece]]     //= [[MLChessPiece]]()
+    var posX: Int
+    var posY: Int
     
-    func getPossibleMoves() -> Array<Int> {
-        return Array(repeating: 0, count: 64)
+    internal override init() {
+        self.board = [[MLChessPiece]]()
+        self.posX = 0
+        self.posY = 0
+    }
+    
+    public func getPossibleMoves() -> [[[MLChessPiece]]] {
+        return [[[MLChessPiece]]]()
     }
 }

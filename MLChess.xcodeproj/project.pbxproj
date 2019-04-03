@@ -19,6 +19,8 @@
 		174BD9C1224D598700C7D48A /* MLWhiteKingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C0224D598700C7D48A /* MLWhiteKingView.swift */; };
 		174BD9C32253580500C7D48A /* MLBlackKingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C22253580500C7D48A /* MLBlackKingView.swift */; };
 		174BD9C72253BBEC00C7D48A /* MLChessPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C62253BBEC00C7D48A /* MLChessPiece.swift */; };
+		174BD9CA2253CA7F00C7D48A /* MLChessGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C92253CA7F00C7D48A /* MLChessGame.swift */; };
+		174BD9CC225547C400C7D48A /* MLRookPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9CB225547C400C7D48A /* MLRookPiece.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +51,8 @@
 		174BD9C0224D598700C7D48A /* MLWhiteKingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLWhiteKingView.swift; sourceTree = "<group>"; };
 		174BD9C22253580500C7D48A /* MLBlackKingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackKingView.swift; sourceTree = "<group>"; };
 		174BD9C62253BBEC00C7D48A /* MLChessPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessPiece.swift; sourceTree = "<group>"; };
+		174BD9C92253CA7F00C7D48A /* MLChessGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessGame.swift; sourceTree = "<group>"; };
+		174BD9CB225547C400C7D48A /* MLRookPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLRookPiece.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				174BD9C62253BBEC00C7D48A /* MLChessPiece.swift */,
+				174BD9C92253CA7F00C7D48A /* MLChessGame.swift */,
+				174BD9CB225547C400C7D48A /* MLRookPiece.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -207,6 +213,8 @@
 				174BD9AA224C0A3100C7D48A /* SecondViewController.swift in Sources */,
 				174BD9A6224C0A3100C7D48A /* AppDelegate.swift in Sources */,
 				174BD9C72253BBEC00C7D48A /* MLChessPiece.swift in Sources */,
+				174BD9CC225547C400C7D48A /* MLRookPiece.swift in Sources */,
+				174BD9CA2253CA7F00C7D48A /* MLChessGame.swift in Sources */,
 				174BD9A8224C0A3100C7D48A /* MainViewController.swift in Sources */,
 				174BD9C32253580500C7D48A /* MLBlackKingView.swift in Sources */,
 			);
