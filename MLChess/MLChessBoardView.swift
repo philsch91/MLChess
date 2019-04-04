@@ -11,7 +11,7 @@ import UIKit
 
 class MLChessBoardView: UIView {
     
-    let size: Float = 0
+    var rect: CGRect = CGRect.null
     
     override init(frame: CGRect) {
         //self.size=Float(frame.size.width-20.0)
@@ -32,11 +32,13 @@ class MLChessBoardView: UIView {
         let squareSize: CGFloat = (rect.width-40)/8
         print("squareSize",squareSize)
         let origin = CGPoint(x: 20, y: rect.height-squareSize-20)
+        print("origin",origin)
         let context = UIGraphicsGetCurrentContext()
-        var tst: MLWhiteKingView
-        var tst2: MLBlackKingView
         
-        print(origin)
+        self.rect = CGRect(origin: origin, size: CGSize(width: squareSize, height: squareSize))
+        
+        //var tst: MLWhiteKingView
+        
         /*
         for col in 1...8{
             let centerx: CGPoint = CGPoint(x: squareSize*CGFloat(col), y: 5)
@@ -81,7 +83,7 @@ class MLChessBoardView: UIView {
             
             //let center: CGPoint = CGPoint(x: 5, y: rect.height-(squareSize*CGFloat(row))-20)
             let center: CGPoint = CGPoint(x: 5, y: squareSize*CGFloat(row))
-            print("center",center)
+            //print("center",center)
             //let frame: CGRect = CGRect(x: 5, y: squareSize*CGFloat(row), width: 10, height: 10)
             let frame: CGRect = CGRect(origin: center, size: CGSize(width: 10, height: 10))
             //----
@@ -89,7 +91,7 @@ class MLChessBoardView: UIView {
             //label.layer.borderWidth=1     //debug
             //print("label.center",label.center)
             label.center.y -= (label.frame.size.height)     //(10.0, 36.875)
-            print("label.center",label.center)
+            //print("label.center",label.center)
             label.text = String(row)
             label.textColor = UIColor.white
             self.addSubview(label)
@@ -101,7 +103,7 @@ class MLChessBoardView: UIView {
             //print("t2",rect.width-label2.frame.size.width)
             label2.center.x = rect.width-label2.frame.size.width
             label2.center.y -= label2.frame.size.height
-            print("label2.center",label2.center)
+            //print("label2.center",label2.center)
             label2.text = String(row)
             label2.textColor = UIColor.white
             self.addSubview(label2)
@@ -113,35 +115,27 @@ class MLChessBoardView: UIView {
                 //print(square.origin)
                 
                 if (row+col)%2 == 0{
-                    print("row ",row," col ",col," white")
+                    //print("row ",row," col ",col," white")
                     context?.setFillColor(UIColor.white.cgColor)
                 } else {
-                    print("row ",row," col ",col," black")
+                    //print("row ",row," col ",col," black")
                     context?.setFillColor(UIColor.darkGray.cgColor)
                 }
                 
                 context?.fill(square)
-                if col == 0{
-                    let frame: CGRect = square
-                    //print(square.origin)
-                    tst = MLWhiteKingView(frame: frame)
+                /*
+                if row == 0 && col == 0 {
+                    tst = MLWhiteKingView(frame: square)
                     tst.center = CGPoint(x: square.origin.x+(square.size.width/2), y: square.origin.y+(square.size.height/2))
                     //print(tst.center)
+                    print(row,col,square.origin,square.size,tst.center)
                     tst.center.x += 3
                     self.addSubview(tst)
                 }
-                if col == 1 {
-                    tst2 = MLBlackKingView(frame: square)
-                    print(tst2.center)
-                    tst2.center = CGPoint(x: square.origin.x+(square.size.width/2), y: square.origin.y+(square.size.height/2))
-                    tst2.center.x += 3
-                    print(tst2.center)
-                    self.addSubview(tst2)
-                }
-                
+                */
             }
         }
+        
     }
-    
 
 }

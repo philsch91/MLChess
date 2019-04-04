@@ -1,14 +1,14 @@
 //
-//  MLRookPiece.swift
+//  MLKingPiece.swift
 //  MLChess
 //
-//  Created by Philipp Schunker on 03.04.19.
+//  Created by Philipp Schunker on 04.04.19.
 //  Copyright © 2019 Philipp Schunker. All rights reserved.
 //
 
 import UIKit
 
-class MLRookPiece: MLChessPiece {
+class MLKingPiece: MLChessPiece {
     
     public init(state:[[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor) {
         super.init()
