@@ -1,18 +1,21 @@
 //
-//  MLBlackKing.swift
+//  MLChessPieceView.swift
 //  MLChess
 //
-//  Created by Philipp Schunker on 02.04.19.
+//  Created by Philipp Schunker on 05.04.19.
 //  Copyright © 2019 Philipp Schunker. All rights reserved.
 //
 
 import UIKit
 
-class MLBlackKingView: MLChessPieceView {
+class MLChessPieceView: UILabel {
     
     override init(frame: CGRect) {
+        //self.size=Float(frame.size.width-20.0)
         super.init(frame: frame)
-        self.text="♚"
+        self.backgroundColor = UIColor.clear
+        self.font = UIFont.boldSystemFont(ofSize: 42)
+        self.textAlignment = NSTextAlignment.center
     }
     
     required init?(coder decoder: NSCoder) {

@@ -1,18 +1,19 @@
 //
-//  MLBlackKing.swift
+//  MLBlackPawnView.swift
 //  MLChess
 //
-//  Created by Philipp Schunker on 02.04.19.
+//  Created by Philipp Schunker on 05.04.19.
 //  Copyright © 2019 Philipp Schunker. All rights reserved.
 //
 
 import UIKit
 
-class MLBlackKingView: MLChessPieceView {
+class MLBlackPawnView: MLChessPieceView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.text="♚"
+        //self.text="\u{265F}"
+        self.text="♟"
     }
     
     required init?(coder decoder: NSCoder) {

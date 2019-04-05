@@ -23,7 +23,7 @@ class MLChessBoardViewController: NSObject {
         var frame: CGRect = self.board.rect
         //41,875
         for row in 0...7 {
-            for col in 0...7{
+            for col in 0...7 {
                 if case let piece? = state[row][col] {
                     if piece is MLKingPiece && piece.color == MLPieceColor.black {
                         print(row,col,"king")
@@ -31,7 +31,7 @@ class MLChessBoardViewController: NSObject {
                         let fig = MLBlackKingView(frame: frame)
                         fig.center = CGPoint(x: frame.origin.x+(frame.size.width/2), y: frame.origin.y+(frame.size.height/2))
                         print(row,col,fig.frame.origin,fig.frame.size)
-                        fig.center.x += 3
+                        //fig.center.x += 3     //correction not needed with textalignment=NSTextAlignment.center
                         self.board.addSubview(fig)
                         self.views.append(fig)
                     }
@@ -41,14 +41,94 @@ class MLChessBoardViewController: NSObject {
                         let fig = MLWhiteKingView(frame: frame)
                         fig.center = CGPoint(x: frame.origin.x+(frame.size.width/2), y: frame.origin.y+(frame.size.height/2))
                         print(row,col,fig.frame.origin,fig.frame.size)
-                        fig.center.x += 3
+                        self.board.addSubview(fig)
+                        self.views.append(fig)
+                    }
+                    if piece is MLQueenPiece && piece.color == MLPieceColor.black {
+                        let fig = MLBlackQueenView(frame: frame)
+                        fig.center = CGPoint(x: frame.origin.x+(frame.size.width/2), y: frame.origin.y+(frame.size.height/2))
+                        print(row,col,fig.frame.origin,fig.frame.size)
+                        //fig.center.x += 3
+                        self.board.addSubview(fig)
+                        self.views.append(fig)
+                    }
+                    if piece is MLQueenPiece && piece.color == MLPieceColor.white {
+                        let fig = MLWhiteQueenView(frame: frame)
+                        fig.center = CGPoint(x: frame.origin.x+(frame.size.width/2), y: frame.origin.y+(frame.size.height/2))
+                        print(row,col,fig.frame.origin,fig.frame.size)
+                        //fig.center.x += 3
+                        self.board.addSubview(fig)
+                        self.views.append(fig)
+                    }
+                    if piece is MLRookPiece && piece.color == MLPieceColor.black {
+                        let fig = MLBlackRookView(frame: frame)
+                        fig.center = CGPoint(x: frame.origin.x+(frame.size.width/2), y: frame.origin.y+(frame.size.height/2))
+                        print(row,col,fig.frame.origin,fig.frame.size)
+                        //fig.center.x += 3
+                        self.board.addSubview(fig)
+                        self.views.append(fig)
+                    }
+                    if piece is MLRookPiece && piece.color == MLPieceColor.white {
+                        let fig = MLWhiteRookView(frame: frame)
+                        fig.center = CGPoint(x: frame.origin.x+(frame.size.width/2), y: frame.origin.y+(frame.size.height/2))
+                        print(row,col,fig.frame.origin,fig.frame.size)
+                        //fig.center.x += 3
+                        self.board.addSubview(fig)
+                        self.views.append(fig)
+                    }
+                    if piece is MLBishopPiece && piece.color == MLPieceColor.black {
+                        let fig = MLBlackBishopView(frame: frame)
+                        fig.center = CGPoint(x: frame.origin.x+(frame.size.width/2), y: frame.origin.y+(frame.size.height/2))
+                        print(row,col,fig.frame.origin,fig.frame.size)
+                        //fig.center.x += 3
+                        self.board.addSubview(fig)
+                        self.views.append(fig)
+                    }
+                    if piece is MLBishopPiece && piece.color == MLPieceColor.white {
+                        let fig = MLWhiteBishopView(frame: frame)
+                        fig.center = CGPoint(x: frame.origin.x+(frame.size.width/2), y: frame.origin.y+(frame.size.height/2))
+                        print(row,col,fig.frame.origin,fig.frame.size)
+                        //fig.center.x += 3
+                        self.board.addSubview(fig)
+                        self.views.append(fig)
+                    }
+                    if piece is MLKnightPiece && piece.color == MLPieceColor.black {
+                        let fig = MLBlackKnightView(frame: frame)
+                        fig.center = CGPoint(x: frame.origin.x+(frame.size.width/2), y: frame.origin.y+(frame.size.height/2))
+                        print(row,col,fig.frame.origin,fig.frame.size)
+                        //fig.center.x += 3
+                        self.board.addSubview(fig)
+                        self.views.append(fig)
+                    }
+                    if piece is MLKnightPiece && piece.color == MLPieceColor.white {
+                        let fig = MLWhiteKnightView(frame: frame)
+                        fig.center = CGPoint(x: frame.origin.x+(frame.size.width/2), y: frame.origin.y+(frame.size.height/2))
+                        print(row,col,fig.frame.origin,fig.frame.size)
+                        //fig.center.x += 3
+                        self.board.addSubview(fig)
+                        self.views.append(fig)
+                    }
+                    if piece is MLPawnPiece && piece.color == MLPieceColor.black {
+                        let fig = MLBlackPawnView(frame: frame)
+                        fig.center = CGPoint(x: frame.origin.x+(frame.size.width/2), y: frame.origin.y+(frame.size.height/2))
+                        print(row,col,fig.frame.origin,fig.frame.size)
+                        //fig.center.x += 3
+                        self.board.addSubview(fig)
+                        self.views.append(fig)
+                    }
+                    if piece is MLPawnPiece && piece.color == MLPieceColor.white {
+                        let fig = MLWhitePawnView(frame: frame)
+                        fig.center = CGPoint(x: frame.origin.x+(frame.size.width/2), y: frame.origin.y+(frame.size.height/2))
+                        print(row,col,fig.frame.origin,fig.frame.size)
+                        //fig.center.x += 3
                         self.board.addSubview(fig)
                         self.views.append(fig)
                     }
                 }
                 frame.origin.x += frame.size.width
             }
-            frame.origin.y += frame.size.height
+            frame.origin.x = self.board.rect.origin.x
+            frame.origin.y -= frame.size.height
         }
     }
     

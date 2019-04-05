@@ -8,13 +8,10 @@
 
 import UIKit
 
-class MLWhiteKingView: UILabel {
+class MLWhiteKingView: MLChessPieceView {
     
     override init(frame: CGRect) {
-        //self.size=Float(frame.size.width-20.0)
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clear
-        self.font = UIFont.boldSystemFont(ofSize: 42)
         self.text="♔"
     }
     
