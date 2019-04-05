@@ -14,6 +14,7 @@ class MLChessPieceView: UILabel {
         //self.size=Float(frame.size.width-20.0)
         super.init(frame: frame)
         self.backgroundColor = UIColor.clear
+        //self.font = UIFont.systemFont(ofSize: 38)
         self.font = UIFont.boldSystemFont(ofSize: 42)
         self.textAlignment = NSTextAlignment.center
     }

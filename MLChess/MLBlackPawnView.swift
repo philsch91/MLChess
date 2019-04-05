@@ -12,8 +12,11 @@ class MLBlackPawnView: MLChessPieceView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        //self.text="\u{265F}"
-        self.text="♟"
+        //self.font = UIFont(name: "Helvetica", size: 28)
+        self.font = UIFont.systemFont(ofSize: 28)
+        self.text="\u{265F}"
+        //self.text = String(format: "%C", 0x265F)
+        //self.text="♟"
     }
     
     required init?(coder decoder: NSCoder) {
