@@ -39,6 +39,7 @@
 		176CC7B022574BF4009D576F /* MLWhiteRookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7AF22574BF4009D576F /* MLWhiteRookView.swift */; };
 		176CC7B222574C28009D576F /* MLBlackKnightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7B122574C28009D576F /* MLBlackKnightView.swift */; };
 		176CC7B422574C4A009D576F /* MLBlackBishopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7B322574C4A009D576F /* MLBlackBishopView.swift */; };
+		1790F01F225D1BF000DC5199 /* UIView+LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F01E225D1BF000DC5199 /* UIView+LayoutConstraint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -89,6 +90,7 @@
 		176CC7AF22574BF4009D576F /* MLWhiteRookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLWhiteRookView.swift; sourceTree = "<group>"; };
 		176CC7B122574C28009D576F /* MLBlackKnightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackKnightView.swift; sourceTree = "<group>"; };
 		176CC7B322574C4A009D576F /* MLBlackBishopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackBishopView.swift; sourceTree = "<group>"; };
+		1790F01E225D1BF000DC5199 /* UIView+LayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+LayoutConstraint.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 		174BD9A4224C0A3100C7D48A /* MLChess */ = {
 			isa = PBXGroup;
 			children = (
+				1790F01D225D1B4A00DC5199 /* Extensions */,
 				174BD9D12256648300C7D48A /* Enums */,
 				174BD9C82253C2C000C7D48A /* Protocols */,
 				174BD9C52253BBD200C7D48A /* Models */,
@@ -196,6 +199,14 @@
 				174BD9CD22560C9700C7D48A /* MLPieceColor.swift */,
 			);
 			name = Enums;
+			sourceTree = "<group>";
+		};
+		1790F01D225D1B4A00DC5199 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1790F01E225D1BF000DC5199 /* UIView+LayoutConstraint.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,6 +292,7 @@
 				176CC7A82257483B009D576F /* MLKnightPiece.swift in Sources */,
 				176CC7B022574BF4009D576F /* MLWhiteRookView.swift in Sources */,
 				176CC79C22573938009D576F /* MLQueenPiece.swift in Sources */,
+				1790F01F225D1BF000DC5199 /* UIView+LayoutConstraint.swift in Sources */,
 				174BD9A6224C0A3100C7D48A /* AppDelegate.swift in Sources */,
 				174BD9C72253BBEC00C7D48A /* MLChessPiece.swift in Sources */,
 				176CC7AE22574BCB009D576F /* MLBlackRookView.swift in Sources */,

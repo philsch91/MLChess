@@ -12,9 +12,26 @@ import UIKit
 class MLChessBoardView: UIView {
     
     var rect: CGRect = CGRect.null
+    private var liBackgroundColor: UIColor = UIColor.white
+    private var daBackgroundColor: UIColor = UIColor.darkGray
+    
+    var lightBackgroundColor: UIColor {
+        get { return self.liBackgroundColor }
+        set(newLightBackgroundColor) {
+            self.liBackgroundColor = newLightBackgroundColor
+            self.setNeedsDisplay()
+        }
+    }
+    
+    var darkBackgroundColor: UIColor {
+        get { return self.daBackgroundColor }
+        set(newDarkBackgroundColor) {
+            self.daBackgroundColor = newDarkBackgroundColor
+            self.setNeedsDisplay()
+        }
+    }
     
     override init(frame: CGRect) {
-        //self.size=Float(frame.size.width-20.0)
         super.init(frame: frame)
         self.backgroundColor = UIColor.brown
     }
@@ -116,10 +133,10 @@ class MLChessBoardView: UIView {
                 
                 if (row+col)%2 == 0{
                     //print("row ",row," col ",col," white")
-                    context?.setFillColor(UIColor.white.cgColor)
+                    context?.setFillColor(self.liBackgroundColor.cgColor)
                 } else {
                     //print("row ",row," col ",col," black")
-                    context?.setFillColor(UIColor.darkGray.cgColor)
+                    context?.setFillColor(self.daBackgroundColor.cgColor)
                 }
                 
                 context?.fill(square)
