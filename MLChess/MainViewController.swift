@@ -8,34 +8,32 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController,CBChessBoardViewDataSource {
     
-    var scrollView: UIScrollView?
-    var contentView: UIView?
-    var board: MLChessBoardView?
-    var game: MLChessGame?
-    var controller: MLChessBoardViewController?
+    var scrollView: UIScrollView!
+    var contentView: UIView!
+    var chessBoardView: MLChessBoardView!
+    var game: MLChessGame!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.title="MLChess"
+        self.title = "MLChess"
         //self.edgesForExtendedLayout = []
         self.setupUI()
-        //self.setupNewGame()
+        self.chessBoardView.dataSource = self
     }
     
     func setupUI() -> Void {
         NSLog("setupUI")
         var frame: CGRect = self.view.frame //as CGRect
-        frame.size.height=frame.size.width
+        frame.size.height = frame.size.width
         //frame.size.width-=20.0
         //frame.origin.y+=CGFloat(100)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "New Game", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.setupNewGame))
         
-        let board = MLChessBoardView(frame: frame)
-        self.board = board
+        self.chessBoardView = MLChessBoardView(frame: frame)
         
         /*
         if let navBar = self.navigationController {
@@ -49,38 +47,44 @@ class MainViewController: UIViewController {
         
         //self.view.addSubview(board)
         
-        self.scrollView = UIScrollView()
-        self.scrollView?.translatesAutoresizingMaskIntoConstraints = false
-        self.scrollView?.isDirectionalLockEnabled = true
+        frame.size.height = self.view.frame.height
+        frame.size.height += 100
+        self.contentView = UIView(frame: frame)
+        //self.contentView.translatesAutoresizingMaskIntoConstraints = false
         
-        self.contentView = UIView()
-        self.contentView?.translatesAutoresizingMaskIntoConstraints = false
+        self.scrollView = UIScrollView(frame: self.view.bounds)
+        //self.scrollView.translatesAutoresizingMaskIntoConstraints = false
+        self.scrollView.isDirectionalLockEnabled = true
+        self.scrollView.contentSize = self.contentView.bounds.size
         
+        /*
         guard let iscrollView = self.scrollView else {
             return
         }
         guard let icontentView = self.contentView else {
             return
-        }
+        }*/
         
-        self.view.addSubview(iscrollView)
-        iscrollView.addSubview(icontentView)
-        
+        /*
         //var viewsDict: [String: UIView] = ["v1":iscrollView,"v2":icontentView,"v3":iboard]
-        let views: [UIView] = [iscrollView,icontentView,board]
+        let views: [UIView] = [self.scrollView,self.contentView,self.board]
         
         self.view.addVisualConstraints(visualFormat: "H:|[v2(==v0)]|", options: NSLayoutConstraint.FormatOptions.directionLeadingToTrailing, metrics: nil, views: views)
         
         self.view.addVisualConstraints(visualFormat: "H:|[v1]|", options: NSLayoutConstraint.FormatOptions.alignAllCenterY, metrics: nil, views: views)
         self.view.addVisualConstraints(visualFormat: "V:|[v1]|", options: NSLayoutConstraint.FormatOptions.alignAllCenterX, metrics: nil, views: views)
         
-        self.scrollView?.addVisualConstraints(visualFormat: "V:|[v2]|", options: NSLayoutConstraint.FormatOptions.alignAllCenterX, metrics: nil, views: views)
+        self.scrollView.addVisualConstraints(visualFormat: "V:|[v2]|", options: NSLayoutConstraint.FormatOptions.alignAllCenterX, metrics: nil, views: views)
+         */
         
-        self.contentView?.addSubview(board)
+        self.contentView.addSubview(self.chessBoardView)
+        self.scrollView.addSubview(self.contentView)
+        self.view.addSubview(self.scrollView)
     }
     
     @objc func setupNewGame() -> Void {
         print("setupNewGame")
+        /*
         if case let controller? = self.controller {
             controller.reset()
         }
@@ -88,11 +92,58 @@ class MainViewController: UIViewController {
             let controller: MLChessBoardViewController = MLChessBoardViewController(board)
             self.controller = controller
         }
-        let game = MLChessGame()
-        self.game = game
-        self.controller?.updateView(state: game.board)
+        */
+        self.game = MLChessGame()
+        //self.controller?.updateView(state: game.board)
+        self.chessBoardView.reloadData()
     }
-
+    
+    func chessBoardView(board: MLChessBoardView, chessPieceForSquare square: CBChessBoardSquare) -> CBChessBoardPiece? {
+        print("chessBoardView chessPieceForSquare")
+        let gamePiece: MLChessPiece? = self.game.board[square.row][square.col]
+        guard let piece = gamePiece else {
+            return nil
+        }
+        
+        if piece is MLKingPiece && piece.color == MLPieceColor.black {
+            return CBChessBoardPiece.BlackKing
+        }
+        if piece is MLKingPiece && piece.color == MLPieceColor.white {
+            return CBChessBoardPiece.WhiteKing
+        }
+        if piece is MLQueenPiece && piece.color == MLPieceColor.black {
+            return CBChessBoardPiece.BlackQueen
+        }
+        if piece is MLQueenPiece && piece.color == MLPieceColor.white {
+            return CBChessBoardPiece.WhiteQueen
+        }
+        if piece is MLRookPiece && piece.color == MLPieceColor.black {
+            return CBChessBoardPiece.BlackRook
+        }
+        if piece is MLRookPiece && piece.color == MLPieceColor.white {
+            return CBChessBoardPiece.WhiteRook
+        }
+        if piece is MLBishopPiece && piece.color == MLPieceColor.black {
+            return CBChessBoardPiece.BlackBishop
+        }
+        if piece is MLBishopPiece && piece.color == MLPieceColor.white {
+            return CBChessBoardPiece.WhiteBishop
+        }
+        if piece is MLKnightPiece && piece.color == MLPieceColor.black {
+            return CBChessBoardPiece.BlackKnight
+        }
+        if piece is MLKnightPiece && piece.color == MLPieceColor.white {
+            return CBChessBoardPiece.WhiteKnight
+        }
+        if piece is MLPawnPiece && piece.color == MLPieceColor.black {
+            return CBChessBoardPiece.BlackPawn
+        }
+        if piece is MLPawnPiece && piece.color == MLPieceColor.white {
+            return CBChessBoardPiece.WhitePawn
+        }
+        
+        return nil
+    }
 
 }
 

@@ -12,8 +12,12 @@ import UIKit
 class MLChessBoardView: UIView {
     
     var rect: CGRect = CGRect.null
+    private var controller: MLChessBoardViewController!
     private var liBackgroundColor: UIColor = UIColor.white
     private var daBackgroundColor: UIColor = UIColor.darkGray
+    
+    weak var dataSource: CBChessBoardViewDataSource?
+    weak var delegate: CBChessBoardViewDelegate?
     
     var lightBackgroundColor: UIColor {
         get { return self.liBackgroundColor }
@@ -34,6 +38,7 @@ class MLChessBoardView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.brown
+        self.controller = MLChessBoardViewController(self)
     }
     
     required init?(coder decoder: NSCoder) {
@@ -153,6 +158,37 @@ class MLChessBoardView: UIView {
             }
         }
         
+    }
+    
+    public func reloadData() -> Void {
+        guard let dataSource = self.dataSource else {
+            return
+        }
+        
+        var state: [[CBChessBoardPiece?]] = [[CBChessBoardPiece?]]()
+        var square: CBChessBoardSquare!
+        var index: Int = 0
+        
+        for _ in 0...7 {
+            var row: [CBChessBoardPiece?] = [CBChessBoardPiece?]()
+            for _ in 0...7 {
+                square = CBChessBoardSquare(index)
+                
+                let boardPiece: CBChessBoardPiece? = dataSource.chessBoardView(board: self, chessPieceForSquare: square)
+                
+                if case let piece? = boardPiece {
+                    row.append(piece)
+                } else {
+                    row.append(nil)
+                }
+                
+                index += 1
+            }
+            state.append(row)
+        }
+        
+        //self.controller.updateView(state: <#T##[[MLChessPiece?]]#>)
+        self.controller.updateView(state: state)
     }
 
 }

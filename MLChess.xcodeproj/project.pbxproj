@@ -40,6 +40,10 @@
 		176CC7B222574C28009D576F /* MLBlackKnightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7B122574C28009D576F /* MLBlackKnightView.swift */; };
 		176CC7B422574C4A009D576F /* MLBlackBishopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7B322574C4A009D576F /* MLBlackBishopView.swift */; };
 		1790F01F225D1BF000DC5199 /* UIView+LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F01E225D1BF000DC5199 /* UIView+LayoutConstraint.swift */; };
+		1790F021225E619E00DC5199 /* CBChessBoardViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F020225E619E00DC5199 /* CBChessBoardViewDataSource.swift */; };
+		1790F023225E639900DC5199 /* CBChessBoardSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F022225E639900DC5199 /* CBChessBoardSquare.swift */; };
+		1790F025225E644200DC5199 /* CBChessBoardViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F024225E644200DC5199 /* CBChessBoardViewDelegate.swift */; };
+		1790F027225E649A00DC5199 /* CBChessBoardPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F026225E649A00DC5199 /* CBChessBoardPiece.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -91,6 +95,10 @@
 		176CC7B122574C28009D576F /* MLBlackKnightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackKnightView.swift; sourceTree = "<group>"; };
 		176CC7B322574C4A009D576F /* MLBlackBishopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackBishopView.swift; sourceTree = "<group>"; };
 		1790F01E225D1BF000DC5199 /* UIView+LayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+LayoutConstraint.swift"; sourceTree = "<group>"; };
+		1790F020225E619E00DC5199 /* CBChessBoardViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBChessBoardViewDataSource.swift; sourceTree = "<group>"; };
+		1790F022225E639900DC5199 /* CBChessBoardSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBChessBoardSquare.swift; sourceTree = "<group>"; };
+		1790F024225E644200DC5199 /* CBChessBoardViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBChessBoardViewDelegate.swift; sourceTree = "<group>"; };
+		1790F026225E649A00DC5199 /* CBChessBoardPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBChessBoardPiece.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +190,7 @@
 				176CC79F22573E84009D576F /* MLPawnPiece.swift */,
 				176CC7A72257483B009D576F /* MLKnightPiece.swift */,
 				176CC7AB225748DA009D576F /* MLBishopPiece.swift */,
+				1790F022225E639900DC5199 /* CBChessBoardSquare.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -189,6 +198,8 @@
 		174BD9C82253C2C000C7D48A /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				1790F020225E619E00DC5199 /* CBChessBoardViewDataSource.swift */,
+				1790F024225E644200DC5199 /* CBChessBoardViewDelegate.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -197,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				174BD9CD22560C9700C7D48A /* MLPieceColor.swift */,
+				1790F026225E649A00DC5199 /* CBChessBoardPiece.swift */,
 			);
 			name = Enums;
 			sourceTree = "<group>";
@@ -281,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1790F021225E619E00DC5199 /* CBChessBoardViewDataSource.swift in Sources */,
 				174BD9BF224C0D0F00C7D48A /* MLChessBoardView.swift in Sources */,
 				176CC79E22573B0E009D576F /* MLChessPieceView.swift in Sources */,
 				174BD9D02256104200C7D48A /* MLChessBoardViewController.swift in Sources */,
@@ -298,12 +311,15 @@
 				176CC7AE22574BCB009D576F /* MLBlackRookView.swift in Sources */,
 				176CC7A222573EE7009D576F /* MLBlackPawnView.swift in Sources */,
 				174BD9CC225547C400C7D48A /* MLRookPiece.swift in Sources */,
+				1790F025225E644200DC5199 /* CBChessBoardViewDelegate.swift in Sources */,
 				174BD9CA2253CA7F00C7D48A /* MLChessGame.swift in Sources */,
+				1790F023225E639900DC5199 /* CBChessBoardSquare.swift in Sources */,
 				176CC79822573878009D576F /* MLWhiteQueenView.swift in Sources */,
 				176CC79A225738CD009D576F /* MLBlackQueenView.swift in Sources */,
 				174BD9CE22560C9700C7D48A /* MLPieceColor.swift in Sources */,
 				176CC7B422574C4A009D576F /* MLBlackBishopView.swift in Sources */,
 				176CC7B222574C28009D576F /* MLBlackKnightView.swift in Sources */,
+				1790F027225E649A00DC5199 /* CBChessBoardPiece.swift in Sources */,
 				176CC7A6225747B9009D576F /* MLWhiteKnightView.swift in Sources */,
 				176CC7A022573E84009D576F /* MLPawnPiece.swift in Sources */,
 				176CC7AC225748DA009D576F /* MLBishopPiece.swift in Sources */,
