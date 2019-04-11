@@ -44,6 +44,7 @@
 		1790F023225E639900DC5199 /* CBChessBoardSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F022225E639900DC5199 /* CBChessBoardSquare.swift */; };
 		1790F025225E644200DC5199 /* CBChessBoardViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F024225E644200DC5199 /* CBChessBoardViewDelegate.swift */; };
 		1790F027225E649A00DC5199 /* CBChessBoardPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F026225E649A00DC5199 /* CBChessBoardPiece.swift */; };
+		1790F029225FC4BA00DC5199 /* PSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F028225FC4BA00DC5199 /* PSButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -99,6 +100,7 @@
 		1790F022225E639900DC5199 /* CBChessBoardSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBChessBoardSquare.swift; sourceTree = "<group>"; };
 		1790F024225E644200DC5199 /* CBChessBoardViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBChessBoardViewDelegate.swift; sourceTree = "<group>"; };
 		1790F026225E649A00DC5199 /* CBChessBoardPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBChessBoardPiece.swift; sourceTree = "<group>"; };
+		1790F028225FC4BA00DC5199 /* PSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 				176CC7AF22574BF4009D576F /* MLWhiteRookView.swift */,
 				176CC7B122574C28009D576F /* MLBlackKnightView.swift */,
 				176CC7B322574C4A009D576F /* MLBlackBishopView.swift */,
+				1790F028225FC4BA00DC5199 /* PSButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				176CC79822573878009D576F /* MLWhiteQueenView.swift in Sources */,
 				176CC79A225738CD009D576F /* MLBlackQueenView.swift in Sources */,
 				174BD9CE22560C9700C7D48A /* MLPieceColor.swift in Sources */,
+				1790F029225FC4BA00DC5199 /* PSButton.swift in Sources */,
 				176CC7B422574C4A009D576F /* MLBlackBishopView.swift in Sources */,
 				176CC7B222574C28009D576F /* MLBlackKnightView.swift in Sources */,
 				1790F027225E649A00DC5199 /* CBChessBoardPiece.swift in Sources */,

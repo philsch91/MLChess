@@ -31,7 +31,9 @@ class MainViewController: UIViewController,CBChessBoardViewDataSource {
         //frame.size.width-=20.0
         //frame.origin.y+=CGFloat(100)
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "New Game", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.setupNewGame))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Game", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.setupNewGame))
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Test", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.start))
         
         self.chessBoardView = MLChessBoardView(frame: frame)
         
@@ -78,6 +80,12 @@ class MainViewController: UIViewController,CBChessBoardViewDataSource {
          */
         
         self.contentView.addSubview(self.chessBoardView)
+        
+        let origin: CGPoint = self.chessBoardView.frame.origin
+        let buttonFrame: CGRect = CGRect(x: (origin.x+10) , y: (origin.y+100), width: 44, height: 44)
+        let button: PSButton = PSButton(frame: buttonFrame, color: UIColor(red: 0.0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1), highlightedColor: UIColor(red: 0.0/255.0, green: 92.0/255.0, blue:255.0/255.0, alpha: 1))
+        self.contentView.addSubview(button)
+        
         self.scrollView.addSubview(self.contentView)
         self.view.addSubview(self.scrollView)
     }
@@ -96,6 +104,10 @@ class MainViewController: UIViewController,CBChessBoardViewDataSource {
         self.game = MLChessGame()
         //self.controller?.updateView(state: game.board)
         self.chessBoardView.reloadData()
+    }
+    
+    @objc func start() -> Void {
+        self.chessBoardView.darkBackgroundColor = UIColor.blue
     }
     
     func chessBoardView(board: MLChessBoardView, chessPieceForSquare square: CBChessBoardSquare) -> CBChessBoardPiece? {
