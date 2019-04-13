@@ -1,0 +1,11 @@
+framework module PSUIKitUtils {
+  umbrella header "PSUIKitUtils.h"
+
+  export *
+  module * { export * }
+}
+
+module PSUIKitUtils.Swift {
+    header "PSUIKitUtils-Swift.h"
+    requires objc
+}

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import PSUIKitUtils
 
-class MainViewController: UIViewController,CBChessBoardViewDataSource {
+class MainViewController: PSViewController,CBChessBoardViewDataSource {
     
     var scrollView: UIScrollView!
     var contentView: UIView!
@@ -81,9 +82,16 @@ class MainViewController: UIViewController,CBChessBoardViewDataSource {
         
         self.contentView.addSubview(self.chessBoardView)
         
-        let origin: CGPoint = self.chessBoardView.frame.origin
-        let buttonFrame: CGRect = CGRect(x: (origin.x+10) , y: (origin.y+100), width: 44, height: 44)
-        let button: PSButton = PSButton(frame: buttonFrame, color: UIColor(red: 0.0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1), highlightedColor: UIColor(red: 0.0/255.0, green: 92.0/255.0, blue:255.0/255.0, alpha: 1))
+        //let origin: CGPoint = self.chessBoardView.frame.origin
+        //let buttonFrame: CGRect = CGRect(x: (origin.x+10) , y: (origin.y+100), width: 44, height: 44)
+        let buttonFrame: CGRect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 44, height: 44))
+        let button: PSButton = PSButton(frame: buttonFrame, color: UIColor(red: 0.0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1), pressedColor: UIColor(red: 0.0/255.0, green: 92.0/255.0, blue:255.0/255.0, alpha: 1))
+        //let button: PSButton = PSButton(color: UIColor(red: 0.0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1), pressedColor: UIColor(red: 0.0/255.0, green: 92.0/255.0, blue:255.0/255.0, alpha: 1))
+        button.center = self.chessBoardView.center
+        button.center.y += 200
+        button.setTitle("Start", for: UIControl.State.normal)
+        button.sizeToFit()
+        button.frame.size.width += 10
         self.contentView.addSubview(button)
         
         self.scrollView.addSubview(self.contentView)
@@ -155,6 +163,14 @@ class MainViewController: UIViewController,CBChessBoardViewDataSource {
         }
         
         return nil
+    }
+    
+    override func appDidEnterBackground(notification: Notification) {
+        print("appDidEnterBackground")
+    }
+    
+    override func appWillEnterForeground(notification: Notification) {
+        print("appWillEnterForeground")
     }
 
 }
