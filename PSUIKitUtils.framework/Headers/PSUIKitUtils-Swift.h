@@ -210,6 +210,21 @@ SWIFT_CLASS("_TtC12PSUIKitUtils16PSViewController")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class NSTimer;
+
+SWIFT_CLASS("_TtC12PSUIKitUtils21PSTimerViewController")
+@interface PSTimerViewController : PSViewController
+- (void)viewDidLoad;
+- (void)viewDidAppear:(BOOL)animated;
+- (void)viewWillDisappear:(BOOL)animated;
+- (void)appDidEnterBackgroundWithNotification:(NSNotification * _Nonnull)notification;
+- (void)appWillEnterForegroundWithNotification:(NSNotification * _Nonnull)notification;
+- (void)onTickWithTimer:(NSTimer * _Nonnull)timer;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 
 
 #if __has_attribute(external_source_symbol)

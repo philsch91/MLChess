@@ -14,7 +14,7 @@ class MLChessPiece: NSObject {
     var posY: Int
     var color: MLPieceColor
     
-    internal override init() {
+    override internal init() {
         self.board = [[MLChessPiece]]()
         self.posX = 0
         self.posY = 0

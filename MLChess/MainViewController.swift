@@ -9,7 +9,7 @@
 import UIKit
 import PSUIKitUtils
 
-class MainViewController: PSViewController,CBChessBoardViewDataSource {
+class MainViewController: PSTimerViewController,CBChessBoardViewDataSource {
     
     var scrollView: UIScrollView!
     var contentView: UIView!
@@ -23,6 +23,9 @@ class MainViewController: PSViewController,CBChessBoardViewDataSource {
         //self.edgesForExtendedLayout = []
         self.setupUI()
         self.chessBoardView.dataSource = self
+        
+        self.timerInterval = 1.0
+        self.timerTolerance = 0.1
     }
     
     func setupUI() -> Void {
@@ -166,11 +169,27 @@ class MainViewController: PSViewController,CBChessBoardViewDataSource {
     }
     
     override func appDidEnterBackground(notification: Notification) {
+        super.appDidEnterBackground(notification: notification)
         print("appDidEnterBackground")
     }
     
     override func appWillEnterForeground(notification: Notification) {
+        super.appWillEnterForeground(notification: notification)
         print("appWillEnterForeground")
+    }
+    
+    override func startTimer() {
+        super.startTimer()
+        print("startTimer")
+    }
+    
+    override func stopTimer() {
+        super.stopTimer()
+        print("stopTimer")
+    }
+    
+    override func onTick(timer: Timer) {
+        print(timer)
     }
 
 }
