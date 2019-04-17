@@ -13,19 +13,27 @@ class MainViewController: PSTimerViewController,CBChessBoardViewDataSource {
     
     var scrollView: UIScrollView!
     var contentView: UIView!
+    var timeLabel: UILabel!
     var chessBoardView: MLChessBoardView!
     var game: MLChessGame!
+    var calcTime: Int!
+    var currTime: Int!
+    var stopFlag: Bool!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "MLChess"
         //self.edgesForExtendedLayout = []
-        self.setupUI()
-        self.chessBoardView.dataSource = self
         
         self.timerInterval = 1.0
         self.timerTolerance = 0.1
+        self.calcTime = 60
+        self.currTime = self.calcTime
+        self.stopFlag = true
+        
+        self.setupUI()
+        self.chessBoardView.dataSource = self
     }
     
     func setupUI() -> Void {
@@ -85,16 +93,25 @@ class MainViewController: PSTimerViewController,CBChessBoardViewDataSource {
         
         self.contentView.addSubview(self.chessBoardView)
         
+        let timeLabelFrame: CGRect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: frame.width, height: 44))
+        self.timeLabel = UILabel(frame: timeLabelFrame)
+        self.timeLabel.center = self.chessBoardView.center
+        self.timeLabel.center.y += (self.chessBoardView.frame.height/2) + self.timeLabel.frame.height
+        self.timeLabel.textAlignment = NSTextAlignment.center
+        self.timeLabel.text = String(self.calcTime)
+        self.contentView.addSubview(self.timeLabel)
+        
         //let origin: CGPoint = self.chessBoardView.frame.origin
         //let buttonFrame: CGRect = CGRect(x: (origin.x+10) , y: (origin.y+100), width: 44, height: 44)
         let buttonFrame: CGRect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 44, height: 44))
         let button: PSButton = PSButton(frame: buttonFrame, color: UIColor(red: 0.0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1), pressedColor: UIColor(red: 0.0/255.0, green: 92.0/255.0, blue:255.0/255.0, alpha: 1))
         //let button: PSButton = PSButton(color: UIColor(red: 0.0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1), pressedColor: UIColor(red: 0.0/255.0, green: 92.0/255.0, blue:255.0/255.0, alpha: 1))
         button.center = self.chessBoardView.center
-        button.center.y += 200
+        button.center.y += (self.chessBoardView.frame.height/2) + button.frame.height + self.timeLabel.frame.height
         button.setTitle("Start", for: UIControl.State.normal)
         button.sizeToFit()
         button.frame.size.width += 10
+        button.addTarget(self, action: #selector(self.startNewGame), for: UIControl.Event.touchUpInside)
         self.contentView.addSubview(button)
         
         self.scrollView.addSubview(self.contentView)
@@ -115,6 +132,10 @@ class MainViewController: PSTimerViewController,CBChessBoardViewDataSource {
         self.game = MLChessGame()
         //self.controller?.updateView(state: game.board)
         self.chessBoardView.reloadData()
+    }
+    
+    @objc func startNewGame() -> Void {
+        self.stopFlag = !self.stopFlag
     }
     
     @objc func start() -> Void {
@@ -190,6 +211,17 @@ class MainViewController: PSTimerViewController,CBChessBoardViewDataSource {
     
     override func onTick(timer: Timer) {
         print(timer)
+        if self.stopFlag {
+            return
+        }
+        
+        if case let label? = self.timeLabel {
+            self.currTime -= 1
+            if self.currTime == 0 {
+                self.currTime = self.calcTime
+            }
+            label.text = String(self.currTime)
+        }
     }
 
 }
