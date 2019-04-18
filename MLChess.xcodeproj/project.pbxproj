@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		174BD9A6224C0A3100C7D48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A5224C0A3100C7D48A /* AppDelegate.swift */; };
 		174BD9A8224C0A3100C7D48A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A7224C0A3100C7D48A /* MainViewController.swift */; };
-		174BD9AA224C0A3100C7D48A /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A9224C0A3100C7D48A /* SecondViewController.swift */; };
+		174BD9AA224C0A3100C7D48A /* GameLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A9224C0A3100C7D48A /* GameLogViewController.swift */; };
 		174BD9AD224C0A3100C7D48A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 174BD9AB224C0A3100C7D48A /* Main.storyboard */; };
 		174BD9AF224C0A3400C7D48A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 174BD9AE224C0A3400C7D48A /* Assets.xcassets */; };
 		174BD9B2224C0A3400C7D48A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 174BD9B0224C0A3400C7D48A /* LaunchScreen.storyboard */; };
@@ -23,6 +23,9 @@
 		174BD9CC225547C400C7D48A /* MLRookPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9CB225547C400C7D48A /* MLRookPiece.swift */; };
 		174BD9CE22560C9700C7D48A /* MLPieceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9CD22560C9700C7D48A /* MLPieceColor.swift */; };
 		174BD9D32256935400C7D48A /* MLKingPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9D22256935400C7D48A /* MLKingPiece.swift */; };
+		175560282268F53B006613E8 /* MLGameLogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175560272268F53B006613E8 /* MLGameLogManager.swift */; };
+		1755602A22690039006613E8 /* MLSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1755602922690039006613E8 /* MLSettingsViewController.swift */; };
+		1755602C22690C27006613E8 /* MLSegmentedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1755602B22690C27006613E8 /* MLSegmentedCollectionViewCell.swift */; };
 		176CC79822573878009D576F /* MLWhiteQueenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC79722573878009D576F /* MLWhiteQueenView.swift */; };
 		176CC79A225738CD009D576F /* MLBlackQueenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC799225738CD009D576F /* MLBlackQueenView.swift */; };
 		176CC79C22573938009D576F /* MLQueenPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC79B22573938009D576F /* MLQueenPiece.swift */; };
@@ -67,7 +70,7 @@
 		174BD9A2224C0A3100C7D48A /* MLChess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLChess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		174BD9A5224C0A3100C7D48A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		174BD9A7224C0A3100C7D48A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		174BD9A9224C0A3100C7D48A /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		174BD9A9224C0A3100C7D48A /* GameLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogViewController.swift; sourceTree = "<group>"; };
 		174BD9AC224C0A3100C7D48A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		174BD9AE224C0A3400C7D48A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		174BD9B1224C0A3400C7D48A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -81,6 +84,9 @@
 		174BD9CB225547C400C7D48A /* MLRookPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLRookPiece.swift; sourceTree = "<group>"; };
 		174BD9CD22560C9700C7D48A /* MLPieceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLPieceColor.swift; sourceTree = "<group>"; };
 		174BD9D22256935400C7D48A /* MLKingPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLKingPiece.swift; sourceTree = "<group>"; };
+		175560272268F53B006613E8 /* MLGameLogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLGameLogManager.swift; sourceTree = "<group>"; };
+		1755602922690039006613E8 /* MLSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLSettingsViewController.swift; sourceTree = "<group>"; };
+		1755602B22690C27006613E8 /* MLSegmentedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLSegmentedCollectionViewCell.swift; sourceTree = "<group>"; };
 		176CC79722573878009D576F /* MLWhiteQueenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLWhiteQueenView.swift; sourceTree = "<group>"; };
 		176CC799225738CD009D576F /* MLBlackQueenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackQueenView.swift; sourceTree = "<group>"; };
 		176CC79B22573938009D576F /* MLQueenPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLQueenPiece.swift; sourceTree = "<group>"; };
@@ -147,11 +153,12 @@
 				174BD9BD224C0CCE00C7D48A /* Views */,
 				174BD9A5224C0A3100C7D48A /* AppDelegate.swift */,
 				174BD9A7224C0A3100C7D48A /* MainViewController.swift */,
-				174BD9A9224C0A3100C7D48A /* SecondViewController.swift */,
+				174BD9A9224C0A3100C7D48A /* GameLogViewController.swift */,
 				174BD9AB224C0A3100C7D48A /* Main.storyboard */,
 				174BD9AE224C0A3400C7D48A /* Assets.xcassets */,
 				174BD9B0224C0A3400C7D48A /* LaunchScreen.storyboard */,
 				174BD9B3224C0A3400C7D48A /* Info.plist */,
+				1755602922690039006613E8 /* MLSettingsViewController.swift */,
 			);
 			path = MLChess;
 			sourceTree = "<group>";
@@ -173,6 +180,7 @@
 				176CC7AF22574BF4009D576F /* MLWhiteRookView.swift */,
 				176CC7B122574C28009D576F /* MLBlackKnightView.swift */,
 				176CC7B322574C4A009D576F /* MLBlackBishopView.swift */,
+				1755602B22690C27006613E8 /* MLSegmentedCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -180,6 +188,7 @@
 		174BD9C42253B3D300C7D48A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				175560272268F53B006613E8 /* MLGameLogManager.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -303,15 +312,18 @@
 				174BD9BF224C0D0F00C7D48A /* MLChessBoardView.swift in Sources */,
 				176CC79E22573B0E009D576F /* MLChessPieceView.swift in Sources */,
 				174BD9C1224D598700C7D48A /* MLWhiteKingView.swift in Sources */,
-				174BD9AA224C0A3100C7D48A /* SecondViewController.swift in Sources */,
+				174BD9AA224C0A3100C7D48A /* GameLogViewController.swift in Sources */,
 				176CC7A422573F21009D576F /* MLWhitePawnView.swift in Sources */,
 				1790F05A22637F6900DC5199 /* MLWhitePawnPiece.swift in Sources */,
+				175560282268F53B006613E8 /* MLGameLogManager.swift in Sources */,
+				1755602C22690C27006613E8 /* MLSegmentedCollectionViewCell.swift in Sources */,
 				176CC7AA225748AB009D576F /* MLWhiteBishopView.swift in Sources */,
 				174BD9D32256935400C7D48A /* MLKingPiece.swift in Sources */,
 				176CC7A82257483B009D576F /* MLKnightPiece.swift in Sources */,
 				176CC7B022574BF4009D576F /* MLWhiteRookView.swift in Sources */,
 				176CC79C22573938009D576F /* MLQueenPiece.swift in Sources */,
 				174BD9A6224C0A3100C7D48A /* AppDelegate.swift in Sources */,
+				1755602A22690039006613E8 /* MLSettingsViewController.swift in Sources */,
 				174BD9C72253BBEC00C7D48A /* MLChessPiece.swift in Sources */,
 				1790F05C22637F7900DC5199 /* MLBlackPawnPiece.swift in Sources */,
 				176CC7AE22574BCB009D576F /* MLBlackRookView.swift in Sources */,
