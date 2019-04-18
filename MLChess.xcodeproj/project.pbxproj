@@ -22,7 +22,6 @@
 		174BD9CA2253CA7F00C7D48A /* MLChessGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C92253CA7F00C7D48A /* MLChessGame.swift */; };
 		174BD9CC225547C400C7D48A /* MLRookPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9CB225547C400C7D48A /* MLRookPiece.swift */; };
 		174BD9CE22560C9700C7D48A /* MLPieceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9CD22560C9700C7D48A /* MLPieceColor.swift */; };
-		174BD9D02256104200C7D48A /* MLChessBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9CF2256104200C7D48A /* MLChessBoardViewController.swift */; };
 		174BD9D32256935400C7D48A /* MLKingPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9D22256935400C7D48A /* MLKingPiece.swift */; };
 		176CC79822573878009D576F /* MLWhiteQueenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC79722573878009D576F /* MLWhiteQueenView.swift */; };
 		176CC79A225738CD009D576F /* MLBlackQueenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC799225738CD009D576F /* MLBlackQueenView.swift */; };
@@ -81,7 +80,6 @@
 		174BD9C92253CA7F00C7D48A /* MLChessGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessGame.swift; sourceTree = "<group>"; };
 		174BD9CB225547C400C7D48A /* MLRookPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLRookPiece.swift; sourceTree = "<group>"; };
 		174BD9CD22560C9700C7D48A /* MLPieceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLPieceColor.swift; sourceTree = "<group>"; };
-		174BD9CF2256104200C7D48A /* MLChessBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessBoardViewController.swift; sourceTree = "<group>"; };
 		174BD9D22256935400C7D48A /* MLKingPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLKingPiece.swift; sourceTree = "<group>"; };
 		176CC79722573878009D576F /* MLWhiteQueenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLWhiteQueenView.swift; sourceTree = "<group>"; };
 		176CC799225738CD009D576F /* MLBlackQueenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackQueenView.swift; sourceTree = "<group>"; };
@@ -182,7 +180,6 @@
 		174BD9C42253B3D300C7D48A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				174BD9CF2256104200C7D48A /* MLChessBoardViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -305,7 +302,6 @@
 				1790F021225E619E00DC5199 /* CBChessBoardViewDataSource.swift in Sources */,
 				174BD9BF224C0D0F00C7D48A /* MLChessBoardView.swift in Sources */,
 				176CC79E22573B0E009D576F /* MLChessPieceView.swift in Sources */,
-				174BD9D02256104200C7D48A /* MLChessBoardViewController.swift in Sources */,
 				174BD9C1224D598700C7D48A /* MLWhiteKingView.swift in Sources */,
 				174BD9AA224C0A3100C7D48A /* SecondViewController.swift in Sources */,
 				176CC7A422573F21009D576F /* MLWhitePawnView.swift in Sources */,

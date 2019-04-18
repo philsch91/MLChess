@@ -12,7 +12,6 @@ import UIKit
 class MLChessBoardView: UIView {
     
     var rect: CGRect = CGRect.null
-    private var controller: MLChessBoardViewController!
     private var subViews: [UIView]
     private var liBackgroundColor: UIColor = UIColor.white
     private var daBackgroundColor: UIColor = UIColor.darkGray
@@ -40,7 +39,6 @@ class MLChessBoardView: UIView {
         self.subViews = [UIView]()
         super.init(frame: frame)
         self.backgroundColor = UIColor.brown
-        self.controller = MLChessBoardViewController(self)
     }
     
     required init?(coder decoder: NSCoder) {
@@ -190,8 +188,6 @@ class MLChessBoardView: UIView {
             state.append(row)
         }
         
-        //self.controller.updateView(state: <#T##[[MLChessPiece?]]#>)
-        //self.controller.updateView(state: state)
         self.updateView(state: state)
     }
     
@@ -203,6 +199,7 @@ class MLChessBoardView: UIView {
         for row in 0...7 {
             for col in 0...7 {
                 if case let piece? = state[row][col] {
+                    //if piece is MLKingPiece && piece.color == MLPieceColor.black {
                     if piece == CBChessBoardPiece.BlackKing {
                         print(row,col,"king")
                         print(frame)
@@ -213,6 +210,7 @@ class MLChessBoardView: UIView {
                         self.addSubview(fig)
                         self.subViews.append(fig)
                     }
+                    //if piece is MLKingPiece && piece.color == MLPieceColor.white {
                     if piece == CBChessBoardPiece.WhiteKing {
                         print(row,col,"king")
                         print(frame)
