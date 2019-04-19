@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GameLogViewController: UIViewController {
+class MLGameLogViewController: UIViewController {
     
     var textView: UITextView!
 
@@ -21,16 +21,21 @@ class GameLogViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        var tst: String = "Hello World"
+        //var tst: String = "Hello World"
+        /*
         for _ in 0...10000 {
             tst += "Hello World"
-        }
-        self.textView.text = tst
+        }*/
+        let logManager = MLGameLogManager()
+        let log = logManager.read()
+        self.textView.text = log
     }
     
     func setupUI() -> Void {
         self.view.backgroundColor = UIColor.black
-        //return
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.trash, target: self, action: #selector(self.clearLog))
+        
         self.textView = UITextView()
         self.textView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -39,6 +44,13 @@ class GameLogViewController: UIViewController {
         let views: [UIView] = [self.textView]
         self.view.addVisualConstraints(visualFormat: "H:|[v1]|", options: NSLayoutConstraint.FormatOptions.alignAllCenterY, metrics: nil, views: views)
         self.view.addVisualConstraints(visualFormat: "V:|[v1]|", options: NSLayoutConstraint.FormatOptions.alignAllCenterX, metrics: nil, views: views)
+    }
+    
+    @objc func clearLog() -> Void {
+        let logManager = MLGameLogManager()
+        _ = logManager.clear()
+        let log = logManager.read()
+        self.textView.text = log
     }
 
 

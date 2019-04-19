@@ -19,7 +19,28 @@ class MLGameLogManager: NSObject {
     
     func write(string: String) -> Bool {
         do {
-            try string.write(to: self.filename, atomically: true, encoding: String.Encoding.utf8)
+            let fh = try FileHandle(forWritingTo: self.filename)
+            fh.seekToEndOfFile()
+            fh.write(string.data(using: String.Encoding.utf8)!)
+            fh.closeFile()
+        } catch {
+            return false
+        }
+        return true
+    }
+    
+    func read() -> String {
+        do {
+            let str = try String(contentsOf: self.filename, encoding: String.Encoding.utf8)
+            return str
+        } catch {
+            return ""
+        }
+    }
+    
+    func clear() -> Bool {
+        do {
+            try "".write(to: self.filename, atomically: true, encoding: String.Encoding.utf8)
         } catch {
             return false
         }

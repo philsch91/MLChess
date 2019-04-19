@@ -16,6 +16,11 @@ class MLPawnPiece: MLChessPiece {
         self.posX = x
         self.posY = y
         self.color = color
+        self.value = self.color.rawValue
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
     }
     
     public override func getPossibleMoves() -> [[[MLChessPiece]]] {

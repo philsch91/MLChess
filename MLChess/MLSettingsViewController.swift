@@ -64,9 +64,10 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
         print(indexPath)
         if indexPath.item == 0 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
-            let arr = ["Test1","Test2"]
+            segmentedControllCell.separatorActive = false
+            let arr = ["White","Black"]
             segmentedControllCell.items = arr
-            segmentedControllCell.segmentedControl.addTarget(self, action: #selector(self.gameTypeChanged(control:)), for: UIControl.Event.touchUpInside)
+            segmentedControllCell.segmentedControl.addTarget(self, action: #selector(self.gameTypeChanged(control:)), for: UIControl.Event.valueChanged)
             return segmentedControllCell
         }
         

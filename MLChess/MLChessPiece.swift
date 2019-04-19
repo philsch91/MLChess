@@ -8,20 +8,27 @@
 
 import UIKit
 
-class MLChessPiece: NSObject {
-    var board: [[MLChessPiece?]]     //= [[MLChessPiece]]()
-    var posX: Int
-    var posY: Int
-    var color: MLPieceColor
+class MLChessPiece: NSObject, Codable {
+    var board: [[MLChessPiece?]] = [[MLChessPiece]]()
+    var posX: Int = 0
+    var posY: Int = 0
+    var color: MLPieceColor = MLPieceColor.black
+    var value: Int = 0
     
-    override internal init() {
-        self.board = [[MLChessPiece]]()
-        self.posX = 0
-        self.posY = 0
-        self.color = MLPieceColor.black
+    override init() {
+        //self.board = [[MLChessPiece]]()
+        //self.posX = 0
+        //self.posY = 0
+        //self.color = MLPieceColor.black
     }
     
     public func getPossibleMoves() -> [[[MLChessPiece]]] {
         return [[[MLChessPiece]]]()
+    }
+    
+    //MARK: - CodingKey
+    
+    enum CodingKeys: String, CodingKey {
+        case value
     }
 }

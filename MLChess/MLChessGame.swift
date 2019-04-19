@@ -8,8 +8,9 @@
 
 import UIKit
 
-class MLChessGame: NSObject {
+class MLChessGame: NSObject, Codable {
     var board: [[MLChessPiece?]] = [[MLChessPiece?]]()
+    var active: MLPieceColor!
     
     override init() {
         var white1: [MLChessPiece?] = [MLChessPiece?]()
@@ -33,7 +34,12 @@ class MLChessGame: NSObject {
         for _ in 2...5 {
             self.board.append(empty)
         }
-        
+        /*
+        for _ in 2...5 {
+            let empty2: [MLChessPiece?] = Array(repeating: MLChessPiece(), count: 8)
+            self.board.append(empty2)
+        }
+        */
         var black2: [MLChessPiece?] = [MLChessPiece?]()
         for col in 0...7 {
             black2.append(MLPawnPiece(state: self.board, x: col, y: 6, color: MLPieceColor.black))
@@ -50,6 +56,15 @@ class MLChessGame: NSObject {
         black1.append(MLKnightPiece(state: self.board, x: 6, y: 7, color: MLPieceColor.black))
         black1.append(MLRookPiece(state: self.board, x: 7, y: 7, color: MLPieceColor.black))
         self.board.append(black1)
+        
+        self.active = MLPieceColor.white
+    }
+    
+    //MARK: - CodingKey
+    
+    enum CodingKeys: String, CodingKey {
+        case board
+        case active
     }
     
 }

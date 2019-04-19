@@ -16,6 +16,12 @@ class MLKingPiece: MLChessPiece {
         self.posX = x
         self.posY = y
         self.color = color
+        self.value = 10 * self.color.rawValue
+    }
+    
+    required init(from decoder: Decoder) throws {
+        //let container = try decoder.container(keyedBy: CodingKeys.self)
+        try super.init(from: decoder)
     }
     
     public override func getPossibleMoves() -> [[[MLChessPiece]]] {

@@ -120,17 +120,18 @@ class MainViewController: PSTimerViewController,CBChessBoardViewDataSource {
     
     @objc func setupNewGame() -> Void {
         print("setupNewGame")
-        /*
-        if case let controller? = self.controller {
-            controller.reset()
-        }
-        if case let board? = self.board {
-            let controller: MLChessBoardViewController = MLChessBoardViewController(board)
-            self.controller = controller
-        }
-        */
+        
         self.game = MLChessGame()
-        //self.controller?.updateView(state: game.board)
+        
+        let encoder = JSONEncoder()
+        //encoder.outputFormatting = JSONEncoder.OutputFormatting.prettyPrinted
+        let jsonData = try? encoder.encode(self.game)
+        
+        if case let json? = String(data: jsonData!, encoding: String.Encoding.utf8){
+            let logManager = MLGameLogManager()
+            _ = logManager.write(string: json)
+        }
+        
         self.chessBoardView.reloadData()
     }
     

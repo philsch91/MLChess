@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum MLPieceColor {
-    case black
-    case white
+enum MLPieceColor: Int, Codable {
+    case black = -1
+    case white = 1
 }
 
