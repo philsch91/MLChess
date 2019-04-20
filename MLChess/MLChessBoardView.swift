@@ -90,10 +90,10 @@ class MLChessBoardView: UIView {
             //----
             let labelx: UILabel = UILabel(frame: framex)
             labelx.center.x -= (labelx.frame.size.width/2)
-            //labelx.text=String(row)
+            //labelx.text = String(row)
             labelx.text = String(format: "%c", row+64) //as String
             //labelx.text = String(UnicodeScalar(row+64)!.value)
-            //labelx.text=String(UnicodeScalar(row + 64))
+            //labelx.text = String(UnicodeScalar(row + 64))
             labelx.textColor = UIColor.white
             self.addSubview(labelx)
             
@@ -110,26 +110,26 @@ class MLChessBoardView: UIView {
             //let frame: CGRect = CGRect(x: 5, y: squareSize*CGFloat(row), width: 10, height: 10)
             let frame: CGRect = CGRect(origin: center, size: CGSize(width: 10, height: 10))
             //----
-            let label: UILabel = UILabel(frame: frame)  //(10.0, 46.875)
-            //label.layer.borderWidth=1     //debug
-            //print("label.center",label.center)
-            label.center.y -= (label.frame.size.height)     //(10.0, 36.875)
-            //print("label.center",label.center)
-            label.text = String(row)
-            label.textColor = UIColor.white
-            self.addSubview(label)
+            let labely: UILabel = UILabel(frame: frame)  //(10.0, 46.875)
+            //labely.layer.borderWidth=1     //debug
+            //print("labely.center",labely.center)
+            labely.center.y -= (labely.frame.size.height)     //(10.0, 36.875)
+            //print("labely.center",labely.center)
+            labely.text = String(9-row)
+            labely.textColor = UIColor.white
+            self.addSubview(labely)
             
-            //let label2: UILabel = UILabel(frame: CGRect(x: label.center.x,y: label.center.y, width: 10, height: 10))
-            let label2: UILabel = UILabel(frame: frame)
-            //label2.center.x += 356.875
-            //print("t1",squareSize*9-label2.frame.size.width)
-            //print("t2",rect.width-label2.frame.size.width)
-            label2.center.x = rect.width-label2.frame.size.width
-            label2.center.y -= label2.frame.size.height
-            //print("label2.center",label2.center)
-            label2.text = String(row)
-            label2.textColor = UIColor.white
-            self.addSubview(label2)
+            //let labely2: UILabel = UILabel(frame: CGRect(x: label.center.x,y: label.center.y, width: 10, height: 10))
+            let labely2: UILabel = UILabel(frame: frame)
+            //labely2.center.x += 356.875
+            //print("t1",squareSize*9-labely2.frame.size.width)
+            //print("t2",rect.width-labely2.frame.size.width)
+            labely2.center.x = rect.width-labely2.frame.size.width
+            labely2.center.y -= labely2.frame.size.height
+            //print("labely2.center",labely2.center)
+            labely2.text = String(9-row)
+            labely2.textColor = UIColor.white
+            self.addSubview(labely2)
         }
         
         for row in 0...7 {

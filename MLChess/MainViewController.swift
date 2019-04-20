@@ -22,7 +22,9 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     var currTime: Int!
     var stopFlag: Bool!
     var mcts: MCTS!
-
+    var treeStopFlag: ObjCBool!
+    var pTreeStopFlag: UnsafeMutablePointer<ObjCBool>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -34,6 +36,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         self.calcTime = 60
         self.currTime = self.calcTime
         self.stopFlag = true
+        
+        self.treeStopFlag = false
+        self.pTreeStopFlag = UnsafeMutablePointer<ObjCBool>.allocate(capacity: 1)
+        self.pTreeStopFlag.initialize(to: self.treeStopFlag)
         
         self.setupUI()
         self.chessBoardView.dataSource = self
@@ -51,18 +57,6 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Test", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.test))
         
         self.chessBoardView = MLChessBoardView(frame: frame)
-        
-        /*
-        if let navBar = self.navigationController {
-            // pin containerView to *bottom* of navBar view
-            //board.topAnchor.constraint(equalTo: navBar.view.bottomAnchor).isActive = true
-        } else {
-            // pin containerView to *top* of view
-            //board.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        }*/
-        //board.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
-        
-        //self.view.addSubview(board)
         
         frame.size.height = self.view.frame.height
         frame.size.height += 100
@@ -92,7 +86,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         button.setTitle("Start", for: UIControl.State.normal)
         button.sizeToFit()
         button.frame.size.width += 10
-        button.addTarget(self, action: #selector(self.startNewGame), for: UIControl.Event.touchUpInside)
+        button.addTarget(self, action: #selector(self.toggleGame), for: UIControl.Event.touchUpInside)
         self.contentView.addSubview(button)
         self.startButton = button
         
@@ -105,8 +99,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         guard self.game != nil else {
             self.game = MLChessGame()
+            
             let startNode = MLChessTreeNode(board: self.game.board)
-            //self.mcts = MCTS(<#T##startNode: MCTreeNode##MCTreeNode#>, end: <#T##MCTreeNode#>, simulationCount: <#T##UInt#>)
+            self.mcts = MCTS(startNode, simulationCount: UInt(Int.max))
+            
             self.chessBoardView.reloadData()
             return
         }
@@ -124,17 +120,40 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         self.chessBoardView.reloadData()
     }
     
-    @objc func startNewGame() -> Void {
+    @objc func toggleGame() -> Void {
         self.stopFlag = !self.stopFlag
+        
         if self.stopFlag {
+            self.treeStopFlag = true
             self.startButton.setTitle("Start", for: UIControl.State.normal)
-        } else {
-            self.startButton.setTitle("Stop", for: UIControl.State.normal)
+            return
         }
+        
+        self.startButton.setTitle("Stop", for: UIControl.State.normal)
+        self.treeStopFlag = false
+        self.mcts.main()
     }
     
     @objc func test() -> Void {
         self.chessBoardView.darkBackgroundColor = UIColor.blue
+    }
+    
+    func nextMove() -> Void {
+        let treeNode = self.mcts.startNode
+        var nextNode: MLChessTreeNode = treeNode.nodes[0] as! MLChessTreeNode
+        
+        for node in treeNode.nodes {
+            let childNode = node as! MLChessTreeNode
+            if childNode.denominator > nextNode.denominator {
+                nextNode = childNode
+            }
+        }
+        
+        self.game.board = nextNode.board
+        self.game.moves.append(nextNode.board)
+        self.chessBoardView.reloadData()
+        
+        self.mcts = MCTS(nextNode, simulationCount: UInt(Int.max))
     }
     
     //MARK: - MCStateDelegate
@@ -163,6 +182,46 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     }
     
     func evaluate(_ currentNode: MCTreeNode, with simNode: MCTreeNode) -> Double {
+        let currentState: MLChessTreeNode = currentNode as! MLChessTreeNode
+        let simState: MLChessTreeNode = simNode as! MLChessTreeNode
+        var currentVal = 0
+        var simVal = 0
+        
+        var kingVal = 10
+        var chessMate = true
+        
+        if self.game.active == MLPieceColor.black {
+            kingVal *= MLPieceColor.black.rawValue
+        }
+        
+        for row in 0...7 {
+            for col in 0...7 {
+                if case let cpiece? = currentState.board[row][col] {
+                    currentVal += cpiece.value
+                }
+                if case let spiece? = simState.board[row][col] {
+                    simVal += spiece.value
+                    if spiece.value == kingVal {
+                        chessMate = false
+                    }
+                }
+            }
+        }
+        
+        if chessMate {
+            return 1
+        }
+        
+        let score = currentVal + simVal
+        
+        if self.game.active == MLPieceColor.white && score > 0 {
+            return 1
+        }
+        
+        if self.game.active == MLPieceColor.black && score < 0 {
+            return 1
+        }
+        
         return 0
     }
     
@@ -216,6 +275,8 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         return nil
     }
     
+    //MARK: - notifications
+    
     override func appDidEnterBackground(notification: Notification) {
         super.appDidEnterBackground(notification: notification)
         print("appDidEnterBackground")
@@ -247,6 +308,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             print(String(self.currTime))
             if self.currTime == 0 {
                 //self.stopFlag = !self.stopFlag
+                self.mcts.pStopFlag = self.pTreeStopFlag
                 if self.game.active == MLPieceColor.white {
                     self.game.active = MLPieceColor.black
                 } else {
@@ -256,6 +318,8 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             }
             label.text = String(self.currTime)
         }
+        
+        self.nextMove()
     }
 
 }

@@ -126,6 +126,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1738643D226B628F00C3AC05 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1755602922690039006613E8 /* MLSettingsViewController.swift */,
+				174BD9A9224C0A3100C7D48A /* MLGameLogViewController.swift */,
+				174BD9A7224C0A3100C7D48A /* MainViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		174BD999224C0A3100C7D48A = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +157,7 @@
 		174BD9A4224C0A3100C7D48A /* MLChess */ = {
 			isa = PBXGroup;
 			children = (
+				1738643D226B628F00C3AC05 /* ViewControllers */,
 				1790F01D225D1B4A00DC5199 /* Extensions */,
 				174BD9D12256648300C7D48A /* Enums */,
 				174BD9C82253C2C000C7D48A /* Protocols */,
@@ -154,13 +165,10 @@
 				174BD9C42253B3D300C7D48A /* Controllers */,
 				174BD9BD224C0CCE00C7D48A /* Views */,
 				174BD9A5224C0A3100C7D48A /* AppDelegate.swift */,
-				174BD9A7224C0A3100C7D48A /* MainViewController.swift */,
-				174BD9A9224C0A3100C7D48A /* MLGameLogViewController.swift */,
 				174BD9AB224C0A3100C7D48A /* Main.storyboard */,
 				174BD9AE224C0A3400C7D48A /* Assets.xcassets */,
 				174BD9B0224C0A3400C7D48A /* LaunchScreen.storyboard */,
 				174BD9B3224C0A3400C7D48A /* Info.plist */,
-				1755602922690039006613E8 /* MLSettingsViewController.swift */,
 			);
 			path = MLChess;
 			sourceTree = "<group>";
