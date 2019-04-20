@@ -101,7 +101,9 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             self.game = MLChessGame()
             
             let startNode = MLChessTreeNode(board: self.game.board)
+            startNode.nid = String(Int.random(in: 0...10000))
             self.mcts = MCTS(startNode, simulationCount: UInt(Int.max))
+            self.mcts.pStopFlag = self.pTreeStopFlag
             
             self.chessBoardView.reloadData()
             return
@@ -131,7 +133,9 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         self.startButton.setTitle("Stop", for: UIControl.State.normal)
         self.treeStopFlag = false
-        self.mcts.main()
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+            self.mcts.main()
+        }
     }
     
     @objc func test() -> Void {
@@ -140,6 +144,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     
     func nextMove() -> Void {
         let treeNode = self.mcts.startNode
+        if treeNode.nodes.count == 0 {
+            print("treeNode.count == 0")
+            return
+        }
         var nextNode: MLChessTreeNode = treeNode.nodes[0] as! MLChessTreeNode
         
         for node in treeNode.nodes {
@@ -154,6 +162,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         self.chessBoardView.reloadData()
         
         self.mcts = MCTS(nextNode, simulationCount: UInt(Int.max))
+        self.mcts.pStopFlag = self.pTreeStopFlag
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+            self.mcts.main()
+        }
     }
     
     //MARK: - MCStateDelegate
@@ -171,6 +183,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
                         let states: [[[MLChessPiece?]]] = piece.getPossibleMoves()
                         for cs in states {
                             let newState: MLChessTreeNode = MLChessTreeNode(board: cs)
+                            newState.nid = String(Int.random(in: 0...10000))
                             nextStates.append(newState)
                         }
                     }
@@ -228,7 +241,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     //MARK: - CBChessBoardViewDataSource
     
     func chessBoardView(board: MLChessBoardView, chessPieceForSquare square: CBChessBoardSquare) -> CBChessBoardPiece? {
-        print("chessBoardView chessPieceForSquare")
+        print("chessPieceForSquare", square.row, square.col)
         let gamePiece: MLChessPiece? = self.game.board[square.row][square.col]
         
         guard let piece = gamePiece else {
@@ -307,14 +320,14 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             self.currTime -= 1
             print(String(self.currTime))
             if self.currTime == 0 {
-                //self.stopFlag = !self.stopFlag
-                self.mcts.pStopFlag = self.pTreeStopFlag
+                self.treeStopFlag = true
+                self.currTime = self.calcTime
+                
                 if self.game.active == MLPieceColor.white {
                     self.game.active = MLPieceColor.black
                 } else {
                     self.game.active = MLPieceColor.white
                 }
-                self.currTime = self.calcTime
             }
             label.text = String(self.currTime)
         }

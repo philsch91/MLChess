@@ -12,6 +12,10 @@ import MonteCarloKit
 class MLChessTreeNode: MCTreeNode {
     var board: [[MLChessPiece?]]
     
+    override init() {
+        self.board = [[MLChessPiece?]]()
+    }
+    
     init(board: [[MLChessPiece?]]) {
         self.board = board
     }

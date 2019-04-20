@@ -23,6 +23,10 @@ class MLChessPiece: NSObject, Codable {
     }
     
     public func isValid(row: Int, col: Int) -> Bool {
+        if row < 0 || row > 7 || col < 0 || col > 7 {
+            return false
+        }
+        
         if case let piece? = self.board[row][col] {
             if piece.color == self.color {
                 return false
