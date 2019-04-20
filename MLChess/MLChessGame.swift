@@ -10,6 +10,7 @@ import UIKit
 
 class MLChessGame: NSObject, Codable {
     var board: [[MLChessPiece?]] = [[MLChessPiece?]]()
+    var moves: [[[MLChessPiece?]]]
     var active: MLPieceColor!
     
     override init() {
@@ -57,6 +58,7 @@ class MLChessGame: NSObject, Codable {
         black1.append(MLRookPiece(state: self.board, x: 7, y: 7, color: MLPieceColor.black))
         self.board.append(black1)
         
+        self.moves = [[[MLChessPiece?]]]()
         self.active = MLPieceColor.white
     }
     
@@ -64,6 +66,7 @@ class MLChessGame: NSObject, Codable {
     
     enum CodingKeys: String, CodingKey {
         case board
+        case moves
         case active
     }
     

@@ -22,8 +22,17 @@ class MLChessPiece: NSObject, Codable {
         //self.color = MLPieceColor.black
     }
     
-    public func getPossibleMoves() -> [[[MLChessPiece]]] {
-        return [[[MLChessPiece]]]()
+    public func isValid(row: Int, col: Int) -> Bool {
+        if case let piece? = self.board[row][col] {
+            if piece.color == self.color {
+                return false
+            }
+        }
+        return true
+    }
+    
+    public func getPossibleMoves() -> [[[MLChessPiece?]]] {
+        return [[[MLChessPiece?]]]()
     }
     
     //MARK: - CodingKey

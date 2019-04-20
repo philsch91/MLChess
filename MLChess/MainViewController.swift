@@ -8,17 +8,20 @@
 
 import UIKit
 import PSUIKitUtils
+import MonteCarloKit
 
-class MainViewController: PSTimerViewController,CBChessBoardViewDataSource {
+class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCStateDelegate {
     
     var scrollView: UIScrollView!
     var contentView: UIView!
     var timeLabel: UILabel!
+    var startButton: PSButton!
     var chessBoardView: MLChessBoardView!
     var game: MLChessGame!
     var calcTime: Int!
     var currTime: Int!
     var stopFlag: Bool!
+    var mcts: MCTS!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +48,7 @@ class MainViewController: PSTimerViewController,CBChessBoardViewDataSource {
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Game", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.setupNewGame))
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Test", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.start))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Test", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.test))
         
         self.chessBoardView = MLChessBoardView(frame: frame)
         
@@ -64,32 +67,10 @@ class MainViewController: PSTimerViewController,CBChessBoardViewDataSource {
         frame.size.height = self.view.frame.height
         frame.size.height += 100
         self.contentView = UIView(frame: frame)
-        //self.contentView.translatesAutoresizingMaskIntoConstraints = false
         
         self.scrollView = UIScrollView(frame: self.view.bounds)
-        //self.scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollView.isDirectionalLockEnabled = true
         self.scrollView.contentSize = self.contentView.bounds.size
-        
-        /*
-        guard let iscrollView = self.scrollView else {
-            return
-        }
-        guard let icontentView = self.contentView else {
-            return
-        }*/
-        
-        /*
-        //var viewsDict: [String: UIView] = ["v1":iscrollView,"v2":icontentView,"v3":iboard]
-        let views: [UIView] = [self.scrollView,self.contentView,self.board]
-        
-        self.view.addVisualConstraints(visualFormat: "H:|[v2(==v0)]|", options: NSLayoutConstraint.FormatOptions.directionLeadingToTrailing, metrics: nil, views: views)
-        
-        self.view.addVisualConstraints(visualFormat: "H:|[v1]|", options: NSLayoutConstraint.FormatOptions.alignAllCenterY, metrics: nil, views: views)
-        self.view.addVisualConstraints(visualFormat: "V:|[v1]|", options: NSLayoutConstraint.FormatOptions.alignAllCenterX, metrics: nil, views: views)
-        
-        self.scrollView.addVisualConstraints(visualFormat: "V:|[v2]|", options: NSLayoutConstraint.FormatOptions.alignAllCenterX, metrics: nil, views: views)
-         */
         
         self.contentView.addSubview(self.chessBoardView)
         
@@ -113,6 +94,7 @@ class MainViewController: PSTimerViewController,CBChessBoardViewDataSource {
         button.frame.size.width += 10
         button.addTarget(self, action: #selector(self.startNewGame), for: UIControl.Event.touchUpInside)
         self.contentView.addSubview(button)
+        self.startButton = button
         
         self.scrollView.addSubview(self.contentView)
         self.view.addSubview(self.scrollView)
@@ -121,7 +103,13 @@ class MainViewController: PSTimerViewController,CBChessBoardViewDataSource {
     @objc func setupNewGame() -> Void {
         print("setupNewGame")
         
-        self.game = MLChessGame()
+        guard self.game != nil else {
+            self.game = MLChessGame()
+            let startNode = MLChessTreeNode(board: self.game.board)
+            //self.mcts = MCTS(<#T##startNode: MCTreeNode##MCTreeNode#>, end: <#T##MCTreeNode#>, simulationCount: <#T##UInt#>)
+            self.chessBoardView.reloadData()
+            return
+        }
         
         let encoder = JSONEncoder()
         //encoder.outputFormatting = JSONEncoder.OutputFormatting.prettyPrinted
@@ -132,20 +120,58 @@ class MainViewController: PSTimerViewController,CBChessBoardViewDataSource {
             _ = logManager.write(string: json)
         }
         
+        self.game = MLChessGame()
         self.chessBoardView.reloadData()
     }
     
     @objc func startNewGame() -> Void {
         self.stopFlag = !self.stopFlag
+        if self.stopFlag {
+            self.startButton.setTitle("Start", for: UIControl.State.normal)
+        } else {
+            self.startButton.setTitle("Stop", for: UIControl.State.normal)
+        }
     }
     
-    @objc func start() -> Void {
+    @objc func test() -> Void {
         self.chessBoardView.darkBackgroundColor = UIColor.blue
     }
+    
+    //MARK: - MCStateDelegate
+    
+    func getStateUpdates(for node: MCTreeNode, level: UInt) -> [MCTreeNode] {
+        //if self.game.active == MLPieceColor.white { let whitePieces: [MLChessPiece?] }
+        
+        let simState: MLChessTreeNode = node as! MLChessTreeNode
+        var nextStates: [MLChessTreeNode] = [MLChessTreeNode]()
+        
+        for row in 0...7 {
+            for col in 0...7 {
+                if case let piece? = simState.board[row][col] {
+                    if piece.color == self.game.active {
+                        let states: [[[MLChessPiece?]]] = piece.getPossibleMoves()
+                        for cs in states {
+                            let newState: MLChessTreeNode = MLChessTreeNode(board: cs)
+                            nextStates.append(newState)
+                        }
+                    }
+                }
+            }
+        }
+        
+        return nextStates
+    }
+    
+    func evaluate(_ currentNode: MCTreeNode, with simNode: MCTreeNode) -> Double {
+        return 0
+    }
+    
+    //MARK: - CBChessBoardViewDataSource
     
     func chessBoardView(board: MLChessBoardView, chessPieceForSquare square: CBChessBoardSquare) -> CBChessBoardPiece? {
         print("chessBoardView chessPieceForSquare")
         let gamePiece: MLChessPiece? = self.game.board[square.row][square.col]
+        
         guard let piece = gamePiece else {
             return nil
         }
@@ -211,14 +237,21 @@ class MainViewController: PSTimerViewController,CBChessBoardViewDataSource {
     }
     
     override func onTick(timer: Timer) {
-        print(timer)
+        //print(timer)
         if self.stopFlag {
             return
         }
         
         if case let label? = self.timeLabel {
             self.currTime -= 1
+            print(String(self.currTime))
             if self.currTime == 0 {
+                //self.stopFlag = !self.stopFlag
+                if self.game.active == MLPieceColor.white {
+                    self.game.active = MLPieceColor.black
+                } else {
+                    self.game.active = MLPieceColor.white
+                }
                 self.currTime = self.calcTime
             }
             label.text = String(self.currTime)

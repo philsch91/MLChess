@@ -10,8 +10,8 @@ import UIKit
 
 class MLBlackPawnPiece: MLPawnPiece {
     
-    override func getPossibleMoves() -> [[[MLChessPiece]]] {
-        return [[[MLChessPiece]]]()
+    override func getPossibleMoves() -> [[[MLChessPiece?]]] {
+        return [[[MLChessPiece?]]]()
     }
 
 }

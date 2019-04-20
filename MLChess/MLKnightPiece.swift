@@ -23,8 +23,8 @@ class MLKnightPiece: MLChessPiece {
         try super.init(from: decoder)
     }
     
-    public override func getPossibleMoves() -> [[[MLChessPiece]]] {
+    public override func getPossibleMoves() -> [[[MLChessPiece?]]] {
         
-        return [[[MLChessPiece]]]()
+        return [[[MLChessPiece?]]]()
     }
 }
