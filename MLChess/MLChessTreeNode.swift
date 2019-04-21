@@ -20,4 +20,20 @@ class MLChessTreeNode: MCTreeNode {
         self.board = board
     }
     
+    override func copy(with zone: NSZone? = nil) -> Any {
+        let node: MLChessTreeNode = super.copy(with: zone) as! MLChessTreeNode
+        node.board = [[MLChessPiece?]]()
+        //TODO: NSCopying MLChessPiece
+        var i = 0
+        for row in self.board {
+            var j = 0
+            for col in row {
+                //node.board[i][j] = self.board[i][j]
+                j += 1
+            }
+            i += 1
+        }
+        return node
+    }
+    
 }

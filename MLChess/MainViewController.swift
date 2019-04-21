@@ -38,8 +38,12 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         self.stopFlag = true
         
         self.treeStopFlag = false
-        self.pTreeStopFlag = UnsafeMutablePointer<ObjCBool>.allocate(capacity: 1)
-        self.pTreeStopFlag.initialize(to: self.treeStopFlag)
+        //self.pTreeStopFlag = UnsafeMutablePointer<ObjCBool>.allocate(capacity: 1)
+        //self.pTreeStopFlag.initialize(to: self.treeStopFlag)
+        //self.pTreeStopFlag.initialize(from: &self.treeStopFlag, count: 1)
+        self.pTreeStopFlag = UnsafeMutablePointer<ObjCBool>(&self.treeStopFlag)
+        //print(self.pTreeStopFlag.pointee)
+        //self.pTreeStopFlag.pointee = true
         
         self.setupUI()
         self.chessBoardView.dataSource = self
@@ -104,6 +108,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             startNode.nid = String(Int.random(in: 0...10000))
             self.mcts = MCTS(startNode, simulationCount: UInt(Int.max))
             self.mcts.pStopFlag = self.pTreeStopFlag
+            self.mcts.stateDelegate = self
             
             self.chessBoardView.reloadData()
             return
@@ -163,6 +168,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         self.mcts = MCTS(nextNode, simulationCount: UInt(Int.max))
         self.mcts.pStopFlag = self.pTreeStopFlag
+        self.mcts.stateDelegate = self
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
             self.mcts.main()
         }
@@ -171,6 +177,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     //MARK: - MCStateDelegate
     
     func getStateUpdates(for node: MCTreeNode, level: UInt) -> [MCTreeNode] {
+        print("getStateUpdates",node.nid)
         //if self.game.active == MLPieceColor.white { let whitePieces: [MLChessPiece?] }
         
         let simState: MLChessTreeNode = node as! MLChessTreeNode
@@ -195,6 +202,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     }
     
     func evaluate(_ currentNode: MCTreeNode, with simNode: MCTreeNode) -> Double {
+        print("evaluate",currentNode,simNode)
         let currentState: MLChessTreeNode = currentNode as! MLChessTreeNode
         let simState: MLChessTreeNode = simNode as! MLChessTreeNode
         var currentVal = 0
