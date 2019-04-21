@@ -182,21 +182,25 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         let simState: MLChessTreeNode = node as! MLChessTreeNode
         var nextStates: [MLChessTreeNode] = [MLChessTreeNode]()
-        
+        //var pawnCount = 0
         for row in 0...7 {
             for col in 0...7 {
                 if case let piece? = simState.board[row][col] {
                     if piece.color == self.game.active {
+                        //if piece is MLPawnPiece { pawnCount += 1 }
                         let states: [[[MLChessPiece?]]] = piece.getPossibleMoves()
                         for cs in states {
                             let newState: MLChessTreeNode = MLChessTreeNode(board: cs)
-                            newState.nid = String(Int.random(in: 0...10000))
+                            //newState.nid = String(Int.random(in: 0...10000))
                             nextStates.append(newState)
                         }
                     }
                 }
             }
         }
+        
+        //print("pawn count",pawnCount)
+        print("state count",nextStates.count)
         
         return nextStates
     }
@@ -336,11 +340,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
                 } else {
                     self.game.active = MLPieceColor.white
                 }
+                self.nextMove()
             }
             label.text = String(self.currTime)
         }
-        
-        self.nextMove()
     }
 
 }

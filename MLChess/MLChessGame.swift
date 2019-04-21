@@ -27,7 +27,7 @@ class MLChessGame: NSObject, Codable {
         
         var white2: [MLChessPiece?] = [MLChessPiece?]()
         for col in 0...7 {
-            white2.append(MLPawnPiece(state: self.board, x: col, y: 1, color: MLPieceColor.white))
+            white2.append(MLWhitePawnPiece(state: self.board, x: col, y: 1, color: MLPieceColor.white))
         }
         self.board.append(white2)
         
@@ -43,7 +43,7 @@ class MLChessGame: NSObject, Codable {
         */
         var black2: [MLChessPiece?] = [MLChessPiece?]()
         for col in 0...7 {
-            black2.append(MLPawnPiece(state: self.board, x: col, y: 6, color: MLPieceColor.black))
+            black2.append(MLBlackPawnPiece(state: self.board, x: col, y: 6, color: MLPieceColor.black))
         }
         self.board.append(black2)
         
@@ -57,6 +57,16 @@ class MLChessGame: NSObject, Codable {
         black1.append(MLKnightPiece(state: self.board, x: 6, y: 7, color: MLPieceColor.black))
         black1.append(MLRookPiece(state: self.board, x: 7, y: 7, color: MLPieceColor.black))
         self.board.append(black1)
+        
+        //print(self.board)
+        for row in self.board {
+            for optPiece in row {
+                if case let piece? = optPiece {
+                    piece.board = self.board
+                }
+            }
+        }
+        //print(white1[0]?.board)
         
         self.moves = [[[MLChessPiece?]]]()
         self.active = MLPieceColor.white

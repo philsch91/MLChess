@@ -13,13 +13,14 @@ class MLWhitePawnPiece: MLPawnPiece {
     override func getPossibleMoves() -> [[[MLChessPiece?]]] {
         var moves: [[[MLChessPiece?]]] = [[[MLChessPiece?]]]()
         
-        if !self.isValid(row: self.posX, col: self.posY-1) {
+        if !self.isValid(row: self.posY+1, col: self.posX) {
+            print("not valid")
             return moves
         }
         
         var copy = self.board
         copy[self.posY][self.posX] = nil
-        copy[self.posY-1][self.posX] = self
+        copy[self.posY+1][self.posX] = self
         moves.append(copy)
         
         return moves
