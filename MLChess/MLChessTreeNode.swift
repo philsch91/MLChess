@@ -34,6 +34,7 @@ class MLChessTreeNode: MCTreeNode {
     }
     
     override func copy(with zone: NSZone? = nil) -> Any {
+        print("self.nid",self.nid)
         let node: MLChessTreeNode = super.copy(with: zone) as! MLChessTreeNode
         node.board = [[MLChessPiece?]]()
         //TODO: NSCopying MLChessPiece
@@ -44,12 +45,14 @@ class MLChessTreeNode: MCTreeNode {
             for piece in row {
                 //node.board[i][j] = self.board[i][j]
                 //j += 1
-                var newPiece = piece
                 /*
+                var newPiece = piece
                 if case let exPiece? = piece {
                     newPiece = exPiece.copy() as? MLChessPiece
-                }*/
+                }
                 pieceRow.append(newPiece)
+                */
+                pieceRow.append(piece)
             }
             //i += 1
             node.board.append(pieceRow)

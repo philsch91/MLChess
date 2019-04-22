@@ -43,6 +43,7 @@ class MLChessPiece: NSObject, NSCopying, Codable {
     //MARK: - NSCopying
     
     func copy(with zone: NSZone? = nil) -> Any {
+        print("MLChessPiece copy")
         let pieceCopy = type(of: self).init()
         //var i = 0
         for row in self.board {
@@ -51,12 +52,14 @@ class MLChessPiece: NSObject, NSCopying, Codable {
             for piece in row {
                 //node.board[i][j] = self.board[i][j]
                 //j += 1
-                var newPiece = piece
                 /*
+                var newPiece = piece
                 if case let exPiece? = piece {
                     newPiece = exPiece.copy() as? MLChessPiece
-                }*/
+                }
                 pieceRow.append(newPiece)
+                */
+                pieceRow.append(piece)
             }
             //i += 1
             pieceCopy.board.append(pieceRow)

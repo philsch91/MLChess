@@ -105,8 +105,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             self.game = MLChessGame()
             
             let startNode = MLChessTreeNode(board: self.game.board)
-            startNode.nid = String(Int.random(in: 0...10000))
+            //startNode.nid = String(Int.random(in: 0...10000))
+            print("startNode.nid",startNode.nid)
             self.mcts = MCTS(startNode, simulationCount: UInt(Int.max))
+            self.mcts.debug = true
             self.mcts.pStopFlag = self.pTreeStopFlag
             self.mcts.stateDelegate = self
             
@@ -149,8 +151,8 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     
     func nextMove() -> Void {
         let treeNode = self.mcts.startNode
+        print("treeNode.nodes.count",treeNode.nodes.count)
         if treeNode.nodes.count == 0 {
-            print("treeNode.count == 0")
             return
         }
         var nextNode: MLChessTreeNode = treeNode.nodes[0] as! MLChessTreeNode
@@ -176,8 +178,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     
     //MARK: - MCStateDelegate
     
-    func getStateUpdates(for node: MCTreeNode, level: UInt) -> [MCTreeNode] {
+    func getStateUpdates(for node: MCTreeNode, depth: UInt) -> [MCTreeNode] {
         print("getStateUpdates",node.nid)
+        print("node.denominator",node.denominator)
+        print("depth",depth)
         //if self.game.active == MLPieceColor.white { let whitePieces: [MLChessPiece?] }
         
         let simState: MLChessTreeNode = node as! MLChessTreeNode
@@ -206,7 +210,8 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     }
     
     func evaluate(_ currentNode: MCTreeNode, with simNode: MCTreeNode) -> Double {
-        print("evaluate",currentNode,simNode)
+        print("evaluate",currentNode.nid,simNode.nid)
+        //print("evaluate",currentNode,simNode)
         let currentState: MLChessTreeNode = currentNode as! MLChessTreeNode
         let simState: MLChessTreeNode = simNode as! MLChessTreeNode
         var currentVal = 0
