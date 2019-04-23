@@ -14,7 +14,6 @@ class MLWhitePawnPiece: MLPawnPiece {
         var moves: [[[MLChessPiece?]]] = [[[MLChessPiece?]]]()
         
         if !self.isValid(row: self.posY+1, col: self.posX) {
-            print("not valid")
             return moves
         }
         
@@ -24,6 +23,18 @@ class MLWhitePawnPiece: MLPawnPiece {
         moves.append(copy)
         
         return moves
+    }
+    
+    override func getPossibleMoves(state:[[MLChessPiece?]], x: Int, y: Int) -> [[[MLChessPiece?]]] {
+        var states: [[[MLChessPiece?]]] = [[[MLChessPiece?]]]()
+        if !self.isValid(board: state, row: y+1, col: x) {
+            return states
+        }
+        var copy = state
+        copy[y][x] = nil
+        copy[y+1][x] = self
+        states.append(copy)
+        return states
     }
 
 }

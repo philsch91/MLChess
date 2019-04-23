@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  MainViewController.swift
 //  MLChess
 //
 //  Created by Philipp Schunker on 27.03.19.
@@ -24,6 +24,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     var mcts: MCTS!
     var treeStopFlag: ObjCBool!
     var pTreeStopFlag: UnsafeMutablePointer<ObjCBool>!
+    var simulationColor: MLPieceColor!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,12 +39,15 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         self.stopFlag = true
         
         self.treeStopFlag = false
-        //self.pTreeStopFlag = UnsafeMutablePointer<ObjCBool>.allocate(capacity: 1)
-        //self.pTreeStopFlag.initialize(to: self.treeStopFlag)
-        //self.pTreeStopFlag.initialize(from: &self.treeStopFlag, count: 1)
+        self.pTreeStopFlag = UnsafeMutablePointer<ObjCBool>.allocate(capacity: 1)
+        ////self.pTreeStopFlag.initialize(to: self.treeStopFlag)
+        ////self.pTreeStopFlag.initialize(from: &self.treeStopFlag, count: 1)
+        //self.pTreeStopFlag.initialize(to: false)
         self.pTreeStopFlag = UnsafeMutablePointer<ObjCBool>(&self.treeStopFlag)
         //print(self.pTreeStopFlag.pointee)
+        //self.treeStopFlag = true
         //self.pTreeStopFlag.pointee = true
+        //print(self.pTreeStopFlag.pointee)
         
         self.setupUI()
         self.chessBoardView.dataSource = self
@@ -108,7 +112,8 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             //startNode.nid = String(Int.random(in: 0...10000))
             print("startNode.nid",startNode.nid)
             self.mcts = MCTS(startNode, simulationCount: UInt(Int.max))
-            self.mcts.debug = true
+            self.mcts.simDepth = 30
+            //self.mcts.debug = true
             self.mcts.pStopFlag = self.pTreeStopFlag
             self.mcts.stateDelegate = self
             
@@ -134,12 +139,14 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         if self.stopFlag {
             self.treeStopFlag = true
+            //self.pTreeStopFlag.pointee = true
             self.startButton.setTitle("Start", for: UIControl.State.normal)
             return
         }
         
         self.startButton.setTitle("Stop", for: UIControl.State.normal)
         self.treeStopFlag = false
+        //self.pTreeStopFlag.pointee = false
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
             self.mcts.main()
         }
@@ -180,22 +187,33 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     
     func getStateUpdates(for node: MCTreeNode, depth: UInt) -> [MCTreeNode] {
         print("getStateUpdates",node.nid)
-        print("node.denominator",node.denominator)
+        //print("node.denominator",node.denominator)
         print("depth",depth)
-        //if self.game.active == MLPieceColor.white { let whitePieces: [MLChessPiece?] }
         
-        let simState: MLChessTreeNode = node as! MLChessTreeNode
+        if depth == 0 {
+            self.simulationColor = self.game.active
+        } else {
+            if self.simulationColor == MLPieceColor.white {
+                self.simulationColor = MLPieceColor.black
+            } else {
+                self.simulationColor = MLPieceColor.white
+            }
+        }
+        
+        let simNode: MLChessTreeNode = node as! MLChessTreeNode
         var nextStates: [MLChessTreeNode] = [MLChessTreeNode]()
         //var pawnCount = 0
         for row in 0...7 {
             for col in 0...7 {
-                if case let piece? = simState.board[row][col] {
-                    if piece.color == self.game.active {
-                        //if piece is MLPawnPiece { pawnCount += 1 }
-                        let states: [[[MLChessPiece?]]] = piece.getPossibleMoves()
-                        for cs in states {
-                            let newState: MLChessTreeNode = MLChessTreeNode(board: cs)
+                if case let piece? = simNode.board[row][col] {
+                    if piece.color == self.simulationColor {
+                        //if piece is MLPawnPiece { pawnCount += 1; }
+                        //if(depth == 2) { print("piece",piece.board); }
+                        let states: [[[MLChessPiece?]]] = piece.getPossibleMoves(state: simNode.board, x: col, y: row)
+                        for state in states {
+                            let newState: MLChessTreeNode = MLChessTreeNode(board: state)
                             //newState.nid = String(Int.random(in: 0...10000))
+                            print(newState.nid)
                             nextStates.append(newState)
                         }
                     }

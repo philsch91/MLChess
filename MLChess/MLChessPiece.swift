@@ -36,7 +36,26 @@ class MLChessPiece: NSObject, NSCopying, Codable {
         return true
     }
     
+    public func isValid(board: [[MLChessPiece?]], row: Int, col: Int) -> Bool {
+        if row < 0 || row > 7 || col < 0 || col > 7 {
+            return false
+        }
+        
+        if case let piece? = board[row][col] {
+            /*
+            if piece.color == color {
+                return false
+            }*/
+            return false
+        }
+        return true
+    }
+    
     public func getPossibleMoves() -> [[[MLChessPiece?]]] {
+        return [[[MLChessPiece?]]]()
+    }
+    
+    func getPossibleMoves(state:[[MLChessPiece?]], x: Int, y: Int) -> [[[MLChessPiece?]]] {
         return [[[MLChessPiece?]]]()
     }
     
