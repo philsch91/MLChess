@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		17386439226B2F3B00C3AC05 /* MLChessTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17386438226B2F3B00C3AC05 /* MLChessTreeNode.swift */; };
+		174075AB2271077D0061037A /* MonteCarloKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174075AA2271077D0061037A /* MonteCarloKit.framework */; };
+		174075AC2271077D0061037A /* MonteCarloKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 174075AA2271077D0061037A /* MonteCarloKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		174BD9A6224C0A3100C7D48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A5224C0A3100C7D48A /* AppDelegate.swift */; };
 		174BD9A8224C0A3100C7D48A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A7224C0A3100C7D48A /* MainViewController.swift */; };
 		174BD9AA224C0A3100C7D48A /* MLGameLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A9224C0A3100C7D48A /* MLGameLogViewController.swift */; };
@@ -22,8 +24,6 @@
 		174BD9CC225547C400C7D48A /* MLRookPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9CB225547C400C7D48A /* MLRookPiece.swift */; };
 		174BD9CE22560C9700C7D48A /* MLPieceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9CD22560C9700C7D48A /* MLPieceColor.swift */; };
 		174BD9D32256935400C7D48A /* MLKingPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9D22256935400C7D48A /* MLKingPiece.swift */; };
-		174F43F5226E31DC0008F192 /* MonteCarloKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174F43F4226E31DC0008F192 /* MonteCarloKit.framework */; };
-		174F43F6226E31DC0008F192 /* MonteCarloKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 174F43F4226E31DC0008F192 /* MonteCarloKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		175560282268F53B006613E8 /* MLGameLogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175560272268F53B006613E8 /* MLGameLogManager.swift */; };
 		1755602A22690039006613E8 /* MLSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1755602922690039006613E8 /* MLSettingsViewController.swift */; };
 		1755602C22690C27006613E8 /* MLSegmentedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1755602B22690C27006613E8 /* MLSegmentedCollectionViewCell.swift */; };
@@ -60,7 +60,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				1790F0642263ACF100DC5199 /* PSUIKitUtils.framework in Embed Frameworks */,
-				174F43F6226E31DC0008F192 /* MonteCarloKit.framework in Embed Frameworks */,
+				174075AC2271077D0061037A /* MonteCarloKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,6 +69,7 @@
 
 /* Begin PBXFileReference section */
 		17386438226B2F3B00C3AC05 /* MLChessTreeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessTreeNode.swift; sourceTree = "<group>"; };
+		174075AA2271077D0061037A /* MonteCarloKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MonteCarloKit.framework; sourceTree = "<group>"; };
 		174BD9A2224C0A3100C7D48A /* MLChess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLChess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		174BD9A5224C0A3100C7D48A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		174BD9A7224C0A3100C7D48A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -85,7 +86,6 @@
 		174BD9CB225547C400C7D48A /* MLRookPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLRookPiece.swift; sourceTree = "<group>"; };
 		174BD9CD22560C9700C7D48A /* MLPieceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLPieceColor.swift; sourceTree = "<group>"; };
 		174BD9D22256935400C7D48A /* MLKingPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLKingPiece.swift; sourceTree = "<group>"; };
-		174F43F4226E31DC0008F192 /* MonteCarloKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MonteCarloKit.framework; sourceTree = "<group>"; };
 		175560272268F53B006613E8 /* MLGameLogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLGameLogManager.swift; sourceTree = "<group>"; };
 		1755602922690039006613E8 /* MLSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLSettingsViewController.swift; sourceTree = "<group>"; };
 		1755602B22690C27006613E8 /* MLSegmentedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLSegmentedCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1790F0632263ACF100DC5199 /* PSUIKitUtils.framework in Frameworks */,
-				174F43F5226E31DC0008F192 /* MonteCarloKit.framework in Frameworks */,
+				174075AB2271077D0061037A /* MonteCarloKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,7 +139,7 @@
 		174BD999224C0A3100C7D48A = {
 			isa = PBXGroup;
 			children = (
-				174F43F4226E31DC0008F192 /* MonteCarloKit.framework */,
+				174075AA2271077D0061037A /* MonteCarloKit.framework */,
 				1790F0622263ACF000DC5199 /* PSUIKitUtils.framework */,
 				174BD9A4224C0A3100C7D48A /* MLChess */,
 				174BD9A3224C0A3100C7D48A /* Products */,
