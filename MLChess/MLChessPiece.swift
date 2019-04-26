@@ -23,6 +23,14 @@ class MLChessPiece: NSObject, NSCopying, Codable {
         //self.color = MLPieceColor.black
     }
     
+    public init(state:[[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor) {
+        super.init()
+        self.board = state
+        self.posX = x
+        self.posY = y
+        self.color = color
+    }
+    
     public func isValid(row: Int, col: Int) -> Bool {
         if row < 0 || row > 7 || col < 0 || col > 7 {
             return false
@@ -40,14 +48,30 @@ class MLChessPiece: NSObject, NSCopying, Codable {
         if row < 0 || row > 7 || col < 0 || col > 7 {
             return false
         }
-        
+        /*
         if case let piece? = board[row][col] {
-            /*
-            if piece.color == color {
-                return false
-            }*/
             return false
         }
+        */
+        return true
+    }
+    
+    public func isFree(board: [[MLChessPiece?]], row: Int, col: Int) -> Bool {
+        if case _? = board[row][col] {
+            return false
+        }
+        return true
+    }
+    
+    public func canTake(board: [[MLChessPiece?]], row: Int, col: Int) -> Bool {
+        guard let piece = board[row][col] else {
+            return false
+        }
+        
+        if piece.color == self.color {
+            return false
+        }
+        
         return true
     }
     

@@ -162,6 +162,12 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         if treeNode.nodes.count == 0 {
             return
         }
+        
+        for cnode in treeNode.nodes {
+            let node = cnode as! MLChessTreeNode
+            print("cccnode",node.nid)
+        }
+        
         var nextNode: MLChessTreeNode = treeNode.nodes[0] as! MLChessTreeNode
         
         for node in treeNode.nodes {
@@ -175,7 +181,14 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         self.game.moves.append(nextNode.board)
         self.chessBoardView.reloadData()
         
+        if(self.game.active == MLPieceColor.white){
+            self.game.active = MLPieceColor.black
+        } else {
+            self.game.active = MLPieceColor.white
+        }
+        
         self.mcts = MCTS(nextNode, simulationCount: UInt(Int.max))
+        self.treeStopFlag = false
         self.mcts.pStopFlag = self.pTreeStopFlag
         self.mcts.stateDelegate = self
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
@@ -192,6 +205,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         if depth == 0 {
             self.simulationColor = self.game.active
+            //print(self.simulationColor)
         } else {
             if self.simulationColor == MLPieceColor.white {
                 self.simulationColor = MLPieceColor.black
@@ -357,12 +371,6 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             if self.currTime == 0 {
                 self.treeStopFlag = true
                 self.currTime = self.calcTime
-                
-                if self.game.active == MLPieceColor.white {
-                    self.game.active = MLPieceColor.black
-                } else {
-                    self.game.active = MLPieceColor.white
-                }
                 self.nextMove()
             }
             label.text = String(self.currTime)

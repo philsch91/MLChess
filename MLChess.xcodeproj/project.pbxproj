@@ -24,6 +24,7 @@
 		174BD9CC225547C400C7D48A /* MLRookPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9CB225547C400C7D48A /* MLRookPiece.swift */; };
 		174BD9CE22560C9700C7D48A /* MLPieceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9CD22560C9700C7D48A /* MLPieceColor.swift */; };
 		174BD9D32256935400C7D48A /* MLKingPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9D22256935400C7D48A /* MLKingPiece.swift */; };
+		17553D9522733C2600D12960 /* MLChessPiecePosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17553D9422733C2600D12960 /* MLChessPiecePosition.swift */; };
 		175560282268F53B006613E8 /* MLGameLogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175560272268F53B006613E8 /* MLGameLogManager.swift */; };
 		1755602A22690039006613E8 /* MLSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1755602922690039006613E8 /* MLSettingsViewController.swift */; };
 		1755602C22690C27006613E8 /* MLSegmentedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1755602B22690C27006613E8 /* MLSegmentedCollectionViewCell.swift */; };
@@ -86,6 +87,7 @@
 		174BD9CB225547C400C7D48A /* MLRookPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLRookPiece.swift; sourceTree = "<group>"; };
 		174BD9CD22560C9700C7D48A /* MLPieceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLPieceColor.swift; sourceTree = "<group>"; };
 		174BD9D22256935400C7D48A /* MLKingPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLKingPiece.swift; sourceTree = "<group>"; };
+		17553D9422733C2600D12960 /* MLChessPiecePosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessPiecePosition.swift; sourceTree = "<group>"; };
 		175560272268F53B006613E8 /* MLGameLogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLGameLogManager.swift; sourceTree = "<group>"; };
 		1755602922690039006613E8 /* MLSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLSettingsViewController.swift; sourceTree = "<group>"; };
 		1755602B22690C27006613E8 /* MLSegmentedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLSegmentedCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				1790F05922637F6900DC5199 /* MLWhitePawnPiece.swift */,
 				1790F05B22637F7900DC5199 /* MLBlackPawnPiece.swift */,
 				17386438226B2F3B00C3AC05 /* MLChessTreeNode.swift */,
+				17553D9422733C2600D12960 /* MLChessPiecePosition.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				17386439226B2F3B00C3AC05 /* MLChessTreeNode.swift in Sources */,
 				1790F027225E649A00DC5199 /* CBChessBoardPiece.swift in Sources */,
 				176CC7A6225747B9009D576F /* MLWhiteKnightView.swift in Sources */,
+				17553D9522733C2600D12960 /* MLChessPiecePosition.swift in Sources */,
 				176CC7A022573E84009D576F /* MLPawnPiece.swift in Sources */,
 				176CC7AC225748DA009D576F /* MLBishopPiece.swift in Sources */,
 				174BD9A8224C0A3100C7D48A /* MainViewController.swift in Sources */,
