@@ -34,7 +34,7 @@ class MLWhitePawnPiece: MLPawnPiece {
         
         for point in points {
             if self.isValid(board: state, row: point.y, col: point.x)
-                && self.isFree(board: state, row: point.y, col: point.x) {
+                && self.isEmpty(board: state, row: point.y, col: point.x) {
                 var copy = state
                 copy[y][x] = nil
                 copy[point.y][point.x] = self

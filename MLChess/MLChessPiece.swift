@@ -56,10 +56,72 @@ class MLChessPiece: NSObject, NSCopying, Codable {
         return true
     }
     
-    public func isFree(board: [[MLChessPiece?]], row: Int, col: Int) -> Bool {
+    public func isEmpty(board: [[MLChessPiece?]], row: Int, col: Int) -> Bool {
         if case _? = board[row][col] {
             return false
         }
+        return true
+    }
+    
+    public func isFree(board: [[MLChessPiece?]], x: Int, y: Int, newX: Int, newY: Int) -> Bool {
+        let lowerBoundX: Int
+        let upperBoundX: Int
+        let lowerBoundY: Int
+        let upperBoundY: Int
+        var positions = [MLChessPiecePosition]()
+        
+        if x < newX {
+            lowerBoundX = x
+            upperBoundX = newX
+        } else if x > newX {
+            lowerBoundX = newX
+            upperBoundX = x
+        } else {
+            lowerBoundX = x
+            upperBoundX = lowerBoundX
+        }
+        
+        if y < newY {
+            lowerBoundY = y
+            upperBoundY = newY
+        } else if y > newY {
+            lowerBoundY = newY
+            upperBoundY = y
+        } else {
+            lowerBoundY = y
+            upperBoundY = lowerBoundY
+        }
+        
+        if lowerBoundX != upperBoundX && lowerBoundY != upperBoundY {
+            var xA = [Int]()
+            var yA = [Int]()
+            
+            for i in lowerBoundX...upperBoundX {
+                xA.append(i)
+            }
+            for j in lowerBoundY...upperBoundY {
+                yA.append(j)
+            }
+            for k in 0..<xA.count {
+                positions.append(MLChessPiecePosition(x: xA[k], y: yA[k]))
+            }
+        } else if lowerBoundX != upperBoundX {
+            for i in lowerBoundX...upperBoundX {
+                positions.append(MLChessPiecePosition(x: i, y: y))
+            }
+            
+        } else if lowerBoundY != upperBoundY {
+            for i in lowerBoundY...upperBoundY {
+                positions.append(MLChessPiecePosition(x: x, y: i))
+            }
+        }
+        
+        for pos in positions {
+            if !isEmpty(board: board, row: pos.y, col: pos.x){
+                return false
+            }
+        }
+        
         return true
     }
     

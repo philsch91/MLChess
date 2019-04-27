@@ -267,7 +267,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         var kingVal = 10
         var chessMate = true
         
-        if self.game.active == MLPieceColor.black {
+        if self.game.active == MLPieceColor.white {
             kingVal *= MLPieceColor.black.rawValue
         }
         
@@ -290,6 +290,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         }
         
         let score = currentVal + simVal
+        print("score", score)
         
         if self.game.active == MLPieceColor.white && score > 0 {
             return 1

@@ -24,8 +24,32 @@ class MLKingPiece: MLChessPiece {
         super.init()
     }
     
-    public override func getPossibleMoves() -> [[[MLChessPiece?]]] {
-        
+    override public func getPossibleMoves() -> [[[MLChessPiece?]]] {
         return [[[MLChessPiece?]]]()
+    }
+    
+    override public func getPossibleMoves(state: [[MLChessPiece?]], x: Int, y: Int) -> [[[MLChessPiece?]]] {
+        var states: [[[MLChessPiece?]]] = [[[MLChessPiece?]]]()
+        
+        var points = [MLChessPiecePosition]()
+        
+        points.append(MLChessPiecePosition(x: x-1, y: y))
+        points.append(MLChessPiecePosition(x: x+1, y: y))
+        points.append(MLChessPiecePosition(x: x, y: y-1))
+        points.append(MLChessPiecePosition(x: x, y: y+1))
+        
+        for p in points {
+            if self.isValid(board: state, row: p.y, col: p.x)
+                && (self.isEmpty(board: state, row: p.y, col: p.x)
+                    || self.canTake(board: state, row: p.y, col: p.x)){
+                
+                var copy = state
+                copy[y][x] = nil
+                copy[p.y][p.x] = self
+                states.append(copy)
+            }
+        }
+        
+        return states
     }
 }
