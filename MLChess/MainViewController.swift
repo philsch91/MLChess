@@ -25,6 +25,8 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     var treeStopFlag: ObjCBool!
     var pTreeStopFlag: UnsafeMutablePointer<ObjCBool>!
     var simulationColor: MLPieceColor!
+    var whiteTree: MLChessTreeNode!
+    var blackTree: MLChessTreeNode!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +36,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         self.timerInterval = 1.0
         self.timerTolerance = 0.1
-        self.calcTime = 60
+        self.calcTime = 30
         self.currTime = self.calcTime
         self.stopFlag = true
         
@@ -162,12 +164,19 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         if treeNode.nodes.count == 0 {
             return
         }
-        
-        for cnode in treeNode.nodes {
-            let node = cnode as! MLChessTreeNode
-            print("cccnode",node.nid)
+        /*
+        for node in treeNode.nodes {
+            let cnode = node as! MLChessTreeNode
+            for node in cnode.nodes {
+                let ccnode = node as! MLChessTreeNode
+                print("ccnode.nodes.count",ccnode.nodes.count)
+                for node in ccnode.nodes {
+                    let cccnode = node as! MLChessTreeNode
+                    print("cccnode.nodes.count",cccnode.nodes.count)
+                }
+            }
         }
-        
+        */
         var nextNode: MLChessTreeNode = treeNode.nodes[0] as! MLChessTreeNode
         
         for node in treeNode.nodes {
@@ -181,10 +190,16 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         self.game.moves.append(nextNode.board)
         self.chessBoardView.reloadData()
         
+        nextNode.nodes = NSMutableArray()
+        
         if(self.game.active == MLPieceColor.white){
             self.game.active = MLPieceColor.black
+            //self.whiteTree = nextNode
+            //self.whiteTree.nodes = NSMutableArray()
         } else {
             self.game.active = MLPieceColor.white
+            //self.blackTree = nextNode
+            //self.blackTree.nodes = NSMutableArray()
         }
         
         self.mcts = MCTS(nextNode, simulationCount: UInt(Int.max))
