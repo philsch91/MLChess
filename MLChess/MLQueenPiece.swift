@@ -54,6 +54,10 @@ class MLQueenPiece: MLChessPiece {
             points.append(pos)
         }
         
+        for i in -7...7 {
+            let pos = MLChessPiecePosition(x: x+i, y: y+i)
+            points.append(pos)
+        }
         
         for p in points {
             if self.isValid(board: state, row: p.y, col: p.x)
