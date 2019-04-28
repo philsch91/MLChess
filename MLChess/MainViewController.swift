@@ -19,6 +19,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     var chessBoardView: MLChessBoardView!
     var game: MLChessGame!
     var calcTime: Int!
+    var memTime: Int!
     var currTime: Int!
     var stopFlag: Bool!
     var mcts: MCTS!
@@ -37,6 +38,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         self.timerInterval = 1.0
         self.timerTolerance = 0.1
         self.calcTime = 30
+        self.memTime = 0
         self.currTime = self.calcTime
         self.stopFlag = true
         
@@ -193,19 +195,28 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         nextNode.nodes = NSMutableArray()
         
         if(self.game.active == MLPieceColor.white){
+            self.whiteTree = nextNode
             self.game.active = MLPieceColor.black
-            //self.whiteTree = nextNode
-            //self.whiteTree.nodes = NSMutableArray()
         } else {
+            self.blackTree = nextNode
             self.game.active = MLPieceColor.white
-            //self.blackTree = nextNode
-            //self.blackTree.nodes = NSMutableArray()
         }
         
+        print("active player", self.game.active)
+    }
+    
+    func startSearch() -> Void {
+        var nextNode: MCTreeNode!
+        if(self.game.active == MLPieceColor.white){
+            nextNode = self.blackTree
+        } else {
+            nextNode = self.whiteTree
+        }
         self.mcts = MCTS(nextNode, simulationCount: UInt(Int.max))
-        self.treeStopFlag = false
+        //self.treeStopFlag = false
         self.mcts.pStopFlag = self.pTreeStopFlag
         self.mcts.stateDelegate = self
+        self.treeStopFlag = false
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
             self.mcts.main()
         }
@@ -242,7 +253,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
                         for state in states {
                             let newState: MLChessTreeNode = MLChessTreeNode(board: state)
                             //newState.nid = String(Int.random(in: 0...10000))
-                            print(newState.nid)
+                            //print(newState.nid)
                             nextStates.append(newState)
                         }
                     }
@@ -251,13 +262,13 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         }
         
         //print("pawn count",pawnCount)
-        print("state count",nextStates.count)
+        //print("state count",nextStates.count)
         
         return nextStates
     }
     
     func evaluate(_ currentNode: MCTreeNode, with simNode: MCTreeNode) -> Double {
-        print("evaluate",currentNode.nid,simNode.nid)
+        //print("evaluate",currentNode.nid,simNode.nid)
         //print("evaluate",currentNode,simNode)
         let currentState: MLChessTreeNode = currentNode as! MLChessTreeNode
         let simState: MLChessTreeNode = simNode as! MLChessTreeNode
@@ -290,7 +301,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         }
         
         let score = currentVal + simVal
-        print("score", score)
+        //print("score", score)
         
         if self.game.active == MLPieceColor.white && score > 0 {
             return 1
@@ -353,6 +364,36 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         return nil
     }
     
+    //MARK: - TimerViewController
+    
+    override func onTick(timer: Timer) {
+        //print(timer)
+        if self.stopFlag {
+            return
+        }
+        
+        if self.memTime > 0 {
+            self.memTime -= 1
+            print("memTime",self.memTime)
+            if self.memTime == 0 {
+                self.startSearch()
+            }
+            return
+        }
+        
+        self.currTime -= 1
+        print(String(self.currTime))
+        
+        if self.currTime == 0 {
+            self.treeStopFlag = true
+            self.memTime = 8
+            self.currTime = self.calcTime
+            self.nextMove()
+        }
+        
+        self.timeLabel.text = String(self.currTime)
+    }
+    
     //MARK: - notifications
     
     override func appDidEnterBackground(notification: Notification) {
@@ -374,24 +415,5 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         super.stopTimer()
         print("stopTimer")
     }
-    
-    override func onTick(timer: Timer) {
-        //print(timer)
-        if self.stopFlag {
-            return
-        }
-        
-        if case let label? = self.timeLabel {
-            self.currTime -= 1
-            print(String(self.currTime))
-            if self.currTime == 0 {
-                self.treeStopFlag = true
-                self.currTime = self.calcTime
-                self.nextMove()
-            }
-            label.text = String(self.currTime)
-        }
-    }
-
 }
 

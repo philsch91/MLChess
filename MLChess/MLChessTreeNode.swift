@@ -34,7 +34,7 @@ class MLChessTreeNode: MCTreeNode {
     }
     
     override func copy(with zone: NSZone? = nil) -> Any {
-        print("self.nid",self.nid)
+        //print("copy",self.nid)
         //let node: MLChessTreeNode = super.copy(with: zone) as! MLChessTreeNode
         //node.board = [[MLChessPiece?]]()
         let node = MLChessTreeNode()
