@@ -30,14 +30,19 @@ class MLBlackPawnPiece: MLPawnPiece {
     override func getPossibleMoves(state: [[MLChessPiece?]], x: Int, y: Int) -> [[[MLChessPiece?]]] {
         var states: [[[MLChessPiece?]]] = [[[MLChessPiece?]]]()
         
-        let points = [MLChessPiecePosition(x: x, y: y-1)]
+        var points = [MLChessPiecePosition(x: x, y: y-1)]
         
-        for point in points {
-            if self.isValid(board: state, row: point.y, col: point.x)
-                && self.isEmpty(board: state, row: point.y, col: point.x) {
+        if y == 6 {
+            points.append(MLChessPiecePosition(x: x, y: y-2))
+        }
+        
+        for p in points {
+            if self.isValid(board: state, row: p.y, col: p.x)
+                && self.isEmpty(board: state, row: p.y, col: p.x)
+                && self.isFree(board: board, x: x, y: y, newX: p.x, newY: p.y){
                 var copy = state
                 copy[y][x] = nil
-                copy[point.y][point.x] = self
+                copy[p.y][p.x] = self
                 states.append(copy)
             }
         }
@@ -46,12 +51,12 @@ class MLBlackPawnPiece: MLPawnPiece {
             MLChessPiecePosition(x: x-1, y: y-1),
             MLChessPiecePosition(x: x+1, y: y-1)]
         
-        for point in takePoints {
-            if self.isValid(board: state, row: point.y, col: point.x)
-                && self.canTake(board: state, row: point.y, col: point.x) {
+        for p in takePoints {
+            if self.isValid(board: state, row: p.y, col: p.x)
+                && self.canTake(board: state, row: p.y, col: p.x) {
                 var copy = state
                 copy[y][x] = nil
-                copy[point.y][point.x] = self
+                copy[p.y][p.x] = self
                 states.append(copy)
             }
         }

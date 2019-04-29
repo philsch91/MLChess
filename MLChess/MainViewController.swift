@@ -116,7 +116,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             //startNode.nid = String(Int.random(in: 0...10000))
             print("startNode.nid",startNode.nid)
             self.mcts = MCTS(startNode, simulationCount: UInt(Int.max))
-            self.mcts.simDepth = 30
+            //self.mcts.simDepth = 60
             //self.mcts.debug = true
             self.mcts.pStopFlag = self.pTreeStopFlag
             self.mcts.stateDelegate = self
@@ -193,6 +193,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         self.chessBoardView.reloadData()
         
         nextNode.nodes = NSMutableArray()
+        self.mcts = nil
         
         if(self.game.active == MLPieceColor.white){
             self.whiteTree = nextNode
@@ -245,7 +246,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         //var pawnCount = 0
         for row in 0...7 {
             for col in 0...7 {
-                if case let piece? = simNode.board[row][col] {
+                if let piece = simNode.board[row][col] {
                     if piece.color == self.simulationColor {
                         //if piece is MLPawnPiece { pawnCount += 1; }
                         //if(depth == 2) { print("piece",piece.board); }
@@ -284,10 +285,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         for row in 0...7 {
             for col in 0...7 {
-                if case let cpiece? = currentState.board[row][col] {
+                if let cpiece = currentState.board[row][col] {
                     currentVal += cpiece.value
                 }
-                if case let spiece? = simState.board[row][col] {
+                if let spiece = simState.board[row][col] {
                     simVal += spiece.value
                     if spiece.value == kingVal {
                         chessMate = false
@@ -302,7 +303,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         let score = currentVal + simVal
         //print("score", score)
-        
+        /*
         if self.game.active == MLPieceColor.white && score > 0 {
             return 1
         }
@@ -310,7 +311,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         if self.game.active == MLPieceColor.black && score < 0 {
             return 1
         }
-        
+        */
         return 0
     }
     

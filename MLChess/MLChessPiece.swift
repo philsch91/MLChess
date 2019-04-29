@@ -17,10 +17,6 @@ class MLChessPiece: NSObject, NSCopying, Codable {
     var value: Int = 0
     
     required override init() {
-        //self.board = [[MLChessPiece]]()
-        //self.posX = 0
-        //self.posY = 0
-        //self.color = MLPieceColor.black
     }
     
     public init(state:[[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor) {
@@ -57,7 +53,7 @@ class MLChessPiece: NSObject, NSCopying, Codable {
     }
     
     public func isEmpty(board: [[MLChessPiece?]], row: Int, col: Int) -> Bool {
-        if case _? = board[row][col] {
+        if let _ = board[row][col] {
             return false
         }
         return true
