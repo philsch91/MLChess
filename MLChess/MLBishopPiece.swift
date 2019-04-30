@@ -13,6 +13,7 @@ class MLBishopPiece: MLChessPiece {
     override public init(state:[[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor) {
         super.init(state: state, x: x, y: y, color: color)
         self.value = 3 * self.color.rawValue
+        self.id = 4 * self.color.rawValue
     }
     
     required init(from decoder: Decoder) throws {
@@ -33,15 +34,23 @@ class MLBishopPiece: MLChessPiece {
         var points = [MLChessPiecePosition]()
         
         for i in -7...7 {
+            if x+i == x {
+                continue
+            }
             let pos = MLChessPiecePosition(x: x+i, y: y+i)
+            //print(pos)
             points.append(pos)
         }
         
         for p in points {
+            let b = self.isFree(board: state, x: 2, y: 0, newX: 7, newY: 5)
+            if b {
+                print("##########")
+            }
             if self.isValid(board: state, row: p.y, col: p.x)
-                && self.isFree(board: state, x: x, y: y, newX: p.x, newY: p.y)
-                && (self.isEmpty(board: state, row: p.y, col: p.x)
-                    || self.canTake(board: state, row: p.y, col: p.x)){
+                && self.isFree(board: state, x: x, y: y, newX: p.x, newY: p.y){
+                //&& (self.isEmpty(board: state, row: p.y, col: p.x)
+                    //|| self.canTake(board: state, row: p.y, col: p.x)){
                 var copy = state
                 copy[y][x] = nil
                 copy[p.y][p.x] = self

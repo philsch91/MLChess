@@ -13,6 +13,7 @@ class MLRookPiece: MLChessPiece {
     override public init(state:[[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor) {
         super.init(state: state, x: x, y: y, color: color)
         self.value = 5 * self.color.rawValue
+        self.id = self.value
     }
     
     required init(from decoder: Decoder) throws {

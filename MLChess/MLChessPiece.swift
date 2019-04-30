@@ -14,6 +14,7 @@ class MLChessPiece: NSObject, NSCopying, Codable {
     var posX: Int = 0
     var posY: Int = 0
     var color: MLPieceColor = MLPieceColor.black
+    var id: Int = 0
     var value: Int = 0
     
     required override init() {
@@ -114,10 +115,11 @@ class MLChessPiece: NSObject, NSCopying, Codable {
         
         for pos in positions {
             if !isEmpty(board: board, row: pos.y, col: pos.x){
+                //print("isFree false")
                 return false
             }
         }
-        
+        //print("isFree true")
         return true
     }
     
@@ -175,6 +177,7 @@ class MLChessPiece: NSObject, NSCopying, Codable {
     //MARK: - CodingKey
     
     enum CodingKeys: String, CodingKey {
+        case id
         case value
     }
 }
