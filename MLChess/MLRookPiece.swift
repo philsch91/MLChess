@@ -61,7 +61,7 @@ class MLRookPiece: MLChessPiece {
             if self.isValid(board: state, row: p.y, col: p.x)
                 && self.isFree(board: state, x: x, y: y, newX: p.x, newY: p.y)
                 && (self.isEmpty(board: state, row: p.y, col: p.x)
-                || self.canTake(board: state, row: p.y, col: p.x)){
+                    || self.canTake(board: state, row: p.y, col: p.x)){
                 var copy = state
                 copy[y][x] = nil
                 copy[p.y][p.x] = self

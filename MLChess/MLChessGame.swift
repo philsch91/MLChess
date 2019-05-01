@@ -32,18 +32,15 @@ class MLChessGame: NSObject, Codable {
         for col in 0...7 {
             white2.append(MLWhitePawnPiece(state: self.board, x: col, y: 1, color: MLPieceColor.white))
         }
-        self.board.append(white2)
-        */
+        self.board.append(white2)*/
+ 
         let empty: [MLChessPiece?] = Array(repeating: nil, count: 8)
         for _ in 1...5 {
+            //let empty2: [MLChessPiece?] = Array(repeating: MLChessPiece(), count: 8)
+            //self.board.append(empty2)
             self.board.append(empty)
         }
-        /*
-        for _ in 2...5 {
-            let empty2: [MLChessPiece?] = Array(repeating: MLChessPiece(), count: 8)
-            self.board.append(empty2)
-        }
-        */
+        
         var black2: [MLChessPiece?] = [MLChessPiece?]()
         for col in 0...7 {
             black2.append(MLBlackPawnPiece(state: self.board, x: col, y: 6, color: MLPieceColor.black))

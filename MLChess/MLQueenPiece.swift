@@ -34,6 +34,8 @@ class MLQueenPiece: MLChessPiece {
         //let points = [MLChessPiecePosition(x: x, y: y-1)]
         var points = [MLChessPiecePosition]()
         
+        //MLRookPiece
+        
         for nx in 0...x {
             let pos = MLChessPiecePosition(x: nx, y: y)
             points.append(pos)
@@ -54,9 +56,27 @@ class MLQueenPiece: MLChessPiece {
             points.append(pos)
         }
         
+        //MLBishopPiece
+        
         for i in -7...7 {
-            let pos = MLChessPiecePosition(x: x+i, y: y+i)
-            points.append(pos)
+            if x+i == x || y+1 == y {
+                continue
+            }
+            
+            var pos = MLChessPiecePosition(x: x+i, y: y+i)
+            if !points.contains(pos) {
+                points.append(pos)
+            }
+            
+            pos = MLChessPiecePosition(x: x-i, y: y+i)
+            if !points.contains(pos) {
+                points.append(pos)
+            }
+            
+            pos = MLChessPiecePosition(x: x+i, y: y-i)
+            if !points.contains(pos) {
+                points.append(pos)
+            }
         }
         
         for p in points {

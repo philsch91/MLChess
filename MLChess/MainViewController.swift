@@ -66,7 +66,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Game", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.setupNewGame))
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Test", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.test))
+        let saveButtonItem  = UIBarButtonItem(title: "Save", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.saveGame))
+        let testButtonItem = UIBarButtonItem(title: "Test", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.test))
+        
+        self.navigationItem.rightBarButtonItems = [testButtonItem,saveButtonItem]
         
         self.chessBoardView = MLChessBoardView(frame: frame)
         
@@ -125,17 +128,21 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             return
         }
         
+        self.saveGame()
+        
+        self.game = MLChessGame()
+        self.chessBoardView.reloadData()
+    }
+    
+    @objc func saveGame() -> Void {
         let encoder = JSONEncoder()
         //encoder.outputFormatting = JSONEncoder.OutputFormatting.prettyPrinted
         let jsonData = try? encoder.encode(self.game)
         
-        if case let json? = String(data: jsonData!, encoding: String.Encoding.utf8){
+        if let json = String(data: jsonData!, encoding: String.Encoding.utf8){
             let logManager = MLGameLogManager()
             _ = logManager.write(string: json)
         }
-        
-        self.game = MLChessGame()
-        self.chessBoardView.reloadData()
     }
     
     @objc func toggleGame() -> Void {

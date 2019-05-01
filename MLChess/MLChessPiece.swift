@@ -69,7 +69,7 @@ class MLChessPiece: NSObject, NSCopying, Codable {
         var positions = [MLChessPiecePosition]()
         
         if x == newX && y == newY {
-            print("return early")
+            print("return")
             return false
         }
         
@@ -95,44 +95,50 @@ class MLChessPiece: NSObject, NSCopying, Codable {
             upperBoundY = lowerBoundY
         }
         
-        if lowerBoundX != upperBoundX && lowerBoundY != upperBoundY {
-            var xA = [Int]()
-            var yA = [Int]()
-            
-            for i in lowerBoundX...upperBoundX {
-                xA.append(i)
-            }
-            for j in lowerBoundY...upperBoundY {
-                yA.append(j)
-            }
-            for k in 1..<xA.count {
-                //print("#####",xA[k],yA[k])
-                positions.append(MLChessPiecePosition(x: xA[k], y: yA[k]))
-            }
-        } else if lowerBoundX != upperBoundX {
-            var xA = [Int]()
-            
-            for i in lowerBoundX...upperBoundX {
-                xA.append(i)
-            }
-            for k in 1..<xA.count {
-                positions.append(MLChessPiecePosition(x: xA[k], y: y))
+        if x != newX && y != newY {
+            if !self.isEmpty(board: board, row: newY, col: newX)
+                && !self.canTake(board: board, row: newY, col: newX) {
+                return false
             }
             
-        } else if lowerBoundY != upperBoundY {
-            var yA = [Int]()
+            var xVals = [Int]()
+            var yVals = [Int]()
             
-            for i in lowerBoundY...upperBoundY {
-                yA.append(i)
+            for ix in lowerBoundX+1..<upperBoundX {
+                xVals.append(ix)
             }
-            for k in 1..<yA.count {
-                positions.append(MLChessPiecePosition(x: x, y: yA[k]))
+            
+            for iy in lowerBoundY+1..<upperBoundY {
+                yVals.append(iy)
+            }
+            
+            for k in 0..<xVals.count {
+                //print("vals",xVals[k],yVals[k])
+                positions.append(MLChessPiecePosition(x: xVals[k], y: yVals[k]))
+            }
+        } else if x != newX {
+            if !self.isEmpty(board: board, row: y, col: newX)
+                && !self.canTake(board: board, row: y, col: newX) {
+                return false
+            }
+        
+            for ix in lowerBoundX+1..<upperBoundX {
+                positions.append(MLChessPiecePosition(x: ix, y: y))
+            }
+        } else if y != newY {
+            if !self.isEmpty(board: board, row: newY, col: x)
+                && !self.canTake(board: board, row: newY, col: x) {
+                return false
+            }
+            
+            for iy in lowerBoundY+1..<upperBoundY {
+                positions.append(MLChessPiecePosition(x: x, y: iy))
             }
         }
         
         for pos in positions {
             print(pos)
-            if !isEmpty(board: board, row: pos.y, col: pos.x){
+            if !self.isEmpty(board: board, row: pos.y, col: pos.x){
                 print("isFree false")
                 return false
             }
@@ -196,6 +202,6 @@ class MLChessPiece: NSObject, NSCopying, Codable {
     
     enum CodingKeys: String, CodingKey {
         case id
-        case value
+        //case value
     }
 }
