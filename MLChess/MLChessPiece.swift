@@ -61,11 +61,17 @@ class MLChessPiece: NSObject, NSCopying, Codable {
     }
     
     public func isFree(board: [[MLChessPiece?]], x: Int, y: Int, newX: Int, newY: Int) -> Bool {
-        let lowerBoundX: Int
+        print(self,"isFree",x,y,newX,newY)
+        var lowerBoundX: Int
         let upperBoundX: Int
-        let lowerBoundY: Int
+        var lowerBoundY: Int
         let upperBoundY: Int
         var positions = [MLChessPiecePosition]()
+        
+        if x == newX && y == newY {
+            print("return early")
+            return false
+        }
         
         if x < newX {
             lowerBoundX = x
@@ -99,27 +105,39 @@ class MLChessPiece: NSObject, NSCopying, Codable {
             for j in lowerBoundY...upperBoundY {
                 yA.append(j)
             }
-            for k in 0..<xA.count {
+            for k in 1..<xA.count {
+                //print("#####",xA[k],yA[k])
                 positions.append(MLChessPiecePosition(x: xA[k], y: yA[k]))
             }
         } else if lowerBoundX != upperBoundX {
+            var xA = [Int]()
+            
             for i in lowerBoundX...upperBoundX {
-                positions.append(MLChessPiecePosition(x: i, y: y))
+                xA.append(i)
+            }
+            for k in 1..<xA.count {
+                positions.append(MLChessPiecePosition(x: xA[k], y: y))
             }
             
         } else if lowerBoundY != upperBoundY {
+            var yA = [Int]()
+            
             for i in lowerBoundY...upperBoundY {
-                positions.append(MLChessPiecePosition(x: x, y: i))
+                yA.append(i)
+            }
+            for k in 1..<yA.count {
+                positions.append(MLChessPiecePosition(x: x, y: yA[k]))
             }
         }
         
         for pos in positions {
+            print(pos)
             if !isEmpty(board: board, row: pos.y, col: pos.x){
-                //print("isFree false")
+                print("isFree false")
                 return false
             }
         }
-        //print("isFree true")
+        print("isFree true")
         return true
     }
     

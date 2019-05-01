@@ -25,7 +25,6 @@ class MLBishopPiece: MLChessPiece {
     }
     
     override public func getPossibleMoves() -> [[[MLChessPiece?]]] {
-        
         return [[[MLChessPiece?]]]()
     }
     
@@ -34,23 +33,26 @@ class MLBishopPiece: MLChessPiece {
         var points = [MLChessPiecePosition]()
         
         for i in -7...7 {
-            if x+i == x {
+            if x+i == x || y+1 == y {
                 continue
             }
-            let pos = MLChessPiecePosition(x: x+i, y: y+i)
+            var pos = MLChessPiecePosition(x: x+i, y: y+i)
             //print(pos)
+            points.append(pos)
+            pos = MLChessPiecePosition(x: x-1, y: y+1)
             points.append(pos)
         }
         
         for p in points {
+            /*
             let b = self.isFree(board: state, x: 2, y: 0, newX: 7, newY: 5)
             if b {
                 print("##########")
-            }
+            }*/
             if self.isValid(board: state, row: p.y, col: p.x)
-                && self.isFree(board: state, x: x, y: y, newX: p.x, newY: p.y){
-                //&& (self.isEmpty(board: state, row: p.y, col: p.x)
-                    //|| self.canTake(board: state, row: p.y, col: p.x)){
+                && self.isFree(board: state, x: x, y: y, newX: p.x, newY: p.y)
+                && (self.isEmpty(board: state, row: p.y, col: p.x)
+                    || self.canTake(board: state, row: p.y, col: p.x)){
                 var copy = state
                 copy[y][x] = nil
                 copy[p.y][p.x] = self
