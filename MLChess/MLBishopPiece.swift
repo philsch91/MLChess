@@ -36,11 +36,21 @@ class MLBishopPiece: MLChessPiece {
             if x+i == x || y+1 == y {
                 continue
             }
+            
             var pos = MLChessPiecePosition(x: x+i, y: y+i)
-            //print(pos)
-            points.append(pos)
-            pos = MLChessPiecePosition(x: x-1, y: y+1)
-            points.append(pos)
+            if !points.contains(pos) {
+                points.append(pos)
+            }
+            
+            pos = MLChessPiecePosition(x: x-i, y: y+i)
+            if !points.contains(pos) {
+                points.append(pos)
+            }
+            
+            pos = MLChessPiecePosition(x: x+i, y: y-i)
+            if !points.contains(pos) {
+                points.append(pos)
+            }
         }
         
         for p in points {

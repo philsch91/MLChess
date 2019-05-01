@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MLChessPiecePosition {
+struct MLChessPiecePosition: Equatable {
     let x: Int
     let y: Int
     
