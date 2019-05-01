@@ -394,7 +394,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         if self.currTime == 0 {
             self.treeStopFlag = true
-            self.memTime = 8
+            self.memTime = 10
             self.currTime = self.calcTime
             self.nextMove()
         }

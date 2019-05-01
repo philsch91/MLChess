@@ -61,7 +61,7 @@ class MLChessPiece: NSObject, NSCopying, Codable {
     }
     
     public func isFree(board: [[MLChessPiece?]], x: Int, y: Int, newX: Int, newY: Int) -> Bool {
-        print(self,"isFree",x,y,newX,newY)
+        //print(self,"isFree",x,y,newX,newY)
         var lowerBoundX: Int
         let upperBoundX: Int
         var lowerBoundY: Int
@@ -69,7 +69,7 @@ class MLChessPiece: NSObject, NSCopying, Codable {
         var positions = [MLChessPiecePosition]()
         
         if x == newX && y == newY {
-            print("return")
+            //print("return")
             return false
         }
         
@@ -137,13 +137,13 @@ class MLChessPiece: NSObject, NSCopying, Codable {
         }
         
         for pos in positions {
-            print(pos)
+            //print(pos)
             if !self.isEmpty(board: board, row: pos.y, col: pos.x){
-                print("isFree false")
+                //print("isFree false")
                 return false
             }
         }
-        print("isFree true")
+        //print("isFree true")
         return true
     }
     
