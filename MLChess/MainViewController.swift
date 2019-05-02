@@ -237,6 +237,19 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         //print("node.denominator",node.denominator)
         print("depth",depth)
         
+        if depth > 100 {
+            return [MLChessTreeNode]()
+        }
+        /*
+        var dep = 0
+        var parentNode: MCTreeNode? = node.parent
+        while let pnode = parentNode {
+            parentNode = pnode
+            dep += 1
+        }
+        print("parents",dep)
+        */
+        
         if depth == 0 {
             self.simulationColor = self.game.active
             //print(self.simulationColor)
@@ -249,20 +262,64 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         }
         
         let simNode: MLChessTreeNode = node as! MLChessTreeNode
-        var nextStates: [MLChessTreeNode] = [MLChessTreeNode]()
+        var states: [[[MLChessPiece?]]] = [[[MLChessPiece?]]]()
         //var pawnCount = 0
+        
         for row in 0...7 {
             for col in 0...7 {
                 if let piece = simNode.board[row][col] {
                     if piece.color == self.simulationColor {
                         //if piece is MLPawnPiece { pawnCount += 1; }
                         //if(depth == 2) { print("piece",piece.board); }
-                        let states: [[[MLChessPiece?]]] = piece.getPossibleMoves(state: simNode.board, x: col, y: row)
-                        for state in states {
-                            let newState: MLChessTreeNode = MLChessTreeNode(board: state)
-                            //newState.nid = String(Int.random(in: 0...10000))
-                            //print(newState.nid)
-                            nextStates.append(newState)
+                        let moves: [[[MLChessPiece?]]] = piece.getPossibleMoves(state: simNode.board, x: col, y: row)
+                        for move in moves {
+                            //let node: MLChessTreeNode = MLChessTreeNode(board: state)
+                            //node.nid = String(Int.random(in: 0...10000))
+                            //print(node.nid)
+                            //stateNodes.append(node)
+                            states.append(move)
+                        }
+                    }
+                }
+            }
+        }
+        
+        let opponentColor: MLPieceColor
+        
+        if self.simulationColor == MLPieceColor.white {
+            opponentColor = MLPieceColor.black
+        } else {
+            opponentColor = MLPieceColor.white
+        }
+        
+        var stateNodes: [MLChessTreeNode] = [MLChessTreeNode]()
+        
+        for state in states {
+            for row in 0...7 {
+                for col in 0...7 {
+                    if let piece = state[row][col] {
+                        if piece.color == opponentColor {
+                            let moves: [[[MLChessPiece?]]] = piece.getPossibleMoves(state: state, x: col, y: row)
+                            
+                            var chessMate = true
+                            
+                            for move in moves {
+                                for irow in 0...7 {
+                                    for icol in 0...7 {
+                                        if let ipiece = move[irow][icol] {
+                                            if ipiece is MLKingPiece && ipiece.color == self.simulationColor {
+                                                chessMate = false
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            if !chessMate {
+                                let node: MLChessTreeNode = MLChessTreeNode(board: state)
+                                stateNodes.append(node)
+                            }
+                            
                         }
                     }
                 }
@@ -270,9 +327,9 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         }
         
         //print("pawn count",pawnCount)
-        //print("state count",nextStates.count)
+        //print("state count",stateNodes.count)
         
-        return nextStates
+        return stateNodes
     }
     
     func evaluate(_ currentNode: MCTreeNode, with simNode: MCTreeNode) -> Double {
