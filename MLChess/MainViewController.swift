@@ -241,15 +241,14 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             return [MLChessTreeNode]()
         }
         /*
-        var dep = 0
+        var parentCount = 0
         var parentNode: MCTreeNode? = node.parent
         while let pnode = parentNode {
-            parentNode = pnode
-            dep += 1
+            parentNode = pnode.parent
+            parentCount += 1
         }
-        print("parents",dep)
+        print("parents",parentCount)
         */
-        
         if depth == 0 {
             self.simulationColor = self.game.active
             //print(self.simulationColor)
@@ -295,34 +294,38 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         var stateNodes: [MLChessTreeNode] = [MLChessTreeNode]()
         
         for state in states {
+            //stateNodes.append(MLChessTreeNode(board: state))
+            var isValidState = true
             for row in 0...7 {
                 for col in 0...7 {
                     if let piece = state[row][col] {
-                        if piece.color == opponentColor {
-                            let moves: [[[MLChessPiece?]]] = piece.getPossibleMoves(state: state, x: col, y: row)
-                            
+                        if piece.color != opponentColor {
+                            continue
+                        }
+                        let moves: [[[MLChessPiece?]]] = piece.getPossibleMoves(state: state, x: col, y: row)
+                        //proof that chessmate is not possible for all moves of the curr.piece
+                        for move in moves {
                             var chessMate = true
-                            
-                            for move in moves {
-                                for irow in 0...7 {
-                                    for icol in 0...7 {
-                                        if let ipiece = move[irow][icol] {
-                                            if ipiece is MLKingPiece && ipiece.color == self.simulationColor {
+                            for irow in 0...7 {
+                                for icol in 0...7 {
+                                    if let ipiece = move[irow][icol] {
+                                        if ipiece is MLKingPiece && ipiece.color == self.simulationColor {
                                                 chessMate = false
-                                            }
                                         }
                                     }
                                 }
                             }
-                            
-                            if !chessMate {
-                                let node: MLChessTreeNode = MLChessTreeNode(board: state)
-                                stateNodes.append(node)
+                            //one chessmate move invalidates the state
+                            if chessMate {
+                                isValidState = false
                             }
-                            
                         }
                     }
                 }
+            }
+            
+            if isValidState {
+                stateNodes.append(MLChessTreeNode(board: state))
             }
         }
         
@@ -374,8 +377,8 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         if self.game.active == MLPieceColor.black && score < 0 {
             return 1
-        }
-        */
+        }*/
+        
         return 0
     }
     
