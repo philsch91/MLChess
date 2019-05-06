@@ -236,7 +236,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         //print("node.denominator",node.denominator)
         //print("depth",depth)
         
-        if depth > 100 {
+        if depth > 250 {
             return [MLChessTreeNode]()
         }
         /*
@@ -288,7 +288,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             for row in 0...7 {
                 for col in 0...7 {
                     if let piece = state[row][col] {
-                        if piece.color != opponentColor {
+                        if piece.color != childNodeColor {
                             continue
                         }
                         let moves: [[[MLChessPiece?]]] = piece.getPossibleMoves(state: state, x: col, y: row)
@@ -298,7 +298,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
                             for irow in 0...7 {
                                 for icol in 0...7 {
                                     if let ipiece = move[irow][icol] {
-                                        if ipiece is MLKingPiece && ipiece.color == self.simulationColor {
+                                        if ipiece is MLKingPiece && ipiece.color == simNode.color {
                                                 chessMate = false
                                         }
                                     }
@@ -314,7 +314,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             }
             
             if isValidState {
-                stateNodes.append(MLChessTreeNode(board: state))
+                stateNodes.append(MLChessTreeNode(board: state, color: childNodeColor))
             }
             */
         }
