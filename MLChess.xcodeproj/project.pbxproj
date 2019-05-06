@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		170A5B38227B7F3A005462F0 /* MonteCarloKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 170A5B37227B7F39005462F0 /* MonteCarloKit.framework */; };
-		170A5B39227B7F3A005462F0 /* MonteCarloKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 170A5B37227B7F39005462F0 /* MonteCarloKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		17386439226B2F3B00C3AC05 /* MLChessTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17386438226B2F3B00C3AC05 /* MLChessTreeNode.swift */; };
 		174BD9A6224C0A3100C7D48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A5224C0A3100C7D48A /* AppDelegate.swift */; };
 		174BD9A8224C0A3100C7D48A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A7224C0A3100C7D48A /* MainViewController.swift */; };
@@ -51,6 +49,8 @@
 		1790F05C22637F7900DC5199 /* MLBlackPawnPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F05B22637F7900DC5199 /* MLBlackPawnPiece.swift */; };
 		1790F0632263ACF100DC5199 /* PSUIKitUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1790F0622263ACF000DC5199 /* PSUIKitUtils.framework */; };
 		1790F0642263ACF100DC5199 /* PSUIKitUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1790F0622263ACF000DC5199 /* PSUIKitUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		17E0AC1A227F31E80071421E /* MonteCarloKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17E0AC19227F31E80071421E /* MonteCarloKit.framework */; };
+		17E0AC1B227F31E80071421E /* MonteCarloKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 17E0AC19227F31E80071421E /* MonteCarloKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,7 +61,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				1790F0642263ACF100DC5199 /* PSUIKitUtils.framework in Embed Frameworks */,
-				170A5B39227B7F3A005462F0 /* MonteCarloKit.framework in Embed Frameworks */,
+				17E0AC1B227F31E80071421E /* MonteCarloKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,7 +69,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		170A5B37227B7F39005462F0 /* MonteCarloKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MonteCarloKit.framework; sourceTree = "<group>"; };
 		17386438226B2F3B00C3AC05 /* MLChessTreeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessTreeNode.swift; sourceTree = "<group>"; };
 		174BD9A2224C0A3100C7D48A /* MLChess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLChess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		174BD9A5224C0A3100C7D48A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +112,7 @@
 		1790F05922637F6900DC5199 /* MLWhitePawnPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLWhitePawnPiece.swift; sourceTree = "<group>"; };
 		1790F05B22637F7900DC5199 /* MLBlackPawnPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackPawnPiece.swift; sourceTree = "<group>"; };
 		1790F0622263ACF000DC5199 /* PSUIKitUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PSUIKitUtils.framework; sourceTree = "<group>"; };
+		17E0AC19227F31E80071421E /* MonteCarloKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MonteCarloKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +121,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1790F0632263ACF100DC5199 /* PSUIKitUtils.framework in Frameworks */,
-				170A5B38227B7F3A005462F0 /* MonteCarloKit.framework in Frameworks */,
+				17E0AC1A227F31E80071421E /* MonteCarloKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +141,7 @@
 		174BD999224C0A3100C7D48A = {
 			isa = PBXGroup;
 			children = (
-				170A5B37227B7F39005462F0 /* MonteCarloKit.framework */,
+				17E0AC19227F31E80071421E /* MonteCarloKit.framework */,
 				1790F0622263ACF000DC5199 /* PSUIKitUtils.framework */,
 				174BD9A4224C0A3100C7D48A /* MLChess */,
 				174BD9A3224C0A3100C7D48A /* Products */,

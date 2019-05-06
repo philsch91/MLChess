@@ -11,13 +11,15 @@ import MonteCarloKit
 
 class MLChessTreeNode: MCTreeNode {
     var board: [[MLChessPiece?]]
+    var color: MLPieceColor!
     
     override init() {
         self.board = [[MLChessPiece?]]()
     }
     
-    init(board: [[MLChessPiece?]]) {
+    init(board: [[MLChessPiece?]], color: MLPieceColor) {
         self.board = board
+        self.color = color
         super.init()
         
         var nid: String = ""
@@ -42,6 +44,7 @@ class MLChessTreeNode: MCTreeNode {
         node.numerator = self.numerator
         node.denominator = self.denominator
         node.nodes = self.nodes
+        node.color = self.color
         //TODO: NSCopying MLChessPiece
         //var i = 0
         for row in self.board {

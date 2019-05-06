@@ -37,7 +37,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         self.timerInterval = 1.0
         self.timerTolerance = 0.1
-        self.calcTime = 30
+        self.calcTime = 60
         self.memTime = 0
         self.currTime = self.calcTime
         self.stopFlag = true
@@ -115,7 +115,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         guard self.game != nil else {
             self.game = MLChessGame()
             
-            let startNode = MLChessTreeNode(board: self.game.board)
+            let startNode = MLChessTreeNode(board: self.game.board, color: MLPieceColor.white)
             //startNode.nid = String(Int.random(in: 0...10000))
             print("startNode.nid",startNode.nid)
             self.mcts = MCTS(startNode, simulationCount: UInt(Int.max))
@@ -221,10 +221,9 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             nextNode = self.whiteTree
         }
         self.mcts = MCTS(nextNode, simulationCount: UInt(Int.max))
-        //self.treeStopFlag = false
+        self.treeStopFlag = false
         self.mcts.pStopFlag = self.pTreeStopFlag
         self.mcts.stateDelegate = self
-        self.treeStopFlag = false
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
             self.mcts.main()
         }
@@ -233,9 +232,9 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     //MARK: - MCStateDelegate
     
     func getStateUpdates(for node: MCTreeNode, depth: UInt) -> [MCTreeNode] {
-        print("getStateUpdates",node.nid)
+        //print("getStateUpdates",node.nid)
         //print("node.denominator",node.denominator)
-        print("depth",depth)
+        //print("depth",depth)
         
         if depth > 100 {
             return [MLChessTreeNode]()
@@ -249,16 +248,6 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         }
         print("parents",parentCount)
         */
-        if depth == 0 {
-            self.simulationColor = self.game.active
-            //print(self.simulationColor)
-        } else {
-            if self.simulationColor == MLPieceColor.white {
-                self.simulationColor = MLPieceColor.black
-            } else {
-                self.simulationColor = MLPieceColor.white
-            }
-        }
         
         let simNode: MLChessTreeNode = node as! MLChessTreeNode
         var states: [[[MLChessPiece?]]] = [[[MLChessPiece?]]]()
@@ -267,9 +256,8 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         for row in 0...7 {
             for col in 0...7 {
                 if let piece = simNode.board[row][col] {
-                    if piece.color == self.simulationColor {
+                    if piece.color == simNode.color {
                         //if piece is MLPawnPiece { pawnCount += 1; }
-                        //if(depth == 2) { print("piece",piece.board); }
                         let moves: [[[MLChessPiece?]]] = piece.getPossibleMoves(state: simNode.board, x: col, y: row)
                         for move in moves {
                             //let node: MLChessTreeNode = MLChessTreeNode(board: state)
@@ -283,18 +271,19 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             }
         }
         
-        let opponentColor: MLPieceColor
+        let childNodeColor: MLPieceColor
         
-        if self.simulationColor == MLPieceColor.white {
-            opponentColor = MLPieceColor.black
+        if simNode.color == MLPieceColor.white {
+            childNodeColor = MLPieceColor.black
         } else {
-            opponentColor = MLPieceColor.white
+            childNodeColor = MLPieceColor.white
         }
         
         var stateNodes: [MLChessTreeNode] = [MLChessTreeNode]()
         
         for state in states {
-            //stateNodes.append(MLChessTreeNode(board: state))
+            stateNodes.append(MLChessTreeNode(board: state, color: childNodeColor))
+            /*
             var isValidState = true
             for row in 0...7 {
                 for col in 0...7 {
@@ -327,6 +316,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             if isValidState {
                 stateNodes.append(MLChessTreeNode(board: state))
             }
+            */
         }
         
         //print("pawn count",pawnCount)
@@ -367,10 +357,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         if chessMate {
             return 1
         }
-        
+        /*
         let score = currentVal + simVal
         //print("score", score)
-        /*
+        
         if self.game.active == MLPieceColor.white && score > 0 {
             return 1
         }
