@@ -155,9 +155,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             return
         }
         
-        self.startButton.setTitle("Stop", for: UIControl.State.normal)
         self.treeStopFlag = false
         //self.pTreeStopFlag.pointee = false
+        self.startButton.setTitle("Stop", for: UIControl.State.normal)
+        
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
             self.mcts.main()
         }
@@ -171,6 +172,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         let treeNode = self.mcts.startNode
         print("treeNode.nodes.count",treeNode.nodes.count)
         if treeNode.nodes.count == 0 {
+            self.treeStopFlag = true
             return
         }
         /*
@@ -187,13 +189,24 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         }
         */
         var nextNode: MLChessTreeNode = treeNode.nodes[0] as! MLChessTreeNode
-        
+        var states: [MLChessTreeNode] = [MLChessTreeNode]()
+        //Int.random(in: 0...10000)
         for node in treeNode.nodes {
             let childNode = node as! MLChessTreeNode
-            if childNode.denominator > nextNode.denominator {
-                nextNode = childNode
+            print("node.numerator",childNode.numerator,"node.denominator",childNode.denominator)
+            if childNode.denominator >= nextNode.denominator {
+                //nextNode = childNode
+                if childNode.numerator >= nextNode.numerator {
+                    print("add",childNode.nid)
+                    nextNode = childNode
+                    if !states.contains(childNode) {
+                        states.append(childNode)
+                    }
+                }
             }
         }
+        //print(states.count)
+        nextNode = states[Int.random(in: 0..<states.count)]
         
         self.game.board = nextNode.board
         self.game.moves.append(nextNode.board)
@@ -236,7 +249,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         //print("node.denominator",node.denominator)
         //print("depth",depth)
         
-        if depth > 250 {
+        if depth > 60 {
             return [MLChessTreeNode]()
         }
         /*
@@ -282,8 +295,8 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         var stateNodes: [MLChessTreeNode] = [MLChessTreeNode]()
         
         for state in states {
-            stateNodes.append(MLChessTreeNode(board: state, color: childNodeColor))
-            /*
+            //stateNodes.append(MLChessTreeNode(board: state, color: childNodeColor))
+            
             var isValidState = true
             for row in 0...7 {
                 for col in 0...7 {
@@ -308,6 +321,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
                             if chessMate {
                                 isValidState = false
                             }
+                            //if !chessMate {stateNodes.append(MLChessTreeNode(board: state, color: childNodeColor))}
                         }
                     }
                 }
@@ -316,7 +330,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             if isValidState {
                 stateNodes.append(MLChessTreeNode(board: state, color: childNodeColor))
             }
-            */
+            
         }
         
         //print("pawn count",pawnCount)
@@ -357,7 +371,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         if chessMate {
             return 1
         }
-        /*
+        
         let score = currentVal + simVal
         //print("score", score)
         
@@ -367,7 +381,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         if self.game.active == MLPieceColor.black && score < 0 {
             return 1
-        }*/
+        }
         
         return 0
     }
