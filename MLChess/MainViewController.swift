@@ -37,7 +37,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         self.timerInterval = 1.0
         self.timerTolerance = 0.1
-        self.calcTime = 60
+        self.calcTime = 30
         self.memTime = 0
         self.currTime = self.calcTime
         self.stopFlag = true
@@ -135,12 +135,29 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     }
     
     @objc func saveGame() -> Void {
+        var games: [MLChessGame]!
+        
+        let logManager = MLGameLogManager()
+        let str = logManager.read()
+        
+        if str == "" {
+            print("empty")
+            games = [MLChessGame]()
+        } else {
+            let decoder = JSONDecoder()
+            let json = str.data(using: String.Encoding.utf8)!
+            games = try? decoder.decode([MLChessGame].self, from: json)
+        }
+        
+        games.append(self.game)
+        
         let encoder = JSONEncoder()
         //encoder.outputFormatting = JSONEncoder.OutputFormatting.prettyPrinted
-        let jsonData = try? encoder.encode(self.game)
+        //let jsonData = try? encoder.encode(self.game)
+        let jsonData = try? encoder.encode(games)
         
         if let json = String(data: jsonData!, encoding: String.Encoding.utf8){
-            let logManager = MLGameLogManager()
+            _ = logManager.clear()
             _ = logManager.write(string: json)
         }
     }
