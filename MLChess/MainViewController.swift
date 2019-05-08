@@ -112,25 +112,22 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     @objc func setupNewGame() -> Void {
         print("setupNewGame")
         
-        guard self.game != nil else {
-            self.game = MLChessGame()
-            
-            let startNode = MLChessTreeNode(board: self.game.board, color: MLPieceColor.white)
-            //startNode.nid = String(Int.random(in: 0...10000))
-            print("startNode.nid",startNode.nid)
-            self.mcts = MCTS(startNode, simulationCount: UInt(Int.max))
-            //self.mcts.simDepth = 60
-            //self.mcts.debug = true
-            self.mcts.pStopFlag = self.pTreeStopFlag
-            self.mcts.stateDelegate = self
-            
-            self.chessBoardView.reloadData()
-            return
+        if self.game != nil {
+            print("save game")
+            self.saveGame()
         }
         
-        self.saveGame()
-        
+        //guard self.game != nil else {}
         self.game = MLChessGame()
+        let startNode = MLChessTreeNode(board: self.game.board, color: MLPieceColor.white)
+        //startNode.nid = String(Int.random(in: 0...10000))
+        print("startNode.nid",startNode.nid)
+        self.mcts = MCTS(startNode, simulationCount: UInt(Int.max))
+        //self.mcts.simDepth = 60
+        //self.mcts.debug = true
+        self.mcts.pStopFlag = self.pTreeStopFlag
+        self.mcts.stateDelegate = self
+            
         self.chessBoardView.reloadData()
     }
     
