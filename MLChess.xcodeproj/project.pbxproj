@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		17386439226B2F3B00C3AC05 /* MLChessTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17386438226B2F3B00C3AC05 /* MLChessTreeNode.swift */; };
+		173DB8D6228A11EE002C8C5C /* PSUIKitUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173DB8D5228A11ED002C8C5C /* PSUIKitUtils.framework */; };
+		173DB8D7228A11EE002C8C5C /* PSUIKitUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 173DB8D5228A11ED002C8C5C /* PSUIKitUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		174BD9A6224C0A3100C7D48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A5224C0A3100C7D48A /* AppDelegate.swift */; };
 		174BD9A8224C0A3100C7D48A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A7224C0A3100C7D48A /* MainViewController.swift */; };
 		174BD9AA224C0A3100C7D48A /* MLGameLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A9224C0A3100C7D48A /* MLGameLogViewController.swift */; };
@@ -47,10 +49,8 @@
 		1790F027225E649A00DC5199 /* CBChessBoardPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F026225E649A00DC5199 /* CBChessBoardPiece.swift */; };
 		1790F05A22637F6900DC5199 /* MLWhitePawnPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F05922637F6900DC5199 /* MLWhitePawnPiece.swift */; };
 		1790F05C22637F7900DC5199 /* MLBlackPawnPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F05B22637F7900DC5199 /* MLBlackPawnPiece.swift */; };
-		1790F0632263ACF100DC5199 /* PSUIKitUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1790F0622263ACF000DC5199 /* PSUIKitUtils.framework */; };
-		1790F0642263ACF100DC5199 /* PSUIKitUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1790F0622263ACF000DC5199 /* PSUIKitUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		17E0AC1A227F31E80071421E /* MonteCarloKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17E0AC19227F31E80071421E /* MonteCarloKit.framework */; };
-		17E0AC1B227F31E80071421E /* MonteCarloKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 17E0AC19227F31E80071421E /* MonteCarloKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		17DBD47E228AA0E800D07805 /* MonteCarloKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DBD47D228AA0E800D07805 /* MonteCarloKit.framework */; };
+		17DBD47F228AA0E800D07805 /* MonteCarloKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 17DBD47D228AA0E800D07805 /* MonteCarloKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,8 +60,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1790F0642263ACF100DC5199 /* PSUIKitUtils.framework in Embed Frameworks */,
-				17E0AC1B227F31E80071421E /* MonteCarloKit.framework in Embed Frameworks */,
+				173DB8D7228A11EE002C8C5C /* PSUIKitUtils.framework in Embed Frameworks */,
+				17DBD47F228AA0E800D07805 /* MonteCarloKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		17386438226B2F3B00C3AC05 /* MLChessTreeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessTreeNode.swift; sourceTree = "<group>"; };
+		173DB8D5228A11ED002C8C5C /* PSUIKitUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PSUIKitUtils.framework; sourceTree = "<group>"; };
 		174BD9A2224C0A3100C7D48A /* MLChess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLChess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		174BD9A5224C0A3100C7D48A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		174BD9A7224C0A3100C7D48A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -111,8 +112,7 @@
 		1790F026225E649A00DC5199 /* CBChessBoardPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBChessBoardPiece.swift; sourceTree = "<group>"; };
 		1790F05922637F6900DC5199 /* MLWhitePawnPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLWhitePawnPiece.swift; sourceTree = "<group>"; };
 		1790F05B22637F7900DC5199 /* MLBlackPawnPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackPawnPiece.swift; sourceTree = "<group>"; };
-		1790F0622263ACF000DC5199 /* PSUIKitUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PSUIKitUtils.framework; sourceTree = "<group>"; };
-		17E0AC19227F31E80071421E /* MonteCarloKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MonteCarloKit.framework; sourceTree = "<group>"; };
+		17DBD47D228AA0E800D07805 /* MonteCarloKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MonteCarloKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,8 +120,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1790F0632263ACF100DC5199 /* PSUIKitUtils.framework in Frameworks */,
-				17E0AC1A227F31E80071421E /* MonteCarloKit.framework in Frameworks */,
+				173DB8D6228A11EE002C8C5C /* PSUIKitUtils.framework in Frameworks */,
+				17DBD47E228AA0E800D07805 /* MonteCarloKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,8 +141,8 @@
 		174BD999224C0A3100C7D48A = {
 			isa = PBXGroup;
 			children = (
-				17E0AC19227F31E80071421E /* MonteCarloKit.framework */,
-				1790F0622263ACF000DC5199 /* PSUIKitUtils.framework */,
+				17DBD47D228AA0E800D07805 /* MonteCarloKit.framework */,
+				173DB8D5228A11ED002C8C5C /* PSUIKitUtils.framework */,
 				174BD9A4224C0A3100C7D48A /* MLChess */,
 				174BD9A3224C0A3100C7D48A /* Products */,
 			);
@@ -261,6 +261,7 @@
 				174BD99F224C0A3100C7D48A /* Frameworks */,
 				174BD9A0224C0A3100C7D48A /* Resources */,
 				174BD9BC224C0A7000C7D48A /* Embed Frameworks */,
+				17DBD480228AAB3E00D07805 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -316,6 +317,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		17DBD480228AAB3E00D07805 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# skip if we run in debug\nif [ \"$CONFIGURATION\" == \"Debug\" ]; then\necho \"Skip frameworks cleaning in debug version\"\nexit 0\nfi\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		174BD99E224C0A3100C7D48A /* Sources */ = {
