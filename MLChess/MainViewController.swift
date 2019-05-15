@@ -169,6 +169,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             return
         }
         
+        if(self.game == nil){
+            self.setupNewGame()
+        }
+        
         self.treeStopFlag = false
         //self.pTreeStopFlag.pointee = false
         self.startButton.setTitle("Stop", for: UIControl.State.normal)
