@@ -18,9 +18,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     var startButton: PSButton!
     var chessBoardView: MLChessBoardView!
     var game: MLChessGame!
-    var calcTime: Int!
-    var memTime: Int!
+    let calcTime: Int! = 30
+    let coolDownTime: Int = 3
     var currTime: Int!
+    var currCoolDownTime: Int!
     var stopFlag: Bool!
     var mcts: MCTS!
     var treeStopFlag: ObjCBool!
@@ -37,9 +38,8 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         self.timerInterval = 1.0
         self.timerTolerance = 0.1
-        self.calcTime = 30
-        self.memTime = 0
         self.currTime = self.calcTime
+        self.currCoolDownTime = 0
         self.stopFlag = true
         
         self.treeStopFlag = false
@@ -132,6 +132,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     }
     
     @objc func saveGame() -> Void {
+        /*
         var games: [MLChessGame]!
         
         let logManager = MLGameLogManager()
@@ -157,6 +158,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             _ = logManager.clear()
             _ = logManager.write(string: json)
         }
+        */
+        
+        let logManager = MLGameLogManager()
+        logManager.save(game: self.game)
     }
     
     @objc func toggleGame() -> Void {
@@ -462,10 +467,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             return
         }
         
-        if self.memTime > 0 {
-            self.memTime -= 1
-            print("memTime",self.memTime)
-            if self.memTime == 0 {
+        if self.currCoolDownTime > 0 {
+            self.currCoolDownTime -= 1
+            print("cool down",self.currCoolDownTime)
+            if self.currCoolDownTime == 0 {
                 self.startSearch()
             }
             return
@@ -476,7 +481,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         if self.currTime == 0 {
             self.treeStopFlag = true
-            self.memTime = 10
+            self.currCoolDownTime = self.coolDownTime
             self.currTime = self.calcTime
             self.nextMove()
         }

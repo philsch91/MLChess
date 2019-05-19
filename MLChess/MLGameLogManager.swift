@@ -46,5 +46,32 @@ class MLGameLogManager: NSObject {
         }
         return true
     }
+    
+    func save(game: MLChessGame) -> Void {
+        var games: [MLChessGame]!
+        
+        let str = self.read()
+        
+        if str == "" {
+            print("empty")
+            games = [MLChessGame]()
+        } else {
+            let decoder = JSONDecoder()
+            let json = str.data(using: String.Encoding.utf8)!
+            games = try? decoder.decode([MLChessGame].self, from: json)
+        }
+        
+        games.append(game)
+        
+        let encoder = JSONEncoder()
+        //encoder.outputFormatting = JSONEncoder.OutputFormatting.prettyPrinted
+        //let jsonData = try? encoder.encode(self.game)
+        let jsonData = try? encoder.encode(games)
+        
+        if let json = String(data: jsonData!, encoding: String.Encoding.utf8){
+            _ = self.clear()
+            _ = self.write(string: json)
+        }
+    }
 
 }
