@@ -19,7 +19,11 @@ class MLSegmentedCollectionViewCell: UICollectionViewCell {
             self.segmentedControl = UISegmentedControl(items: self.items)
         }
     }
-    var selectedIndex: Int!
+    var selectedIndex: Int! {
+        didSet (oldValue) {
+            self.segmentedControl.selectedSegmentIndex = self.selectedIndex
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

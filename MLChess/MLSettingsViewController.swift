@@ -57,7 +57,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,9 +65,19 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
         if indexPath.item == 0 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
             segmentedControllCell.separatorActive = false
-            let arr = ["White","Black"]
-            segmentedControllCell.items = arr
+            segmentedControllCell.items = ["AI vs AI","User vs AI"]
+            //segmentedControllCell.isSelected = true
+            segmentedControllCell.selectedIndex = 0
             segmentedControllCell.segmentedControl.addTarget(self, action: #selector(self.gameTypeChanged(control:)), for: UIControl.Event.valueChanged)
+            return segmentedControllCell
+        }
+        
+        if indexPath.item == 1 {
+            let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
+            segmentedControllCell.separatorActive = false
+            segmentedControllCell.items = ["White","Black"]
+            segmentedControllCell.selectedIndex = 0
+            segmentedControllCell.segmentedControl.addTarget(self, action: #selector(self.userColorChanged(control:)), for: UIControl.Event.valueChanged)
             return segmentedControllCell
         }
         
@@ -82,6 +92,10 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     }
     
     @objc func gameTypeChanged(control: UISegmentedControl) -> Void {
+        print(control)
+    }
+    
+    @objc func userColorChanged(control: UISegmentedControl) -> Void {
         print(control)
     }
 
