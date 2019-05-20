@@ -11,18 +11,6 @@ import UIKit
 class MLBlackPawnPiece: MLPawnPiece {
     
     override func getPossibleMoves() -> [[[MLChessPiece?]]] {
-        /*
-        var states: [[[MLChessPiece?]]] = [[[MLChessPiece?]]]()
-        
-        if !self.isValid(row: self.posY-1, col: self.posX) {
-            return states
-        }
-        
-        var copy = self.board
-        copy[self.posY][self.posX] = nil
-        copy[self.posY-1][self.posX] = self
-        states.append(copy)
-        */
         let states = self.getPossibleMoves(state: self.board, x: self.posX, y: self.posY)
         return states
     }
@@ -32,8 +20,13 @@ class MLBlackPawnPiece: MLPawnPiece {
         var newPiece: MLChessPiece = self
         var points = [MLChessPiecePosition(x: x, y: y-1)]
         
+        if self.isEnPassantBeatable {
+            self.isEnPassantBeatable = false
+        }
+        
         if y == 6 {
             points.append(MLChessPiecePosition(x: x, y: y-2))
+            newPiece = MLBlackPawnPiece(state: state, x: x, y: y-2, color: self.color, isEnPassantBeatable: true)
         }
         
         if points[0].y == 0 {
@@ -51,15 +44,15 @@ class MLBlackPawnPiece: MLPawnPiece {
             }
         }
         
-        let takePoints = [
+        let beatPoints = [
             MLChessPiecePosition(x: x-1, y: y-1),
             MLChessPiecePosition(x: x+1, y: y-1)]
         
-        if takePoints[0].y == 0 {
+        if beatPoints[0].y == 0 {
             newPiece = MLQueenPiece(state: state, x: points[0].x, y: points[0].y, color: self.color)
         }
         
-        for p in takePoints {
+        for p in beatPoints {
             if self.isValid(board: state, row: p.y, col: p.x)
                 && self.canTake(board: state, row: p.y, col: p.x) {
                 var copy = state
@@ -68,16 +61,28 @@ class MLBlackPawnPiece: MLPawnPiece {
                 states.append(copy)
             }
         }
-        /*
-        if !self.isValid(board: state, row: y-1, col: x) {
-            return states
+        
+        let enPassantBeatPoints = [
+            MLChessPiecePosition(x: x-1, y: y),
+            MLChessPiecePosition(x: x+1, y: y)]
+        
+        for p in enPassantBeatPoints {
+            if self.isValid(board: state, row: p.y, col: p.x) {
+                if let piece = state[p.y][p.x] {
+                    if piece is MLWhitePawnPiece {
+                        let pawn = piece as! MLWhitePawnPiece
+                        if pawn.isEnPassantBeatable {
+                            var copy = state
+                            copy[y][x] = nil
+                            copy[p.y][p.x] = nil
+                            copy[p.y-1][p.x] = newPiece
+                            states.append(copy)
+                        }
+                    }
+                }
+            }
         }
         
-        var copy = state
-        copy[y][x] = nil
-        copy[y-1][x] = self
-        states.append(copy)
-        */
         return states
     }
 

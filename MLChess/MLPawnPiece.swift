@@ -11,11 +11,18 @@ import UIKit
 class MLPawnPiece: MLChessPiece {
     
     var moved = false
+    var isEnPassantBeatable: Bool = false
     
     override public init(state:[[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor) {
         super.init(state: state, x: x, y: y, color: color)
         self.value = self.color.rawValue
         self.id = self.value
+    }
+    
+    public convenience init(state: [[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor, isEnPassantBeatable: Bool) {
+        //convenience initializer must ultimately call a designated initializer
+        self.init(state: state, x: x, y: y, color: color)
+        self.isEnPassantBeatable = isEnPassantBeatable
     }
     
     required init(from decoder: Decoder) throws {
@@ -27,7 +34,6 @@ class MLPawnPiece: MLChessPiece {
     }
     
     public override func getPossibleMoves() -> [[[MLChessPiece?]]] {
-        
         return [[[MLChessPiece?]]]()
     }
 }
