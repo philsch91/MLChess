@@ -18,7 +18,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     var startButton: PSButton!
     var chessBoardView: MLChessBoardView!
     var game: MLChessGame!
-    let calcTime: Int! = 30
+    let calcTime: Int = 30
     let coolDownTime: Int = 3
     var currTime: Int!
     var currCoolDownTime: Int!
@@ -43,10 +43,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         self.stopFlag = true
         
         self.treeStopFlag = false
-        self.pTreeStopFlag = UnsafeMutablePointer<ObjCBool>.allocate(capacity: 1)
+        //self.pTreeStopFlag = UnsafeMutablePointer<ObjCBool>.allocate(capacity: 1)
         ////self.pTreeStopFlag.initialize(to: self.treeStopFlag)
         ////self.pTreeStopFlag.initialize(from: &self.treeStopFlag, count: 1)
-        //self.pTreeStopFlag.initialize(to: false)
+        ////self.pTreeStopFlag.initialize(to: false)
         self.pTreeStopFlag = UnsafeMutablePointer<ObjCBool>(&self.treeStopFlag)
         //print(self.pTreeStopFlag.pointee)
         //self.treeStopFlag = true
