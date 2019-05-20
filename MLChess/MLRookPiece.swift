@@ -9,11 +9,19 @@
 import UIKit
 
 class MLRookPiece: MLChessPiece {
+    var isRochadeAvailable: Bool = false
     
     override public init(state:[[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor) {
         super.init(state: state, x: x, y: y, color: color)
         self.value = 5 * self.color.rawValue
         self.id = self.value
+        self.isRochadeAvailable = true
+    }
+    
+    public convenience init(state: [[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor, isRochadeAvailable: Bool) {
+        //convenience initializer must ultimately call a designated initializer
+        self.init(state: state, x: x, y: y, color: color)
+        self.isRochadeAvailable = isRochadeAvailable
     }
     
     required init(from decoder: Decoder) throws {
@@ -32,7 +40,7 @@ class MLRookPiece: MLChessPiece {
     
     override func getPossibleMoves(state: [[MLChessPiece?]], x: Int, y: Int) -> [[[MLChessPiece?]]] {
         var states: [[[MLChessPiece?]]] = [[[MLChessPiece?]]]()
-        
+        let rookPiece = MLRookPiece(state: state, x: x, y: y, color: self.color, isRochadeAvailable: false)
         //let points = [MLChessPiecePosition(x: x, y: y-1)]
         var points = [MLChessPiecePosition]()
         
@@ -56,7 +64,6 @@ class MLRookPiece: MLChessPiece {
             points.append(pos)
         }
         
-        
         for p in points {
             if self.isValid(board: state, row: p.y, col: p.x)
                 && self.isFree(board: state, x: x, y: y, newX: p.x, newY: p.y)
@@ -64,7 +71,7 @@ class MLRookPiece: MLChessPiece {
                     || self.canTake(board: state, row: p.y, col: p.x)){
                 var copy = state
                 copy[y][x] = nil
-                copy[p.y][p.x] = self
+                copy[p.y][p.x] = rookPiece
                 states.append(copy)
             }
         }

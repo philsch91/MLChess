@@ -191,11 +191,21 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         self.chessBoardView.darkBackgroundColor = UIColor.blue
     }
     
+    func handleGameEnd() -> Void {
+        self.treeStopFlag = true
+        self.stopFlag = true
+        let alert = UIAlertController(title: "Chess mate", message: "The game has ended", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: UIAlertAction.Style.default, handler: { _ in
+            //NSLog("The \"OK\" alertaction occured")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func nextMove() -> Void {
         let treeNode = self.mcts.startNode
         print("treeNode.nodes.count",treeNode.nodes.count)
         if treeNode.nodes.count == 0 {
-            self.treeStopFlag = true
+            self.handleGameEnd()
             return
         }
         /*
