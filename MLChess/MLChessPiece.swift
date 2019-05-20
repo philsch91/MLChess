@@ -104,12 +104,26 @@ class MLChessPiece: NSObject, NSCopying, Codable {
             var xVals = [Int]()
             var yVals = [Int]()
             
-            for ix in lowerBoundX+1..<upperBoundX {
-                xVals.append(ix)
+            if x < newX {
+                for ix in (lowerBoundX+1..<upperBoundX).reversed() {
+                    xVals.append(ix)
+                }
+            } else {
+                //3...4
+                for ix in lowerBoundX+1..<upperBoundX {
+                    xVals.append(ix)
+                }
             }
             
-            for iy in lowerBoundY+1..<upperBoundY {
-                yVals.append(iy)
+            if y < newY {
+                //2...1
+                for iy in (lowerBoundY+1..<upperBoundY).reversed() {
+                    yVals.append(iy)
+                }
+            } else {
+                for iy in lowerBoundY+1..<upperBoundY {
+                    yVals.append(iy)
+                }
             }
             
             for k in 0..<xVals.count {
