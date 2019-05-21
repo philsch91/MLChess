@@ -18,7 +18,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     var startButton: PSButton!
     var chessBoardView: MLChessBoardView!
     var game: MLChessGame!
-    let calcTime: Int = 30
+    var calcTime: Int = 30
     let coolDownTime: Int = 3
     var currTime: Int!
     var currCoolDownTime: Int!
@@ -56,6 +56,11 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         self.setupUI()
         self.chessBoardView.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.simMode = UserDefaults.standard.bool(forKey: "simulationMode")
+        print("simulationMode",self.simMode)
     }
     
     func setupUI() -> Void {
@@ -193,6 +198,9 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     }
     
     func handleGameEnd() -> Void {
+        if simMode {
+            //
+        }
         self.toggleGame()
         var msg = "white lost"
         if self.game.active == MLPieceColor.black {
@@ -307,8 +315,13 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         var possibleStates: [[[MLChessPiece?]]] = [[[MLChessPiece?]]]()
         //var pawnCount = 0
         
-        for row in 0...7 {
-            for col in 0...7 {
+        var indices = stride(from: 0, through: 7, by: +1)
+        if simNode.color == MLPieceColor.black {
+            indices = stride(from: 7, through: 0, by: -1)
+        }
+        
+        for row in indices {
+            for col in indices {
                 if let piece = simNode.board[row][col] {
                     if piece.color == simNode.color {
                         //if piece is MLPawnPiece { pawnCount += 1; }
@@ -352,10 +365,9 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         for state in states {
             //stateNodes.append(MLChessTreeNode(board: state, color: childNodeColor))
-            
             var isValidState = true
-            for row in 0...7 {
-                for col in 0...7 {
+            for row in indices {
+                for col in indices {
                     if let piece = state[row][col] {
                         if piece.color != childNodeColor {
                             continue

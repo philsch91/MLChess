@@ -115,6 +115,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     
     @objc func setSimulationMode(control: UISwitch) -> Void {
         print(control.isOn)
+        UserDefaults.standard.set(control.isOn, forKey: "simulationMode")
     }
 
 }
