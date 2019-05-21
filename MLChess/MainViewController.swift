@@ -29,6 +29,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     var simulationColor: MLPieceColor!
     var whiteTree: MLChessTreeNode!
     var blackTree: MLChessTreeNode!
+    var simMode: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,9 +68,9 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Game", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.setupNewGame))
         
         let saveButtonItem  = UIBarButtonItem(title: "Save", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.saveGame))
-        let testButtonItem = UIBarButtonItem(title: "Test", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.test))
+        //let testButtonItem = UIBarButtonItem(title: "Test", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.test))
         
-        self.navigationItem.rightBarButtonItems = [testButtonItem,saveButtonItem]
+        self.navigationItem.rightBarButtonItems = [saveButtonItem]
         
         self.chessBoardView = MLChessBoardView(frame: frame)
         
@@ -192,11 +193,18 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     }
     
     func handleGameEnd() -> Void {
-        self.treeStopFlag = true
-        self.stopFlag = true
-        let alert = UIAlertController(title: "Chess mate", message: "The game has ended", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: UIAlertAction.Style.default, handler: { _ in
-            //NSLog("The \"OK\" alertaction occured")
+        self.toggleGame()
+        var msg = "white lost"
+        if self.game.active == MLPieceColor.black {
+            msg = "black lost"
+        }
+        let alert = UIAlertController(title: "Chess mate", message: msg, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "New game", style: UIAlertAction.Style.default, handler: { _ in
+            self.setupNewGame()
+            self.toggleGame()
+        }))
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { _ in
+            NSLog("user pressed OK")
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -296,7 +304,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         */
         
         let simNode: MLChessTreeNode = node as! MLChessTreeNode
-        var states: [[[MLChessPiece?]]] = [[[MLChessPiece?]]]()
+        var possibleStates: [[[MLChessPiece?]]] = [[[MLChessPiece?]]]()
         //var pawnCount = 0
         
         for row in 0...7 {
@@ -310,8 +318,23 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
                             //node.nid = String(Int.random(in: 0...10000))
                             //print(node.nid)
                             //stateNodes.append(node)
-                            states.append(move)
+                            possibleStates.append(move)
                         }
+                    }
+                }
+            }
+        }
+        
+        //print("pawn count",pawnCount)
+        var states: [[[MLChessPiece?]]] = possibleStates
+        
+        if self.game.moves.count > 50 {
+            states = [[[MLChessPiece?]]]()
+            for istate in possibleStates {
+                for jstate in self.game.moves {
+                    //if !istate.elementsEqual(jstate)
+                    if istate != jstate {
+                        states.append(istate)
                     }
                 }
             }
@@ -366,7 +389,6 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             
         }
         
-        //print("pawn count",pawnCount)
         //print("state count",stateNodes.count)
         
         return stateNodes

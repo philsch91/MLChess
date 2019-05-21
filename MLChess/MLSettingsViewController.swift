@@ -22,6 +22,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
         self.collectionView.delegate = self
         
         self.collectionView.register(MLSegmentedCollectionViewCell.self, forCellWithReuseIdentifier: MLSegmentedCollectionViewCell.self.description())
+        self.collectionView.register(MLSwitchCollectionViewCell.self, forCellWithReuseIdentifier: MLSwitchCollectionViewCell.self.description())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +39,8 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     func setupUI() -> Void {
         let collectionViewLayout = UICollectionViewFlowLayout()
         collectionViewLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        collectionViewLayout.minimumLineSpacing = 0
+        collectionViewLayout.minimumInteritemSpacing = 0
         
         self.collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: collectionViewLayout)
         self.collectionView.backgroundColor = UIColor.white
@@ -57,28 +60,39 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         print(indexPath)
         if indexPath.item == 0 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
-            segmentedControllCell.separatorActive = false
+            //segmentedControllCell.separatorActive = false
             segmentedControllCell.items = ["AI vs AI","User vs AI"]
             //segmentedControllCell.isSelected = true
             segmentedControllCell.selectedIndex = 0
             segmentedControllCell.segmentedControl.addTarget(self, action: #selector(self.gameTypeChanged(control:)), for: UIControl.Event.valueChanged)
+            
             return segmentedControllCell
         }
         
         if indexPath.item == 1 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
-            segmentedControllCell.separatorActive = false
+            //segmentedControllCell.separatorActive = false
             segmentedControllCell.items = ["White","Black"]
             segmentedControllCell.selectedIndex = 0
             segmentedControllCell.segmentedControl.addTarget(self, action: #selector(self.userColorChanged(control:)), for: UIControl.Event.valueChanged)
+            
             return segmentedControllCell
+        }
+        
+        if indexPath.item == 2 {
+            let switchCell: MLSwitchCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSwitchCollectionViewCell.self.description(), for: indexPath) as! MLSwitchCollectionViewCell
+            
+            switchCell.uiswitch.isOn = UserDefaults.standard.bool(forKey: "simulationMode")
+            switchCell.uiswitch.addTarget(self, action: #selector(setSimulationMode(control:)), for: UIControl.Event.valueChanged)
+            
+            return switchCell
         }
         
         fatalError("exception")
@@ -88,7 +102,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: self.view.frame.width, height: 62)
+        return CGSize(width: self.view.frame.width, height: 44)
     }
     
     @objc func gameTypeChanged(control: UISegmentedControl) -> Void {
@@ -97,6 +111,10 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     
     @objc func userColorChanged(control: UISegmentedControl) -> Void {
         print(control)
+    }
+    
+    @objc func setSimulationMode(control: UISwitch) -> Void {
+        print(control.isOn)
     }
 
 }

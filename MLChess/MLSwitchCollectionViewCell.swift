@@ -1,36 +1,24 @@
 //
-//  MLSegmentedCollectionViewCell.swift
+//  MLSwitchCollectionViewCell.swift
 //  MLChess
 //
-//  Created by Philipp Schunker on 18.04.19.
+//  Created by Philipp Schunker on 21.05.19.
 //  Copyright © 2019 Philipp Schunker. All rights reserved.
 //
 
 import UIKit
 
-class MLSegmentedCollectionViewCell: UICollectionViewCell {
+class MLSwitchCollectionViewCell: UICollectionViewCell {
     
-    var segmentedControl: UISegmentedControl!
+    var uiswitch: UISwitch!
     var insets: UIEdgeInsets!
     var separator: CALayer?
     var separatorActive: Bool!
-    var items: [Any]! {
-        didSet (oldValue){
-            self.segmentedControl = UISegmentedControl(items: self.items)
-        }
-    }
-    var selectedIndex: Int! {
-        didSet (oldValue) {
-            self.segmentedControl.selectedSegmentIndex = self.selectedIndex
-        }
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        self.items = [Any]()
-        self.segmentedControl = UISegmentedControl(items: self.items)
-        self.selectedIndex = 0
+        self.uiswitch = UISwitch()
         self.separatorActive = true
     }
     
@@ -44,10 +32,10 @@ class MLSegmentedCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.contentView.addSubview(self.segmentedControl)
+        self.contentView.addSubview(self.uiswitch)
         
         let bounds: CGRect = self.contentView.bounds
-        self.segmentedControl.frame = bounds.inset(by: UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10))
+        self.uiswitch.frame = bounds.inset(by: UIEdgeInsets(top: 6, left: self.contentView.frame.width - self.uiswitch.frame.width-10, bottom: 4, right: 0))
         
         if self.separatorActive {
             let height: CGFloat = 0.5

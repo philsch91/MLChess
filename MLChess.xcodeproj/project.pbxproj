@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1731DB0A22944B2B0097E4E6 /* MLSwitchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1731DB0922944B2B0097E4E6 /* MLSwitchCollectionViewCell.swift */; };
 		17386439226B2F3B00C3AC05 /* MLChessTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17386438226B2F3B00C3AC05 /* MLChessTreeNode.swift */; };
 		173DB8D6228A11EE002C8C5C /* PSUIKitUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173DB8D5228A11ED002C8C5C /* PSUIKitUtils.framework */; };
 		173DB8D7228A11EE002C8C5C /* PSUIKitUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 173DB8D5228A11ED002C8C5C /* PSUIKitUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -69,6 +70,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1731DB0922944B2B0097E4E6 /* MLSwitchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLSwitchCollectionViewCell.swift; sourceTree = "<group>"; };
 		17386438226B2F3B00C3AC05 /* MLChessTreeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessTreeNode.swift; sourceTree = "<group>"; };
 		173DB8D5228A11ED002C8C5C /* PSUIKitUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PSUIKitUtils.framework; sourceTree = "<group>"; };
 		174BD9A2224C0A3100C7D48A /* MLChess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLChess.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -193,6 +195,7 @@
 				176CC7B122574C28009D576F /* MLBlackKnightView.swift */,
 				176CC7B322574C4A009D576F /* MLBlackBishopView.swift */,
 				1755602B22690C27006613E8 /* MLSegmentedCollectionViewCell.swift */,
+				1731DB0922944B2B0097E4E6 /* MLSwitchCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1731DB0A22944B2B0097E4E6 /* MLSwitchCollectionViewCell.swift in Sources */,
 				1790F021225E619E00DC5199 /* CBChessBoardViewDataSource.swift in Sources */,
 				174BD9BF224C0D0F00C7D48A /* MLChessBoardView.swift in Sources */,
 				176CC79E22573B0E009D576F /* MLChessPieceView.swift in Sources */,

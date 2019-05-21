@@ -32,7 +32,7 @@ class MLChessPiece: NSObject, NSCopying, Codable {
         if row < 0 || row > 7 || col < 0 || col > 7 {
             return false
         }
-        print("isValid",row,col)
+        //print("isValid",row,col)
         if case let piece? = self.board[row][col] {
             if piece.color == self.color {
                 return false
@@ -212,10 +212,16 @@ class MLChessPiece: NSObject, NSCopying, Codable {
         return pieceCopy
     }
     
-    //MARK: - CodingKey
+    //MARK: - Codable
     
     enum CodingKeys: String, CodingKey {
         case id
         //case value
+    }
+    
+    //MARK: - Equatable
+    
+    static func ==(lhs: MLChessPiece, rhs: MLChessPiece) -> Bool {
+        return lhs.id == lhs.id
     }
 }
