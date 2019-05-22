@@ -30,6 +30,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     var whiteTree: MLChessTreeNode!
     var blackTree: MLChessTreeNode!
     var simMode: Bool!
+    var evaluationCount: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,6 +127,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         //guard self.game != nil else {}
         self.game = MLChessGame()
         let startNode = MLChessTreeNode(board: self.game.board, color: MLPieceColor.white)
+        self.evaluationCount = 0
         //startNode.nid = String(Int.random(in: 0...10000))
         print("startNode.nid",startNode.nid)
         self.mcts = MCTS(startNode, simulationCount: UInt(Int.max))
@@ -218,8 +220,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     }
     
     func nextMove() -> Void {
+        self.evaluationCount = 0
         let treeNode = self.mcts.startNode
         print("treeNode.nodes.count",treeNode.nodes.count)
+        
         if treeNode.nodes.count == 0 {
             self.handleGameEnd()
             return
@@ -242,11 +246,11 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         //Int.random(in: 0...10000)
         for node in treeNode.nodes {
             let childNode = node as! MLChessTreeNode
-            print("node.numerator",childNode.numerator,"node.denominator",childNode.denominator)
+            //print("node.numerator",childNode.numerator,"node.denominator",childNode.denominator)
             if childNode.denominator >= nextNode.denominator {
                 //nextNode = childNode
                 if childNode.numerator >= nextNode.numerator {
-                    print("add",childNode.nid)
+                    //print("add",childNode.nid)
                     nextNode = childNode
                     if !states.contains(childNode) {
                         states.append(childNode)
@@ -254,7 +258,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
                 }
             }
         }
-        //print(states.count)
+        print("next states.count",states.count)
         nextNode = states[Int.random(in: 0..<states.count)]
         
         self.game.board = nextNode.board
@@ -341,7 +345,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         //print("pawn count",pawnCount)
         var states: [[[MLChessPiece?]]] = possibleStates
         
-        if self.game.moves.count > 50 {
+        if self.game.moves.count > 0 && depth == 0 && self.evaluationCount == 1 {
             states = [[[MLChessPiece?]]]()
             for istate in possibleStates {
                 for jstate in self.game.moves {
@@ -366,14 +370,14 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         for state in states {
             //stateNodes.append(MLChessTreeNode(board: state, color: childNodeColor))
             var isValidState = true
-            for row in indices {
-                for col in indices {
+            for row in indices.reversed() {
+                for col in indices.reversed() {
                     if let piece = state[row][col] {
                         if piece.color != childNodeColor {
                             continue
                         }
                         let moves: [[[MLChessPiece?]]] = piece.getPossibleMoves(state: state, x: col, y: row)
-                        //proof that chessmate is not possible for all moves of the curr.piece
+                        //proof that chessmate is not possible for all moves of this piece
                         for move in moves {
                             var chessMate = true
                             for irow in 0...7 {
@@ -434,6 +438,8 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
                 }
             }
         }
+        
+        self.evaluationCount += 1
         
         if chessMate {
             return 1
