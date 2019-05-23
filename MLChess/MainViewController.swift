@@ -60,6 +60,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.simMode = UserDefaults.standard.bool(forKey: "simulationMode")
         print("simulationMode",self.simMode)
     }
