@@ -18,7 +18,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     var startButton: PSButton!
     var chessBoardView: MLChessBoardView!
     var game: MLChessGame!
-    var calcTime: Int = 30
+    var calcTime: Int = 40
     let coolDownTime: Int = 3
     var currTime: Int!
     var currCoolDownTime: Int!
