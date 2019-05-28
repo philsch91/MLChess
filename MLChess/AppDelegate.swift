@@ -24,8 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         let settings = [
-            "simulationMode" : false
-        ]
+            "simulationMode" : false,
+            "whiteCalcTime" : 40,
+            "blackCalcTime" : 40,
+            "whiteStrategy" : MLChessStrategy.Numerator.rawValue,
+            "blackStrategy" : MLChessStrategy.Numerator.rawValue
+            ] as [String : Any]
         
         UserDefaults.standard.register(defaults: settings)
         

@@ -29,6 +29,8 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     var simulationColor: MLPieceColor!
     var whiteTree: MLChessTreeNode!
     var blackTree: MLChessTreeNode!
+    var whiteStrategy: MLChessStrategy!
+    var blackStrategy: MLChessStrategy!
     var simMode: Bool!
     var evaluationCount: Int!
     
@@ -63,6 +65,10 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         super.viewWillAppear(animated)
         self.simMode = UserDefaults.standard.bool(forKey: "simulationMode")
         print("simulationMode",self.simMode)
+        self.whiteStrategy = MLChessStrategy(rawValue: UserDefaults.standard.integer(forKey: "whiteStrategy"))
+        print("whiteStrategy",self.whiteStrategy)
+        self.blackStrategy = MLChessStrategy(rawValue: UserDefaults.standard.integer(forKey: "blackStrategy"))
+        print("blackStrategy",self.blackStrategy)
     }
     
     func setupUI() -> Void {
@@ -242,23 +248,48 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             }
         }
         */
+        
+        let strategy: MLChessStrategy!
+        
+        if self.game.active == MLPieceColor.white {
+            strategy = self.whiteStrategy
+        } else {
+            strategy = self.blackStrategy
+        }
+        
+        print(strategy)
+        
         var nextNode: MLChessTreeNode = treeNode.nodes[0] as! MLChessTreeNode
         var states: [MLChessTreeNode] = [MLChessTreeNode]()
         //Int.random(in: 0...10000)
         for node in treeNode.nodes {
             let childNode = node as! MLChessTreeNode
             //print("node.numerator",childNode.numerator,"node.denominator",childNode.denominator)
-            if childNode.denominator >= nextNode.denominator {
-                //nextNode = childNode
+            if strategy == MLChessStrategy.Denominator {
+                if childNode.denominator >= nextNode.denominator {
+                    //nextNode = childNode
+                    if childNode.numerator >= nextNode.numerator {
+                        //print("add",childNode.nid)
+                        nextNode = childNode
+                        if !states.contains(childNode) {
+                            states.append(childNode)
+                        }
+                    }
+                }
+            } else {
                 if childNode.numerator >= nextNode.numerator {
-                    //print("add",childNode.nid)
-                    nextNode = childNode
-                    if !states.contains(childNode) {
-                        states.append(childNode)
+                    //nextNode = childNode
+                    if childNode.denominator >= nextNode.denominator {
+                        //print("add",childNode.nid)
+                        nextNode = childNode
+                        if !states.contains(childNode) {
+                            states.append(childNode)
+                        }
                     }
                 }
             }
         }
+        
         print("next states.count",states.count)
         nextNode = states[Int.random(in: 0..<states.count)]
         
