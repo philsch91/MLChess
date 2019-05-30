@@ -27,10 +27,13 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     var treeStopFlag: ObjCBool!
     var pTreeStopFlag: UnsafeMutablePointer<ObjCBool>!
     var simulationColor: MLPieceColor!
+    var simulationDepth: Int!
     var whiteTree: MLChessTreeNode!
     var blackTree: MLChessTreeNode!
     var whiteStrategy: MLChessStrategy!
     var blackStrategy: MLChessStrategy!
+    var whiteSimulationDepth: Int!
+    var blackSimulationDepth: Int!
     var simMode: Bool!
     var evaluationCount: Int!
     
@@ -63,12 +66,21 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         self.simMode = UserDefaults.standard.bool(forKey: "simulationMode")
         print("simulationMode",self.simMode)
+        
         self.whiteStrategy = MLChessStrategy(rawValue: UserDefaults.standard.integer(forKey: "whiteStrategy"))
         print("whiteStrategy",self.whiteStrategy)
+        
         self.blackStrategy = MLChessStrategy(rawValue: UserDefaults.standard.integer(forKey: "blackStrategy"))
         print("blackStrategy",self.blackStrategy)
+        
+        self.whiteSimulationDepth = UserDefaults.standard.integer(forKey: "whiteSimulationDepth")
+        print("whiteSimulationDepth",self.whiteSimulationDepth)
+        
+        self.blackSimulationDepth = UserDefaults.standard.integer(forKey: "blackSimulationDepth")
+        print("blackSimulationDepth",self.blackSimulationDepth)
     }
     
     func setupUI() -> Void {
@@ -135,6 +147,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         self.game = MLChessGame()
         let startNode = MLChessTreeNode(board: self.game.board, color: MLPieceColor.white)
         self.evaluationCount = 0
+        self.simulationDepth = self.whiteSimulationDepth
         //startNode.nid = String(Int.random(in: 0...10000))
         print("startNode.nid",startNode.nid)
         self.mcts = MCTS(startNode, simulationCount: UInt(Int.max))
@@ -303,9 +316,11 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         if(self.game.active == MLPieceColor.white){
             self.whiteTree = nextNode
             self.game.active = MLPieceColor.black
+            self.simulationDepth = self.blackSimulationDepth
         } else {
             self.blackTree = nextNode
             self.game.active = MLPieceColor.white
+            self.simulationDepth = self.whiteSimulationDepth
         }
         
         print("active player", self.game.active)
@@ -333,10 +348,16 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         //print("getStateUpdates",node.nid)
         //print("node.denominator",node.denominator)
         //print("depth",depth)
-        
+        /*
         if depth > 60 {
             return [MLChessTreeNode]()
         }
+        */
+        
+        if self.simulationDepth > 0 && depth > self.simulationDepth {
+            return [MLChessTreeNode]()
+        }
+        
         /*
         var parentCount = 0
         var parentNode: MCTreeNode? = node.parent

@@ -11,6 +11,7 @@ import UIKit
 class MLSwitchCollectionViewCell: UICollectionViewCell {
     
     var uiswitch: UISwitch!
+    var label: UILabel!
     var insets: UIEdgeInsets!
     var separator: CALayer?
     var separatorActive: Bool!
@@ -19,6 +20,7 @@ class MLSwitchCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         self.insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.uiswitch = UISwitch()
+        self.label = UILabel()
         self.separatorActive = true
     }
     
@@ -33,9 +35,11 @@ class MLSwitchCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.contentView.addSubview(self.uiswitch)
+        self.contentView.addSubview(self.label)
         
         let bounds: CGRect = self.contentView.bounds
         self.uiswitch.frame = bounds.inset(by: UIEdgeInsets(top: 6, left: self.contentView.frame.width - self.uiswitch.frame.width-10, bottom: 4, right: 0))
+        self.label.frame = bounds.inset(by: UIEdgeInsets(top: 6, left: 10, bottom: 4, right: 10))
         
         if self.separatorActive {
             let height: CGFloat = 0.5

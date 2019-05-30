@@ -28,7 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "whiteCalcTime" : 40,
             "blackCalcTime" : 40,
             "whiteStrategy" : MLChessStrategy.Numerator.rawValue,
-            "blackStrategy" : MLChessStrategy.Numerator.rawValue
+            "blackStrategy" : MLChessStrategy.Numerator.rawValue,
+            "whiteSimulationDepth" : MLChessSimulationDepth.Long.rawValue,
+            "blackSimulationDepth" : MLChessSimulationDepth.Long.rawValue
             ] as [String : Any]
         
         UserDefaults.standard.register(defaults: settings)

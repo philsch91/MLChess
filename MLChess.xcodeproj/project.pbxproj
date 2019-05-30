@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		171267A5229FFB3300E9B366 /* MLChessSimulatonDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171267A4229FFB3300E9B366 /* MLChessSimulatonDepth.swift */; };
 		1731DB0A22944B2B0097E4E6 /* MLSwitchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1731DB0922944B2B0097E4E6 /* MLSwitchCollectionViewCell.swift */; };
 		17386439226B2F3B00C3AC05 /* MLChessTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17386438226B2F3B00C3AC05 /* MLChessTreeNode.swift */; };
 		173DB8D6228A11EE002C8C5C /* PSUIKitUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173DB8D5228A11ED002C8C5C /* PSUIKitUtils.framework */; };
@@ -71,6 +72,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		171267A4229FFB3300E9B366 /* MLChessSimulatonDepth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessSimulatonDepth.swift; sourceTree = "<group>"; };
 		1731DB0922944B2B0097E4E6 /* MLSwitchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLSwitchCollectionViewCell.swift; sourceTree = "<group>"; };
 		17386438226B2F3B00C3AC05 /* MLChessTreeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessTreeNode.swift; sourceTree = "<group>"; };
 		173DB8D5228A11ED002C8C5C /* PSUIKitUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PSUIKitUtils.framework; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				174BD9CD22560C9700C7D48A /* MLPieceColor.swift */,
 				1790F026225E649A00DC5199 /* CBChessBoardPiece.swift */,
 				17717744229DB98C0042A3B7 /* MLChessStrategy.swift */,
+				171267A4229FFB3300E9B366 /* MLChessSimulatonDepth.swift */,
 			);
 			name = Enums;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				176CC7AE22574BCB009D576F /* MLBlackRookView.swift in Sources */,
 				176CC7A222573EE7009D576F /* MLBlackPawnView.swift in Sources */,
 				174BD9CC225547C400C7D48A /* MLRookPiece.swift in Sources */,
+				171267A5229FFB3300E9B366 /* MLChessSimulatonDepth.swift in Sources */,
 				1790F025225E644200DC5199 /* CBChessBoardViewDelegate.swift in Sources */,
 				174BD9CA2253CA7F00C7D48A /* MLChessGame.swift in Sources */,
 				1790F023225E639900DC5199 /* CBChessBoardSquare.swift in Sources */,

@@ -60,7 +60,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -88,11 +88,53 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
         
         if indexPath.item == 2 {
             let switchCell: MLSwitchCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSwitchCollectionViewCell.self.description(), for: indexPath) as! MLSwitchCollectionViewCell
-            
+            switchCell.label.text = "Simulationmode"
             switchCell.uiswitch.isOn = UserDefaults.standard.bool(forKey: "simulationMode")
             switchCell.uiswitch.addTarget(self, action: #selector(setSimulationMode(control:)), for: UIControl.Event.valueChanged)
             
             return switchCell
+        }
+        
+        if indexPath.item == 3 {
+            let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
+            //segmentedControllCell.separatorActive = false
+            segmentedControllCell.items = ["WDepth 20","WDepth 40","WDepth 60","WTerminal"]
+            segmentedControllCell.segmentedControl.addTarget(self, action: #selector(self.whiteDepthChanged(control:)), for: UIControl.Event.valueChanged)
+            
+            let value = MLChessSimulationDepth(rawValue: UserDefaults.standard.integer(forKey: "whiteSimulationDepth"))
+            
+            if value == MLChessSimulationDepth.Short {
+                segmentedControllCell.selectedIndex = 0
+            } else if value == MLChessSimulationDepth.Medium {
+                segmentedControllCell.selectedIndex = 1
+            } else if value == MLChessSimulationDepth.Long {
+                segmentedControllCell.selectedIndex = 2
+            } else {
+                segmentedControllCell.selectedIndex = 3
+            }
+            
+            return segmentedControllCell
+        }
+        
+        if indexPath.item == 4 {
+            let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
+            //segmentedControllCell.separatorActive = false
+            segmentedControllCell.items = ["BDepth 20","BDepth 40","BDepth 60","BTerminal"]
+            segmentedControllCell.segmentedControl.addTarget(self, action: #selector(self.blackDepthChanged(control:)), for: UIControl.Event.valueChanged)
+            
+            let value = MLChessSimulationDepth(rawValue: UserDefaults.standard.integer(forKey: "blackSimulationDepth"))
+            
+            if value == MLChessSimulationDepth.Short {
+                segmentedControllCell.selectedIndex = 0
+            } else if value == MLChessSimulationDepth.Medium {
+                segmentedControllCell.selectedIndex = 1
+            } else if value == MLChessSimulationDepth.Long {
+                segmentedControllCell.selectedIndex = 2
+            } else {
+                segmentedControllCell.selectedIndex = 3
+            }
+            
+            return segmentedControllCell
         }
         
         fatalError("exception")
@@ -116,6 +158,42 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     @objc func setSimulationMode(control: UISwitch) -> Void {
         print(control.isOn)
         UserDefaults.standard.set(control.isOn, forKey: "simulationMode")
+    }
+    
+    @objc func whiteDepthChanged(control: UISegmentedControl) -> Void {
+        //print(control)
+        //print(control.selectedSegmentIndex)
+        let value: MLChessSimulationDepth!
+        
+        if control.selectedSegmentIndex == 0 {
+            value = MLChessSimulationDepth.Short
+        } else if control.selectedSegmentIndex == 1 {
+            value = MLChessSimulationDepth.Medium
+        } else if control.selectedSegmentIndex == 2 {
+            value = MLChessSimulationDepth.Long
+        } else {
+            value = MLChessSimulationDepth.Terminal
+        }
+        
+        UserDefaults.standard.set(value.rawValue, forKey: "whiteSimulationDepth")
+    }
+    
+    @objc func blackDepthChanged(control: UISegmentedControl) -> Void {
+        print(control)
+        //print(control.selectedSegmentIndex)
+        let value: MLChessSimulationDepth!
+        
+        if control.selectedSegmentIndex == 0 {
+            value = MLChessSimulationDepth.Short
+        } else if control.selectedSegmentIndex == 1 {
+            value = MLChessSimulationDepth.Medium
+        } else if control.selectedSegmentIndex == 2 {
+            value = MLChessSimulationDepth.Long
+        } else {
+            value = MLChessSimulationDepth.Terminal
+        }
+        
+        UserDefaults.standard.set(value.rawValue, forKey: "blackSimulationDepth")
     }
 
 }
