@@ -368,8 +368,8 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         print("parents",parentCount)
         */
         
-        let simNode: MLChessTreeNode = node as! MLChessTreeNode
-        var possibleStates: [[[MLChessPiece?]]] = [[[MLChessPiece?]]]()
+        let simNode = node as! MLChessTreeNode
+        var possibleStates = [[[MLChessPiece?]]]()
         //var pawnCount = 0
         
         var indices = stride(from: 0, through: 7, by: +1)
@@ -418,7 +418,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             childNodeColor = MLPieceColor.white
         }
         
-        var stateNodes: [MLChessTreeNode] = [MLChessTreeNode]()
+        var stateNodes = [MLChessTreeNode]()
         
         for state in states {
             //stateNodes.append(MLChessTreeNode(board: state, color: childNodeColor))

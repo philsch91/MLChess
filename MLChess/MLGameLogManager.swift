@@ -17,6 +17,10 @@ class MLGameLogManager: NSObject {
         self.filename = paths[0].appendingPathComponent("game.log")
     }
     
+    init(url: URL) {
+        self.filename = url
+    }
+    
     func write(string: String) -> Bool {
         do {
             let fh = try FileHandle(forWritingTo: self.filename)
