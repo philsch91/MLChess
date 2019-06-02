@@ -51,6 +51,16 @@ class MLChessBoardView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         //print(rect)
+        //CoreGraphics = LLO
+        //A lower-left-origin coordinate system (LLO), in which the origin of drawing operations is at the lower-left
+        //corner of the drawing area, with positive values extending upward and to the right.
+        //The default coordinate system used by Core Graphics framework is LLO-based
+        
+        //UIKit = ULO
+        //An upper-left-origin coordinate system (ULO), in which the origin of drawing operations is at the upper-left
+        //corner of the drawing area, with positive values extending downward and to the right.
+        //The default coordinate system used by the UIKit and Core Animation frameworks is ULO-based
+        //https://developer.apple.com/library/archive/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/GraphicsDrawingOverview/GraphicsDrawingOverview.html
         
         let squareSize: CGFloat = (rect.width-40)/8
         print("squareSize",squareSize)
@@ -85,11 +95,12 @@ class MLChessBoardView: UIView {
         }
         */
         for row in 1...8 {
-            let centerx: CGPoint = CGPoint(x: squareSize*CGFloat(row), y: 5)
-            let framex: CGRect = CGRect(origin: centerx, size: CGSize(width: 10, height: 10))
+            let centerx: CGPoint = CGPoint(x: squareSize*CGFloat(row), y: 6)
+            let framex: CGRect = CGRect(origin: centerx, size: CGSize(width: 12, height: 12))
             //----
             let labelx: UILabel = UILabel(frame: framex)
             labelx.center.x -= (labelx.frame.size.width/2)
+            labelx.center.y = 10
             //labelx.text = String(row)
             labelx.text = String(format: "%c", row+64) //as String
             //labelx.text = String(UnicodeScalar(row+64)!.value)
@@ -98,22 +109,24 @@ class MLChessBoardView: UIView {
             self.addSubview(labelx)
             
             let labelx2: UILabel = UILabel(frame: framex)
-            labelx2.center.x -= (labelx2.frame.size.width/2)
-            labelx2.center.y = rect.height-labelx2.frame.size.height
+            labelx2.center.x -= (labelx2.frame.size.width/2)    //labelx2.center.x = 6
+            //labelx2.center.y = rect.height-labelx2.frame.size.height
+            labelx2.center.y = rect.height-10
             labelx2.text = String(format: "%c", row+64)
             labelx2.textColor = UIColor.white
             self.addSubview(labelx2)
             
-            //let center: CGPoint = CGPoint(x: 5, y: rect.height-(squareSize*CGFloat(row))-20)
-            let center: CGPoint = CGPoint(x: 5, y: squareSize*CGFloat(row))
+            //let center: CGPoint = CGPoint(x: 5, y: rect.height-(squareSize*CGFloat(row)))     //LLO
+            let center: CGPoint = CGPoint(x: 6, y: squareSize*CGFloat(row))
             //print("center",center)
             //let frame: CGRect = CGRect(x: 5, y: squareSize*CGFloat(row), width: 10, height: 10)
-            let frame: CGRect = CGRect(origin: center, size: CGSize(width: 10, height: 10))
+            let frame: CGRect = CGRect(origin: center, size: CGSize(width: 12, height: 12))
             //----
             let labely: UILabel = UILabel(frame: frame)  //(10.0, 46.875)
             //labely.layer.borderWidth=1     //debug
+            labely.center.x = 10
             //print("labely.center",labely.center)
-            labely.center.y -= (labely.frame.size.height)     //(10.0, 36.875)
+            labely.center.y -= (labely.frame.size.height/2)     //(10.0, 36.875)
             //print("labely.center",labely.center)
             labely.text = String(9-row)
             labely.textColor = UIColor.white
@@ -124,8 +137,10 @@ class MLChessBoardView: UIView {
             //labely2.center.x += 356.875
             //print("t1",squareSize*9-labely2.frame.size.width)
             //print("t2",rect.width-labely2.frame.size.width)
-            labely2.center.x = rect.width-labely2.frame.size.width
-            labely2.center.y -= labely2.frame.size.height
+            //labely2.center.x = rect.width-(labely2.frame.size.width)
+            //labely2.center.x = rect.width-20+(labely2.frame.size.width)
+            labely2.center.x = rect.width-10
+            labely2.center.y -= (labely2.frame.size.height/2)
             //print("labely2.center",labely2.center)
             labely2.text = String(9-row)
             labely2.textColor = UIColor.white

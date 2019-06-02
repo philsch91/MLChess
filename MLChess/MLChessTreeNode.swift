@@ -26,7 +26,7 @@ class MLChessTreeNode: MCTreeNode {
         for row in self.board {
             for optPiece in row {
                 if case let piece? = optPiece {
-                    nid += String(piece.value)
+                    nid += String(piece.id)
                 } else {
                   nid += "0"
                 }

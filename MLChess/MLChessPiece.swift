@@ -208,6 +208,7 @@ class MLChessPiece: NSObject, NSCopying, Codable {
         pieceCopy.posX = self.posX
         pieceCopy.posY = self.posY
         pieceCopy.color = self.color
+        pieceCopy.id = self.id
         pieceCopy.value = self.value
         return pieceCopy
     }
