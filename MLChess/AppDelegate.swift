@@ -25,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let settings = [
             "simulationMode" : false,
-            "whiteCalcTime" : 40,
-            "blackCalcTime" : 40,
+            "whiteCalcDuration" : 40,
+            "blackCalcDuration" : 40,
             "whiteStrategy" : MLChessStrategy.Numerator.rawValue,
             "blackStrategy" : MLChessStrategy.Numerator.rawValue,
             "whiteSimulationDepth" : MLChessSimulationDepth.Long.rawValue,

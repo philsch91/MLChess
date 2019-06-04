@@ -13,6 +13,14 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     
     var collectionView: UICollectionView!
     
+    var whiteCalcDurationSlider: UISlider!
+    var whiteMinimumValueLabel: UILabel!
+    var whiteMaximumValueLabel: UILabel!
+    
+    var blackCalcDurationSlider: UISlider!
+    var blackMinimumValueLabel: UILabel!
+    var blackMaximumValueLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Settings"
@@ -23,6 +31,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
         
         self.collectionView.register(MLSegmentedCollectionViewCell.self, forCellWithReuseIdentifier: MLSegmentedCollectionViewCell.self.description())
         self.collectionView.register(MLSwitchCollectionViewCell.self, forCellWithReuseIdentifier: MLSwitchCollectionViewCell.self.description())
+        self.collectionView.register(MLSliderCollectionViewCell.self, forCellWithReuseIdentifier: MLSliderCollectionViewCell.self.description())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,7 +69,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -96,6 +105,60 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
         }
         
         if indexPath.item == 3 {
+            let sliderCell: MLSliderCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSliderCollectionViewCell.self.description(), for: indexPath) as! MLSliderCollectionViewCell
+            
+            self.whiteCalcDurationSlider = UISlider()
+            sliderCell.slider = self.whiteCalcDurationSlider
+            
+            //sliderCell.slider.isContinuous = false
+            sliderCell.slider.minimumValue = 30
+            sliderCell.slider.maximumValue = 600
+            sliderCell.slider.value = Float(UserDefaults.standard.integer(forKey: "whiteCalcDuration"))
+            
+            self.whiteMinimumValueLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 72, height: 22))
+            var str = "White "
+            str += String(30)
+            self.whiteMinimumValueLabel.text = str
+            
+            self.whiteMaximumValueLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 32, height: 22))
+            self.whiteMaximumValueLabel.text = String(600)
+            
+            sliderCell.slider.minimumValueImage = UIImage.imageWithLabel(label: self.whiteMinimumValueLabel)
+            sliderCell.slider.maximumValueImage = UIImage.imageWithLabel(label: self.whiteMaximumValueLabel)
+            
+            sliderCell.slider.addTarget(self, action: #selector(setCalcDuration(control:)), for: UIControl.Event.valueChanged)
+            
+            return sliderCell
+        }
+        
+        if indexPath.item == 4 {
+            let sliderCell: MLSliderCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSliderCollectionViewCell.self.description(), for: indexPath) as! MLSliderCollectionViewCell
+            
+            self.blackCalcDurationSlider = UISlider()
+            sliderCell.slider = self.blackCalcDurationSlider
+            
+            //sliderCell.slider.isContinuous = false
+            sliderCell.slider.minimumValue = 30
+            sliderCell.slider.maximumValue = 600
+            sliderCell.slider.value = Float(UserDefaults.standard.integer(forKey: "blackCalcDuration"))
+            
+            self.blackMinimumValueLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 72, height: 22))
+            var str = "Black "
+            str += String(30)
+            self.blackMinimumValueLabel.text = str
+            
+            self.blackMaximumValueLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 32, height: 22))
+            self.blackMaximumValueLabel.text = String(600)
+            
+            sliderCell.slider.minimumValueImage = UIImage.imageWithLabel(label: self.blackMinimumValueLabel)
+            sliderCell.slider.maximumValueImage = UIImage.imageWithLabel(label: self.blackMaximumValueLabel)
+            
+            sliderCell.slider.addTarget(self, action: #selector(setCalcDuration(control:)), for: UIControl.Event.valueChanged)
+            
+            return sliderCell
+        }
+        
+        if indexPath.item == 5 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
             //segmentedControllCell.separatorActive = false
             segmentedControllCell.items = ["WDepth 20","WDepth 40","WDepth 60","WTerminal"]
@@ -116,7 +179,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             return segmentedControllCell
         }
         
-        if indexPath.item == 4 {
+        if indexPath.item == 6 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
             //segmentedControllCell.separatorActive = false
             segmentedControllCell.items = ["BDepth 20","BDepth 40","BDepth 60","BTerminal"]
@@ -158,6 +221,34 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     @objc func setSimulationMode(control: UISwitch) -> Void {
         print(control.isOn)
         UserDefaults.standard.set(control.isOn, forKey: "simulationMode")
+    }
+    
+    @objc func setCalcDuration(control: UISlider) -> Void {
+        //print(control)
+        if control === self.whiteCalcDurationSlider {
+            //print("white")
+            UserDefaults.standard.set(Int(control.value), forKey: "whiteCalcDuration")
+            let value = UserDefaults.standard.value(forKey: "whiteCalcDuration") as! Int
+            self.whiteMaximumValueLabel.text = String(value)
+            self.whiteCalcDurationSlider.maximumValueImage = UIImage.imageWithLabel(label: self.whiteMaximumValueLabel)
+            
+            print(value)
+        }
+        
+        if control === self.blackCalcDurationSlider {
+            //print("black")
+            UserDefaults.standard.set(Int(control.value), forKey: "blackCalcDuration")
+            let value = UserDefaults.standard.value(forKey: "blackCalcDuration") as! Int
+            self.blackMaximumValueLabel.text = String(value)
+            self.blackCalcDurationSlider.maximumValueImage = UIImage.imageWithLabel(label: self.blackMaximumValueLabel)
+            
+            print(value)
+        }
+    }
+    
+    func setBlackCalcDuration(control: UISlider) -> Void {
+        print(control)
+        UserDefaults.standard.set(Int(control.value), forKey: "blackCalcDuration")
     }
     
     @objc func whiteDepthChanged(control: UISegmentedControl) -> Void {
