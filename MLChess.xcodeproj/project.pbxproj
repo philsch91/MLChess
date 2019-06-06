@@ -10,8 +10,6 @@
 		171267A5229FFB3300E9B366 /* MLChessSimulatonDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171267A4229FFB3300E9B366 /* MLChessSimulatonDepth.swift */; };
 		1731DB0A22944B2B0097E4E6 /* MLSwitchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1731DB0922944B2B0097E4E6 /* MLSwitchCollectionViewCell.swift */; };
 		17386439226B2F3B00C3AC05 /* MLChessTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17386438226B2F3B00C3AC05 /* MLChessTreeNode.swift */; };
-		173DB8D6228A11EE002C8C5C /* PSUIKitUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 173DB8D5228A11ED002C8C5C /* PSUIKitUtils.framework */; };
-		173DB8D7228A11EE002C8C5C /* PSUIKitUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 173DB8D5228A11ED002C8C5C /* PSUIKitUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		174BD9A6224C0A3100C7D48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A5224C0A3100C7D48A /* AppDelegate.swift */; };
 		174BD9A8224C0A3100C7D48A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A7224C0A3100C7D48A /* MainViewController.swift */; };
 		174BD9AA224C0A3100C7D48A /* MLGameLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A9224C0A3100C7D48A /* MLGameLogViewController.swift */; };
@@ -55,7 +53,8 @@
 		17DBD47E228AA0E800D07805 /* MonteCarloKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DBD47D228AA0E800D07805 /* MonteCarloKit.framework */; };
 		17DBD47F228AA0E800D07805 /* MonteCarloKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 17DBD47D228AA0E800D07805 /* MonteCarloKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		17E1A54F22A7067A00284386 /* MLSliderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E1A54E22A7067A00284386 /* MLSliderCollectionViewCell.swift */; };
-		17E1A55122A70F2A00284386 /* UIImage+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E1A55022A70F2A00284386 /* UIImage+UILabel.swift */; };
+		17FF9D5722A90EDE00C59CFA /* PSUIKitUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17FF9D5622A90EDE00C59CFA /* PSUIKitUtils.framework */; };
+		17FF9D5822A90EDE00C59CFA /* PSUIKitUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 17FF9D5622A90EDE00C59CFA /* PSUIKitUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -65,7 +64,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				173DB8D7228A11EE002C8C5C /* PSUIKitUtils.framework in Embed Frameworks */,
+				17FF9D5822A90EDE00C59CFA /* PSUIKitUtils.framework in Embed Frameworks */,
 				17DBD47F228AA0E800D07805 /* MonteCarloKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -77,7 +76,6 @@
 		171267A4229FFB3300E9B366 /* MLChessSimulatonDepth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessSimulatonDepth.swift; sourceTree = "<group>"; };
 		1731DB0922944B2B0097E4E6 /* MLSwitchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLSwitchCollectionViewCell.swift; sourceTree = "<group>"; };
 		17386438226B2F3B00C3AC05 /* MLChessTreeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessTreeNode.swift; sourceTree = "<group>"; };
-		173DB8D5228A11ED002C8C5C /* PSUIKitUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PSUIKitUtils.framework; sourceTree = "<group>"; };
 		174BD9A2224C0A3100C7D48A /* MLChess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLChess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		174BD9A5224C0A3100C7D48A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		174BD9A7224C0A3100C7D48A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -122,7 +120,7 @@
 		1790F05B22637F7900DC5199 /* MLBlackPawnPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackPawnPiece.swift; sourceTree = "<group>"; };
 		17DBD47D228AA0E800D07805 /* MonteCarloKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MonteCarloKit.framework; sourceTree = "<group>"; };
 		17E1A54E22A7067A00284386 /* MLSliderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLSliderCollectionViewCell.swift; sourceTree = "<group>"; };
-		17E1A55022A70F2A00284386 /* UIImage+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+UILabel.swift"; sourceTree = "<group>"; };
+		17FF9D5622A90EDE00C59CFA /* PSUIKitUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PSUIKitUtils.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				173DB8D6228A11EE002C8C5C /* PSUIKitUtils.framework in Frameworks */,
+				17FF9D5722A90EDE00C59CFA /* PSUIKitUtils.framework in Frameworks */,
 				17DBD47E228AA0E800D07805 /* MonteCarloKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,8 +149,8 @@
 		174BD999224C0A3100C7D48A = {
 			isa = PBXGroup;
 			children = (
+				17FF9D5622A90EDE00C59CFA /* PSUIKitUtils.framework */,
 				17DBD47D228AA0E800D07805 /* MonteCarloKit.framework */,
-				173DB8D5228A11ED002C8C5C /* PSUIKitUtils.framework */,
 				174BD9A4224C0A3100C7D48A /* MLChess */,
 				174BD9A3224C0A3100C7D48A /* Products */,
 			);
@@ -260,7 +258,6 @@
 		1790F01D225D1B4A00DC5199 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				17E1A55022A70F2A00284386 /* UIImage+UILabel.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -398,7 +395,6 @@
 				176CC7A022573E84009D576F /* MLPawnPiece.swift in Sources */,
 				176CC7AC225748DA009D576F /* MLBishopPiece.swift in Sources */,
 				174BD9A8224C0A3100C7D48A /* MainViewController.swift in Sources */,
-				17E1A55122A70F2A00284386 /* UIImage+UILabel.swift in Sources */,
 				174BD9C32253580500C7D48A /* MLBlackKingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
