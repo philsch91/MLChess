@@ -351,8 +351,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         /*
         if depth > 60 {
             return [MLChessTreeNode]()
-        }
-        */
+        }*/
         
         if self.simulationDepth > 0 && depth > self.simulationDepth {
             return [MLChessTreeNode]()
@@ -396,6 +395,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         }
         
         //print("pawn count",pawnCount)
+        //print("possibleStates.count",possibleStates.count)
         var states: [[[MLChessPiece?]]] = possibleStates
         
         if self.game.moves.count > 0 && depth == 0 && self.evaluationCount == 1 {
@@ -403,12 +403,14 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             for istate in possibleStates {
                 for jstate in self.game.moves {
                     //if !istate.elementsEqual(jstate)
-                    if istate != jstate {
+                    if istate != jstate && !states.contains(istate) {
                         states.append(istate)
                     }
                 }
             }
         }
+        
+        //print("states.count",states.count)
         
         let childNodeColor: MLPieceColor
         
@@ -458,7 +460,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             
         }
         
-        //print("state count",stateNodes.count)
+        //print("stateNodes.count",stateNodes.count)
         
         return stateNodes
     }

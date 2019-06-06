@@ -82,17 +82,6 @@ class MLWhitePawnPiece: MLPawnPiece {
                 }
             }
         }
- 
-        /*
-        if !self.isValid(board: state, row: y+1, col: x) {
-            return states
-        }
-        
-        var copy = state
-        copy[y][x] = nil
-        copy[y+1][x] = self
-        states.append(copy)
-        */
         
         return states
     }
