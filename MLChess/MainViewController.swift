@@ -85,6 +85,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     
     func setupUI() -> Void {
         NSLog("setupUI")
+        self.view.backgroundColor = UIColor.white
         var frame: CGRect = self.view.frame //as CGRect
         frame.size.height = frame.size.width
         //frame.size.width-=20.0
@@ -94,7 +95,6 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         let saveButtonItem  = UIBarButtonItem(title: "Save", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.saveGame))
         //let testButtonItem = UIBarButtonItem(title: "Test", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.test))
-        
         self.navigationItem.rightBarButtonItems = [saveButtonItem]
         
         self.chessBoardView = MLChessBoardView(frame: frame)

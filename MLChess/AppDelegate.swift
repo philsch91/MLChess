@@ -15,6 +15,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let mainViewController = MainViewController()
+        let logViewController = MLGameLogViewController()
+        let settingsViewController = MLSettingsViewController()
+        
+        let navigationController1 = UINavigationController(rootViewController: mainViewController)
+        navigationController1.tabBarItem = UITabBarItem(title: "MLChess", image: UIImage(named: "first"), tag: 0)
+        let navigationController2 = UINavigationController(rootViewController: logViewController)
+        navigationController2.tabBarItem = UITabBarItem(title: "Logs", image: UIImage(named: "data"), tag: 1)
+        let navigationController3 = UINavigationController(rootViewController: settingsViewController)
+        navigationController3.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settings"), tag: 3)
+        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [navigationController1,navigationController2,navigationController3]
+        
+        self.window?.rootViewController = tabBarController
+        self.window?.makeKeyAndVisible()
+ 
         application.isIdleTimerDisabled = true
         
         return true
