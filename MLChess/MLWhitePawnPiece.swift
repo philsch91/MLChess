@@ -58,10 +58,10 @@ class MLWhitePawnPiece: MLPawnPiece {
                 var copy = state
                 copy[y][x] = nil
                 copy[p.y][p.x] = newPiece
-                states.append(state)
+                states.append(copy)
             }
         }
-        /*
+        
         let enPassantBeatPoints = [
             MLChessPiecePosition(x: x-1, y: y),
             MLChessPiecePosition(x: x+1, y: y)]
@@ -81,7 +81,7 @@ class MLWhitePawnPiece: MLPawnPiece {
                     }
                 }
             }
-        }*/
+        }
         
         return states
     }

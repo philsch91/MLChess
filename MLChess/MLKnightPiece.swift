@@ -25,7 +25,6 @@ class MLKnightPiece: MLChessPiece {
     }
     
     public override func getPossibleMoves() -> [[[MLChessPiece?]]] {
-        
         return [[[MLChessPiece?]]]()
     }
     
