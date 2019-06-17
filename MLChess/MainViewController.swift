@@ -30,11 +30,15 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     var simulationDepth: Int!
     var whiteTree: MLChessTreeNode!
     var blackTree: MLChessTreeNode!
+    
+    var simMode: Bool!
     var whiteStrategy: MLChessStrategy!
     var blackStrategy: MLChessStrategy!
     var whiteSimulationDepth: Int!
     var blackSimulationDepth: Int!
-    var simMode: Bool!
+    var whiteCalculationDuration: Int!
+    var blackCalculationDuration: Int!
+    
     var evaluationCount: Int!
     
     override func viewDidLoad() {
@@ -81,6 +85,14 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         
         self.blackSimulationDepth = UserDefaults.standard.integer(forKey: "blackSimulationDepth")
         print("blackSimulationDepth",self.blackSimulationDepth)
+        
+        self.whiteCalculationDuration = UserDefaults.standard.integer(forKey: "whiteCalcDuration")
+        print("whiteCalcDuration",self.whiteCalculationDuration)
+        
+        self.blackCalculationDuration = UserDefaults.standard.integer(forKey: "blackCalcDuration")
+        print("blackCalcDuration",self.blackCalculationDuration)
+        
+        self.timeLabel.text = String(self.whiteCalculationDuration)
     }
     
     func setupUI() -> Void {
@@ -148,6 +160,8 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         let startNode = MLChessTreeNode(board: self.game.board, color: MLPieceColor.white)
         self.evaluationCount = 0
         self.simulationDepth = self.whiteSimulationDepth
+        self.currTime = self.whiteCalculationDuration
+        
         //startNode.nid = String(Int.random(in: 0...10000))
         print("startNode.nid",startNode.nid)
         self.mcts = MCTS(startNode, simulationCount: UInt(Int.max))
@@ -289,10 +303,12 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
             self.whiteTree = nextNode
             self.game.active = MLPieceColor.black
             self.simulationDepth = self.blackSimulationDepth
+            self.currTime = self.blackCalculationDuration
         } else {
             self.blackTree = nextNode
             self.game.active = MLPieceColor.white
             self.simulationDepth = self.whiteSimulationDepth
+            self.currTime = self.whiteCalculationDuration
         }
         
         print("active player", self.game.active)
@@ -559,7 +575,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         if self.currTime == 0 {
             self.treeStopFlag = true
             self.currCoolDownTime = self.coolDownTime
-            self.currTime = self.calcTime
+            //self.currTime = self.calcTime
             self.nextMove()
         }
         
