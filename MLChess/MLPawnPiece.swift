@@ -13,8 +13,8 @@ class MLPawnPiece: MLChessPiece {
     var moved = false
     var isEnPassantBeatable: Bool = false
     
-    override public init(state:[[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor) {
-        super.init(state: state, x: x, y: y, color: color)
+    override public init(x: Int, y: Int, color: MLPieceColor) {
+        super.init(x: x, y: y, color: color)
         self.value = self.color.rawValue
         self.id = self.value
     }

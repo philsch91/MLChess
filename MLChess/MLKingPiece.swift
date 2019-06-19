@@ -11,8 +11,8 @@ import UIKit
 class MLKingPiece: MLChessPiece {
     var isRochadeAvailable: Bool = false
     
-    override public init(state:[[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor) {
-        super.init(state: state, x: x, y: y, color: color)
+    override public init(x: Int, y: Int, color: MLPieceColor) {
+        super.init(x: x, y: y, color: color)
         self.value = 10 * self.color.rawValue
         self.id = self.value
         self.isRochadeAvailable = true

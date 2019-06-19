@@ -17,11 +17,14 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     var timeLabel: UILabel!
     var startButton: PSButton!
     var chessBoardView: MLChessBoardView!
+    
     var game: MLChessGame!
+    
     var calcTime: Int = 40
     let coolDownTime: Int = 3
     var currTime: Int!
     var currCoolDownTime: Int!
+    
     var stopFlag: Bool!
     var mcts: MCTS!
     var treeStopFlag: ObjCBool!

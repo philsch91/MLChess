@@ -11,7 +11,10 @@ import UIKit
 class MLWhitePawnPiece: MLPawnPiece {
     
     override func getPossibleMoves() -> [[[MLChessPiece?]]] {
-        let states = self.getPossibleMoves(state: self.board, x: self.posX, y: self.posY)
+        guard let board = self.board else {
+            return [[[MLChessPiece?]]]()
+        }
+        let states = self.getPossibleMoves(state: board, x: self.posX, y: self.posY)
         return states
     }
     

@@ -10,7 +10,8 @@ import UIKit
 
 class MLChessPiece: NSObject, NSCopying, Codable {
     
-    var board: [[MLChessPiece?]] = [[MLChessPiece]]()
+    //var board: [[MLChessPiece?]] = [[MLChessPiece]]()
+    var board: [[MLChessPiece?]]?
     var posX: Int = 0
     var posY: Int = 0
     var color: MLPieceColor = MLPieceColor.black
@@ -20,9 +21,14 @@ class MLChessPiece: NSObject, NSCopying, Codable {
     required override init() {
     }
     
-    public init(state:[[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor) {
-        super.init()
+    public convenience init(state:[[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor) {
+        //convenience initializer must ultimately call a designated initializer
+        self.init(x: x, y: y, color: color)
         self.board = state
+    }
+    
+    public init(x: Int, y: Int, color: MLPieceColor) {
+        super.init()
         self.posX = x
         self.posY = y
         self.color = color
@@ -33,11 +39,14 @@ class MLChessPiece: NSObject, NSCopying, Codable {
             return false
         }
         //print("isValid",row,col)
-        if case let piece? = self.board[row][col] {
-            if piece.color == self.color {
-                return false
+        if let board = self.board {
+            if let piece = board[row][col] {
+                if piece.color == self.color {
+                    return false
+                }
             }
         }
+        
         return true
     }
     
@@ -186,25 +195,33 @@ class MLChessPiece: NSObject, NSCopying, Codable {
     func copy(with zone: NSZone? = nil) -> Any {
         print("MLChessPiece copy")
         let pieceCopy = type(of: self).init()
+        
         //var i = 0
-        for row in self.board {
-            //var j = 0
-            var pieceRow = [MLChessPiece?]()
-            for piece in row {
-                //node.board[i][j] = self.board[i][j]
-                //j += 1
-                /*
-                var newPiece = piece
-                if case let exPiece? = piece {
-                    newPiece = exPiece.copy() as? MLChessPiece
+        if let board = self.board {
+            var boardCopy = [[MLChessPiece?]]()
+            for row in board {
+                //var j = 0
+                var boardRow = [MLChessPiece?]()
+                for val in row {
+                    //node.board[i][j] = self.board[i][j]
+                    //j += 1
+                    
+                    var valueCopy = val
+                    if let piece = val {
+                        valueCopy = piece.copy() as? MLChessPiece
+                    }
+                    
+                    boardRow.append(valueCopy)
+                    //boardRow.append(val)
                 }
-                pieceRow.append(newPiece)
-                */
-                pieceRow.append(piece)
+                
+                //i += 1
+                boardCopy.append(boardRow)
+                //pieceCopy.board.append(boardRow)
             }
-            //i += 1
-            pieceCopy.board.append(pieceRow)
+            pieceCopy.board = boardCopy
         }
+        
         pieceCopy.posX = self.posX
         pieceCopy.posY = self.posY
         pieceCopy.color = self.color

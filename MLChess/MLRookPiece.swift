@@ -11,8 +11,9 @@ import UIKit
 class MLRookPiece: MLChessPiece {
     var isRochadeAvailable: Bool = false
     
-    override public init(state:[[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor) {
-        super.init(state: state, x: x, y: y, color: color)
+    override public init(x: Int, y: Int, color: MLPieceColor) {
+        super.init(x: x, y: y, color: color)
+        //self.board = state
         self.value = 5 * self.color.rawValue
         self.id = self.value
         self.isRochadeAvailable = true
@@ -21,6 +22,7 @@ class MLRookPiece: MLChessPiece {
     public convenience init(state: [[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor, isRochadeAvailable: Bool) {
         //convenience initializer must ultimately call a designated initializer
         self.init(state: state, x: x, y: y, color: color)
+        //self.board = state //already in self.init()
         self.isRochadeAvailable = isRochadeAvailable
     }
     
@@ -34,7 +36,11 @@ class MLRookPiece: MLChessPiece {
     
     public override func getPossibleMoves() -> [[[MLChessPiece?]]] {
         //return [[[MLChessPiece?]]]()
-        let states = self.getPossibleMoves(state: self.board, x: self.posX, y: self.posY)
+        guard let board = self.board else {
+            return [[[MLChessPiece?]]]()
+        }
+        
+        let states = self.getPossibleMoves(state: board, x: self.posX, y: self.posY)
         return states
     }
     
