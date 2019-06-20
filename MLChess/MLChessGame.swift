@@ -12,6 +12,7 @@ class MLChessGame: NSObject, Codable {
     var board: [[MLChessPiece?]] = [[MLChessPiece?]]()
     var moves: [[[MLChessPiece?]]]
     var active: MLPieceColor!
+    var winner: Int!
     
     override init() {
         var white1: [MLChessPiece?] = [MLChessPiece?]()
@@ -72,6 +73,7 @@ class MLChessGame: NSObject, Codable {
         
         self.moves = [[[MLChessPiece?]]]()
         self.active = MLPieceColor.white
+        self.winner = 0
     }
     
     //MARK: - CodingKey
@@ -80,6 +82,7 @@ class MLChessGame: NSObject, Codable {
         case board
         case moves
         case active
+        case winner
     }
     
 }

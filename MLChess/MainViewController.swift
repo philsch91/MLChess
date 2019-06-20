@@ -209,14 +209,21 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     }
     
     func handleGameEnd() -> Void {
-        if simMode {
+        if self.simMode {
             //
         }
         self.toggleGame()
+        
         var msg = "white lost"
+        var winnerId = 1
+        
         if self.game.active == MLPieceColor.black {
             msg = "black lost"
+            winnerId = -1
         }
+        
+        self.game.winner = winnerId
+        
         let alert = UIAlertController(title: "Chess mate", message: msg, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "New game", style: UIAlertAction.Style.default, handler: { _ in
             self.setupNewGame()

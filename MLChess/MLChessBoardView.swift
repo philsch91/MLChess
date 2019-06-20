@@ -72,6 +72,33 @@ class MLChessBoardView: UIView {
         
         //var tst: MLWhiteKingView
         
+        for row in 0...7 {
+            for col in 0...7{
+                let square = CGRect(x: origin.x+(CGFloat(col)*squareSize), y: origin.y-(CGFloat(row)*squareSize), width: squareSize, height: squareSize)
+                //print(square.origin)
+                
+                if (row+col)%2 == 0{
+                    //print("row ",row," col ",col," white")
+                    context?.setFillColor(self.liBackgroundColor.cgColor)
+                } else {
+                    //print("row ",row," col ",col," black")
+                    context?.setFillColor(self.daBackgroundColor.cgColor)
+                }
+                
+                context?.fill(square)
+                /*
+                 if row == 0 && col == 0 {
+                 tst = MLWhiteKingView(frame: square)
+                 tst.center = CGPoint(x: square.origin.x+(square.size.width/2), y: square.origin.y+(square.size.height/2))
+                 //print(tst.center)
+                 print(row,col,square.origin,square.size,tst.center)
+                 tst.center.x += 3
+                 self.addSubview(tst)
+                 }
+                 */
+            }
+        }
+        
         /*
         for col in 1...8{
             let centerx: CGPoint = CGPoint(x: squareSize*CGFloat(col), y: 5)
@@ -146,34 +173,6 @@ class MLChessBoardView: UIView {
             labely2.textColor = UIColor.white
             self.addSubview(labely2)
         }
-        
-        for row in 0...7 {
-            for col in 0...7{
-                let square = CGRect(x: origin.x+(CGFloat(col)*squareSize), y: origin.y-(CGFloat(row)*squareSize), width: squareSize, height: squareSize)
-                //print(square.origin)
-                
-                if (row+col)%2 == 0{
-                    //print("row ",row," col ",col," white")
-                    context?.setFillColor(self.liBackgroundColor.cgColor)
-                } else {
-                    //print("row ",row," col ",col," black")
-                    context?.setFillColor(self.daBackgroundColor.cgColor)
-                }
-                
-                context?.fill(square)
-                /*
-                if row == 0 && col == 0 {
-                    tst = MLWhiteKingView(frame: square)
-                    tst.center = CGPoint(x: square.origin.x+(square.size.width/2), y: square.origin.y+(square.size.height/2))
-                    //print(tst.center)
-                    print(row,col,square.origin,square.size,tst.center)
-                    tst.center.x += 3
-                    self.addSubview(tst)
-                }
-                */
-            }
-        }
-        
     }
     
     public func reloadData() -> Void {

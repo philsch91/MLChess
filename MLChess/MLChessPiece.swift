@@ -21,17 +21,17 @@ class MLChessPiece: NSObject, NSCopying, Codable {
     required override init() {
     }
     
-    public convenience init(state:[[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor) {
-        //convenience initializer must ultimately call a designated initializer
-        self.init(x: x, y: y, color: color)
-        self.board = state
-    }
-    
     public init(x: Int, y: Int, color: MLPieceColor) {
         super.init()
         self.posX = x
         self.posY = y
         self.color = color
+    }
+    
+    public convenience init(state:[[MLChessPiece?]], x: Int, y: Int, color: MLPieceColor) {
+        //convenience initializer must ultimately call a designated initializer
+        self.init(x: x, y: y, color: color)
+        self.board = state
     }
     
     public func isValid(row: Int, col: Int) -> Bool {
