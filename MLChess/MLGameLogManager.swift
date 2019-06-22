@@ -10,7 +10,7 @@ import UIKit
 
 class MLGameLogManager: NSObject {
     
-    let filename: URL!
+    public let filename: URL!
     
     override init() {
         let paths = FileManager.default.urls(for: FileManager.SearchPathDirectory.documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask)
