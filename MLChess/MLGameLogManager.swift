@@ -14,7 +14,7 @@ class MLGameLogManager: NSObject {
     
     override init() {
         let paths = FileManager.default.urls(for: FileManager.SearchPathDirectory.documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask)
-        self.filename = paths[0].appendingPathComponent("game.log")
+        self.filename = paths[0].appendingPathComponent("MLChessGames.txt")
     }
     
     init(url: URL) {
