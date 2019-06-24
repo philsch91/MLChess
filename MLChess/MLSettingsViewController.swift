@@ -13,6 +13,9 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     
     var collectionView: UICollectionView!
     
+    var whiteStrategySegmentedControl: UISegmentedControl!
+    var blackStrategySegmentedControl: UISegmentedControl!
+    
     var whiteCalcDurationSlider: UISlider!
     var whiteMinimumValueLabel: UILabel!
     var whiteMaximumValueLabel: UILabel!
@@ -69,7 +72,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return 9
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -97,7 +100,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
         
         if indexPath.item == 2 {
             let switchCell: MLSwitchCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSwitchCollectionViewCell.self.description(), for: indexPath) as! MLSwitchCollectionViewCell
-            switchCell.label.text = "Simulationmode"
+            switchCell.label.text = "Learning Mode"
             switchCell.uiswitch.isOn = UserDefaults.standard.bool(forKey: "simulationMode")
             switchCell.uiswitch.addTarget(self, action: #selector(setSimulationMode(control:)), for: UIControl.Event.valueChanged)
             
@@ -105,6 +108,32 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
         }
         
         if indexPath.item == 3 {
+            let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
+            
+            self.whiteStrategySegmentedControl = UISegmentedControl(items: ["White Numerator","White Denominator"])
+            segmentedControllCell.segmentedControl = self.whiteStrategySegmentedControl
+            //segmentedControllCell.separatorActive = false
+            //segmentedControllCell.items = ["White Numerator","White Denominator"]
+            segmentedControllCell.selectedIndex = UserDefaults.standard.integer(forKey: "whiteStrategy")
+            segmentedControllCell.segmentedControl.addTarget(self, action: #selector(self.strategyChanged(control:)), for: UIControl.Event.valueChanged)
+            
+            return segmentedControllCell
+        }
+        
+        if indexPath.item == 4 {
+            let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
+            
+            self.blackStrategySegmentedControl = UISegmentedControl(items: ["Black Numerator","Black Denominator"])
+            segmentedControllCell.segmentedControl = self.blackStrategySegmentedControl
+            //segmentedControllCell.separatorActive = false
+            //segmentedControllCell.items = ["Black Numerator","Black Denominator"]
+            segmentedControllCell.selectedIndex = UserDefaults.standard.integer(forKey: "blackStrategy")
+            segmentedControllCell.segmentedControl.addTarget(self, action: #selector(self.strategyChanged(control:)), for: UIControl.Event.valueChanged)
+            
+            return segmentedControllCell
+        }
+        
+        if indexPath.item == 5 {
             let sliderCell: MLSliderCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSliderCollectionViewCell.self.description(), for: indexPath) as! MLSliderCollectionViewCell
             
             self.whiteCalcDurationSlider = UISlider()
@@ -131,7 +160,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             return sliderCell
         }
         
-        if indexPath.item == 4 {
+        if indexPath.item == 6 {
             let sliderCell: MLSliderCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSliderCollectionViewCell.self.description(), for: indexPath) as! MLSliderCollectionViewCell
             
             self.blackCalcDurationSlider = UISlider()
@@ -158,7 +187,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             return sliderCell
         }
         
-        if indexPath.item == 5 {
+        if indexPath.item == 7 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
             //segmentedControllCell.separatorActive = false
             segmentedControllCell.items = ["WDepth 20","WDepth 40","WDepth 60","WTerminal"]
@@ -179,7 +208,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             return segmentedControllCell
         }
         
-        if indexPath.item == 6 {
+        if indexPath.item == 8 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
             //segmentedControllCell.separatorActive = false
             segmentedControllCell.items = ["BDepth 20","BDepth 40","BDepth 60","BTerminal"]
@@ -216,6 +245,30 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     
     @objc func userColorChanged(control: UISegmentedControl) -> Void {
         print(control)
+    }
+    
+    @objc func strategyChanged(control: UISegmentedControl) -> Void {
+        //print(control)
+        var value: MLChessStrategy! = MLChessStrategy.Denominator
+        var key = "whiteStrategy"
+        
+        if control === self.whiteStrategySegmentedControl {
+            key = "whiteStrategy"
+        }
+        
+        if control === self.blackStrategySegmentedControl {
+            key = "blackStrategy"
+        }
+        
+        if control.selectedSegmentIndex == 0 {
+            value = MLChessStrategy.Numerator
+        } else if control.selectedSegmentIndex == 1 {
+            value = MLChessStrategy.Denominator
+        }
+        
+        print(key,value)
+        
+        UserDefaults.standard.set(value.rawValue, forKey: key)
     }
     
     @objc func setSimulationMode(control: UISwitch) -> Void {
