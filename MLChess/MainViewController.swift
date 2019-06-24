@@ -215,11 +215,11 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         self.toggleGame()
         
         var msg = "white lost"
-        var winnerId = 1
+        var winnerId = -1
         
         if self.game.active == MLPieceColor.black {
             msg = "black lost"
-            winnerId = -1
+            winnerId = 1
         }
         
         self.game.winner = winnerId
