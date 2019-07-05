@@ -191,7 +191,7 @@ class CBChessBoardView: UIView {
                 
                 let boardPiece: CBChessBoardPiece? = dataSource.chessBoardView(board: self, chessPieceForSquare: square)
                 
-                if case let piece? = boardPiece {
+                if let piece = boardPiece {
                     row.append(piece)
                 } else {
                     row.append(nil)
@@ -212,7 +212,7 @@ class CBChessBoardView: UIView {
         //41,875
         for row in 0...7 {
             for col in 0...7 {
-                if case let piece? = state[row][col] {
+                if let piece = state[row][col] {
                     //if piece is MLKingPiece && piece.color == MLPieceColor.black {
                     if piece == CBChessBoardPiece.BlackKing {
                         print(row,col,"king")
