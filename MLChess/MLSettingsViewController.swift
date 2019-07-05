@@ -24,6 +24,9 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     var blackMinimumValueLabel: UILabel!
     var blackMaximumValueLabel: UILabel!
     
+    var whiteStateEvaluationSegmentedControl: UISegmentedControl!
+    var blackStateEvaluationSegmentedControl: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Settings"
@@ -72,7 +75,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return 11
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -229,6 +232,32 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             return segmentedControllCell
         }
         
+        if indexPath.item == 9 {
+            let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
+            
+            self.whiteStateEvaluationSegmentedControl = UISegmentedControl(items: ["White Win","White Pawn Units"])
+            segmentedControllCell.segmentedControl = self.whiteStateEvaluationSegmentedControl
+            //segmentedControllCell.separatorActive = false
+            //segmentedControllCell.items = ["Black Numerator","Black Denominator"]
+            segmentedControllCell.selectedIndex = UserDefaults.standard.integer(forKey: "whiteStateEvaluation")
+            segmentedControllCell.segmentedControl.addTarget(self, action: #selector(self.stateEvaluationChanged(control:)), for: UIControl.Event.valueChanged)
+            
+            return segmentedControllCell
+        }
+        
+        if indexPath.item == 10 {
+            let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
+            
+            self.blackStateEvaluationSegmentedControl = UISegmentedControl(items: ["Black Win","Black Pawn Units"])
+            segmentedControllCell.segmentedControl = self.blackStateEvaluationSegmentedControl
+            //segmentedControllCell.separatorActive = false
+            //segmentedControllCell.items = ["Black Numerator","Black Denominator"]
+            segmentedControllCell.selectedIndex = UserDefaults.standard.integer(forKey: "blackStateEvaluation")
+            segmentedControllCell.segmentedControl.addTarget(self, action: #selector(self.stateEvaluationChanged(control:)), for: UIControl.Event.valueChanged)
+            
+            return segmentedControllCell
+        }
+        
         fatalError("exception")
     }
     
@@ -264,6 +293,30 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             value = MLChessStrategy.Numerator
         } else if control.selectedSegmentIndex == 1 {
             value = MLChessStrategy.Denominator
+        }
+        
+        print(key,value)
+        
+        UserDefaults.standard.set(value.rawValue, forKey: key)
+    }
+    
+    @objc func stateEvaluationChanged(control: UISegmentedControl) -> Void {
+        //print(control)
+        var value: MLChessStateEvaluation! = MLChessStateEvaluation.Win
+        var key = "whiteStateEvaluation"
+        
+        if control === self.whiteStrategySegmentedControl {
+            key = "whiteStateEvaluation"
+        }
+        
+        if control === self.blackStrategySegmentedControl {
+            key = "blackStateEvaluation"
+        }
+        
+        if control.selectedSegmentIndex == 0 {
+            value = MLChessStateEvaluation.Win
+        } else if control.selectedSegmentIndex == 1 {
+            value = MLChessStateEvaluation.PawnUnits
         }
         
         print(key,value)

@@ -29,6 +29,7 @@
 		175560282268F53B006613E8 /* MLGameLogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175560272268F53B006613E8 /* MLGameLogManager.swift */; };
 		1755602A22690039006613E8 /* MLSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1755602922690039006613E8 /* MLSettingsViewController.swift */; };
 		1755602C22690C27006613E8 /* MLSegmentedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1755602B22690C27006613E8 /* MLSegmentedCollectionViewCell.swift */; };
+		17694A4622CFCC4100EC5666 /* MLChessStateEvaluation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17694A4522CFCC4100EC5666 /* MLChessStateEvaluation.swift */; };
 		176CC79822573878009D576F /* CBWhiteQueenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC79722573878009D576F /* CBWhiteQueenView.swift */; };
 		176CC79A225738CD009D576F /* CBBlackQueenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC799225738CD009D576F /* CBBlackQueenView.swift */; };
 		176CC79C22573938009D576F /* MLQueenPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC79B22573938009D576F /* MLQueenPiece.swift */; };
@@ -98,6 +99,7 @@
 		175560272268F53B006613E8 /* MLGameLogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLGameLogManager.swift; sourceTree = "<group>"; };
 		1755602922690039006613E8 /* MLSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLSettingsViewController.swift; sourceTree = "<group>"; };
 		1755602B22690C27006613E8 /* MLSegmentedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLSegmentedCollectionViewCell.swift; sourceTree = "<group>"; };
+		17694A4522CFCC4100EC5666 /* MLChessStateEvaluation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessStateEvaluation.swift; sourceTree = "<group>"; };
 		176CC79722573878009D576F /* CBWhiteQueenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBWhiteQueenView.swift; sourceTree = "<group>"; };
 		176CC799225738CD009D576F /* CBBlackQueenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBBlackQueenView.swift; sourceTree = "<group>"; };
 		176CC79B22573938009D576F /* MLQueenPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLQueenPiece.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				1790F026225E649A00DC5199 /* CBChessBoardPiece.swift */,
 				17717744229DB98C0042A3B7 /* MLChessStrategy.swift */,
 				171267A4229FFB3300E9B366 /* MLChessSimulatonDepth.swift */,
+				17694A4522CFCC4100EC5666 /* MLChessStateEvaluation.swift */,
 			);
 			name = Enums;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				1790F023225E639900DC5199 /* CBChessBoardSquare.swift in Sources */,
 				176CC79822573878009D576F /* CBWhiteQueenView.swift in Sources */,
 				176CC79A225738CD009D576F /* CBBlackQueenView.swift in Sources */,
+				17694A4622CFCC4100EC5666 /* MLChessStateEvaluation.swift in Sources */,
 				17717745229DB98C0042A3B7 /* MLChessStrategy.swift in Sources */,
 				174BD9CE22560C9700C7D48A /* MLPieceColor.swift in Sources */,
 				176CC7B422574C4A009D576F /* CBBlackBishopView.swift in Sources */,

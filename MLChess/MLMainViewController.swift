@@ -41,6 +41,8 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, M
     var blackSimulationDepth: Int!
     var whiteCalculationDuration: Int!
     var blackCalculationDuration: Int!
+    var whiteStateEvaluation: MLChessStateEvaluation!
+    var blackStateEvaluation: MLChessStateEvaluation!
     
     var evaluationCount: Int!
     
@@ -94,6 +96,12 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, M
         
         self.blackCalculationDuration = UserDefaults.standard.integer(forKey: "blackCalcDuration")
         print("blackCalcDuration",self.blackCalculationDuration)
+        
+        self.whiteStateEvaluation = MLChessStateEvaluation(rawValue: UserDefaults.standard.integer(forKey: "whiteStateEvaluation"))
+        print("whiteStateEvaluation",self.whiteStateEvaluation)
+        
+        self.blackStateEvaluation = MLChessStateEvaluation(rawValue: UserDefaults.standard.integer(forKey: "blackStateEvaluation"))
+        print("blackStateEvaluation",self.blackStateEvaluation)
         
         self.timeLabel.text = String(self.whiteCalculationDuration)
     }
@@ -496,6 +504,16 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, M
         
         if chessMate {
             return 1
+        }
+        
+        if self.game.active == MLPieceColor.white
+            && self.whiteStateEvaluation == MLChessStateEvaluation.Win {
+            return 0
+        }
+        
+        if self.game.active == MLPieceColor.black
+            && self.blackStateEvaluation == MLChessStateEvaluation.Win {
+            return 0
         }
         
         let score = currentVal + simVal

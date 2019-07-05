@@ -49,7 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "whiteStrategy" : MLChessStrategy.Numerator.rawValue,
             "blackStrategy" : MLChessStrategy.Numerator.rawValue,
             "whiteSimulationDepth" : MLChessSimulationDepth.Long.rawValue,
-            "blackSimulationDepth" : MLChessSimulationDepth.Long.rawValue
+            "blackSimulationDepth" : MLChessSimulationDepth.Long.rawValue,
+            "whiteStateEvaluation" : MLChessStateEvaluation.PawnUnits.rawValue,
+            "blackStateEvaluation" : MLChessStateEvaluation.PawnUnits.rawValue
             ] as [String : Any]
         
         UserDefaults.standard.register(defaults: settings)
