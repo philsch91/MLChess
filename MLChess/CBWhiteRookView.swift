@@ -1,5 +1,5 @@
 //
-//  MLBlackPawnView.swift
+//  CBWhiteRookView.swift
 //  MLChess
 //
 //  Created by Philipp Schunker on 05.04.19.
@@ -8,15 +8,11 @@
 
 import UIKit
 
-class MLBlackPawnView: MLChessPieceView {
+class CBWhiteRookView: CBChessPieceView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        //self.font = UIFont(name: "Helvetica", size: 28)
-        self.font = UIFont.systemFont(ofSize: 32)
-        self.text="\u{265F}"
-        //self.text = String(format: "%C", 0x265F)
-        //self.text="♟"
+        self.text="♖"
     }
     
     required init?(coder decoder: NSCoder) {

@@ -12,14 +12,14 @@
 		17386439226B2F3B00C3AC05 /* MLChessTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17386438226B2F3B00C3AC05 /* MLChessTreeNode.swift */; };
 		173E405F22C2A58E0038598A /* MLChess.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 173E405E22C2A58D0038598A /* MLChess.mlmodel */; };
 		174BD9A6224C0A3100C7D48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A5224C0A3100C7D48A /* AppDelegate.swift */; };
-		174BD9A8224C0A3100C7D48A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A7224C0A3100C7D48A /* MainViewController.swift */; };
+		174BD9A8224C0A3100C7D48A /* MLMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A7224C0A3100C7D48A /* MLMainViewController.swift */; };
 		174BD9AA224C0A3100C7D48A /* MLGameLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9A9224C0A3100C7D48A /* MLGameLogViewController.swift */; };
 		174BD9AD224C0A3100C7D48A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 174BD9AB224C0A3100C7D48A /* Main.storyboard */; };
 		174BD9AF224C0A3400C7D48A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 174BD9AE224C0A3400C7D48A /* Assets.xcassets */; };
 		174BD9B2224C0A3400C7D48A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 174BD9B0224C0A3400C7D48A /* LaunchScreen.storyboard */; };
-		174BD9BF224C0D0F00C7D48A /* MLChessBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9BE224C0D0F00C7D48A /* MLChessBoardView.swift */; };
-		174BD9C1224D598700C7D48A /* MLWhiteKingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C0224D598700C7D48A /* MLWhiteKingView.swift */; };
-		174BD9C32253580500C7D48A /* MLBlackKingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C22253580500C7D48A /* MLBlackKingView.swift */; };
+		174BD9BF224C0D0F00C7D48A /* CBChessBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9BE224C0D0F00C7D48A /* CBChessBoardView.swift */; };
+		174BD9C1224D598700C7D48A /* CBWhiteKingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C0224D598700C7D48A /* CBWhiteKingView.swift */; };
+		174BD9C32253580500C7D48A /* CBBlackKingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C22253580500C7D48A /* CBBlackKingView.swift */; };
 		174BD9C72253BBEC00C7D48A /* MLChessPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C62253BBEC00C7D48A /* MLChessPiece.swift */; };
 		174BD9CA2253CA7F00C7D48A /* MLChessGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9C92253CA7F00C7D48A /* MLChessGame.swift */; };
 		174BD9CC225547C400C7D48A /* MLRookPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174BD9CB225547C400C7D48A /* MLRookPiece.swift */; };
@@ -29,21 +29,21 @@
 		175560282268F53B006613E8 /* MLGameLogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175560272268F53B006613E8 /* MLGameLogManager.swift */; };
 		1755602A22690039006613E8 /* MLSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1755602922690039006613E8 /* MLSettingsViewController.swift */; };
 		1755602C22690C27006613E8 /* MLSegmentedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1755602B22690C27006613E8 /* MLSegmentedCollectionViewCell.swift */; };
-		176CC79822573878009D576F /* MLWhiteQueenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC79722573878009D576F /* MLWhiteQueenView.swift */; };
-		176CC79A225738CD009D576F /* MLBlackQueenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC799225738CD009D576F /* MLBlackQueenView.swift */; };
+		176CC79822573878009D576F /* CBWhiteQueenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC79722573878009D576F /* CBWhiteQueenView.swift */; };
+		176CC79A225738CD009D576F /* CBBlackQueenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC799225738CD009D576F /* CBBlackQueenView.swift */; };
 		176CC79C22573938009D576F /* MLQueenPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC79B22573938009D576F /* MLQueenPiece.swift */; };
-		176CC79E22573B0E009D576F /* MLChessPieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC79D22573B0E009D576F /* MLChessPieceView.swift */; };
+		176CC79E22573B0E009D576F /* CBChessPieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC79D22573B0E009D576F /* CBChessPieceView.swift */; };
 		176CC7A022573E84009D576F /* MLPawnPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC79F22573E84009D576F /* MLPawnPiece.swift */; };
-		176CC7A222573EE7009D576F /* MLBlackPawnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7A122573EE7009D576F /* MLBlackPawnView.swift */; };
-		176CC7A422573F21009D576F /* MLWhitePawnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7A322573F21009D576F /* MLWhitePawnView.swift */; };
-		176CC7A6225747B9009D576F /* MLWhiteKnightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7A5225747B9009D576F /* MLWhiteKnightView.swift */; };
+		176CC7A222573EE7009D576F /* CBBlackPawnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7A122573EE7009D576F /* CBBlackPawnView.swift */; };
+		176CC7A422573F21009D576F /* CBWhitePawnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7A322573F21009D576F /* CBWhitePawnView.swift */; };
+		176CC7A6225747B9009D576F /* CBWhiteKnightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7A5225747B9009D576F /* CBWhiteKnightView.swift */; };
 		176CC7A82257483B009D576F /* MLKnightPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7A72257483B009D576F /* MLKnightPiece.swift */; };
-		176CC7AA225748AB009D576F /* MLWhiteBishopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7A9225748AB009D576F /* MLWhiteBishopView.swift */; };
+		176CC7AA225748AB009D576F /* CBWhiteBishopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7A9225748AB009D576F /* CBWhiteBishopView.swift */; };
 		176CC7AC225748DA009D576F /* MLBishopPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7AB225748DA009D576F /* MLBishopPiece.swift */; };
-		176CC7AE22574BCB009D576F /* MLBlackRookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7AD22574BCB009D576F /* MLBlackRookView.swift */; };
-		176CC7B022574BF4009D576F /* MLWhiteRookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7AF22574BF4009D576F /* MLWhiteRookView.swift */; };
-		176CC7B222574C28009D576F /* MLBlackKnightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7B122574C28009D576F /* MLBlackKnightView.swift */; };
-		176CC7B422574C4A009D576F /* MLBlackBishopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7B322574C4A009D576F /* MLBlackBishopView.swift */; };
+		176CC7AE22574BCB009D576F /* CBBlackRookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7AD22574BCB009D576F /* CBBlackRookView.swift */; };
+		176CC7B022574BF4009D576F /* CBWhiteRookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7AF22574BF4009D576F /* CBWhiteRookView.swift */; };
+		176CC7B222574C28009D576F /* CBBlackKnightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7B122574C28009D576F /* CBBlackKnightView.swift */; };
+		176CC7B422574C4A009D576F /* CBBlackBishopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7B322574C4A009D576F /* CBBlackBishopView.swift */; };
 		17717745229DB98C0042A3B7 /* MLChessStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17717744229DB98C0042A3B7 /* MLChessStrategy.swift */; };
 		1790F021225E619E00DC5199 /* CBChessBoardViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F020225E619E00DC5199 /* CBChessBoardViewDataSource.swift */; };
 		1790F023225E639900DC5199 /* CBChessBoardSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F022225E639900DC5199 /* CBChessBoardSquare.swift */; };
@@ -80,15 +80,15 @@
 		173E405E22C2A58D0038598A /* MLChess.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MLChess.mlmodel; sourceTree = "<group>"; };
 		174BD9A2224C0A3100C7D48A /* MLChess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLChess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		174BD9A5224C0A3100C7D48A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		174BD9A7224C0A3100C7D48A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		174BD9A7224C0A3100C7D48A /* MLMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLMainViewController.swift; sourceTree = "<group>"; };
 		174BD9A9224C0A3100C7D48A /* MLGameLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLGameLogViewController.swift; sourceTree = "<group>"; };
 		174BD9AC224C0A3100C7D48A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		174BD9AE224C0A3400C7D48A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		174BD9B1224C0A3400C7D48A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		174BD9B3224C0A3400C7D48A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		174BD9BE224C0D0F00C7D48A /* MLChessBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessBoardView.swift; sourceTree = "<group>"; };
-		174BD9C0224D598700C7D48A /* MLWhiteKingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLWhiteKingView.swift; sourceTree = "<group>"; };
-		174BD9C22253580500C7D48A /* MLBlackKingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackKingView.swift; sourceTree = "<group>"; };
+		174BD9BE224C0D0F00C7D48A /* CBChessBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBChessBoardView.swift; sourceTree = "<group>"; };
+		174BD9C0224D598700C7D48A /* CBWhiteKingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBWhiteKingView.swift; sourceTree = "<group>"; };
+		174BD9C22253580500C7D48A /* CBBlackKingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBBlackKingView.swift; sourceTree = "<group>"; };
 		174BD9C62253BBEC00C7D48A /* MLChessPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessPiece.swift; sourceTree = "<group>"; };
 		174BD9C92253CA7F00C7D48A /* MLChessGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessGame.swift; sourceTree = "<group>"; };
 		174BD9CB225547C400C7D48A /* MLRookPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLRookPiece.swift; sourceTree = "<group>"; };
@@ -98,21 +98,21 @@
 		175560272268F53B006613E8 /* MLGameLogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLGameLogManager.swift; sourceTree = "<group>"; };
 		1755602922690039006613E8 /* MLSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLSettingsViewController.swift; sourceTree = "<group>"; };
 		1755602B22690C27006613E8 /* MLSegmentedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLSegmentedCollectionViewCell.swift; sourceTree = "<group>"; };
-		176CC79722573878009D576F /* MLWhiteQueenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLWhiteQueenView.swift; sourceTree = "<group>"; };
-		176CC799225738CD009D576F /* MLBlackQueenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackQueenView.swift; sourceTree = "<group>"; };
+		176CC79722573878009D576F /* CBWhiteQueenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBWhiteQueenView.swift; sourceTree = "<group>"; };
+		176CC799225738CD009D576F /* CBBlackQueenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBBlackQueenView.swift; sourceTree = "<group>"; };
 		176CC79B22573938009D576F /* MLQueenPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLQueenPiece.swift; sourceTree = "<group>"; };
-		176CC79D22573B0E009D576F /* MLChessPieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessPieceView.swift; sourceTree = "<group>"; };
+		176CC79D22573B0E009D576F /* CBChessPieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBChessPieceView.swift; sourceTree = "<group>"; };
 		176CC79F22573E84009D576F /* MLPawnPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLPawnPiece.swift; sourceTree = "<group>"; };
-		176CC7A122573EE7009D576F /* MLBlackPawnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackPawnView.swift; sourceTree = "<group>"; };
-		176CC7A322573F21009D576F /* MLWhitePawnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLWhitePawnView.swift; sourceTree = "<group>"; };
-		176CC7A5225747B9009D576F /* MLWhiteKnightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLWhiteKnightView.swift; sourceTree = "<group>"; };
+		176CC7A122573EE7009D576F /* CBBlackPawnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBBlackPawnView.swift; sourceTree = "<group>"; };
+		176CC7A322573F21009D576F /* CBWhitePawnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBWhitePawnView.swift; sourceTree = "<group>"; };
+		176CC7A5225747B9009D576F /* CBWhiteKnightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBWhiteKnightView.swift; sourceTree = "<group>"; };
 		176CC7A72257483B009D576F /* MLKnightPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLKnightPiece.swift; sourceTree = "<group>"; };
-		176CC7A9225748AB009D576F /* MLWhiteBishopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLWhiteBishopView.swift; sourceTree = "<group>"; };
+		176CC7A9225748AB009D576F /* CBWhiteBishopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBWhiteBishopView.swift; sourceTree = "<group>"; };
 		176CC7AB225748DA009D576F /* MLBishopPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBishopPiece.swift; sourceTree = "<group>"; };
-		176CC7AD22574BCB009D576F /* MLBlackRookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackRookView.swift; sourceTree = "<group>"; };
-		176CC7AF22574BF4009D576F /* MLWhiteRookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLWhiteRookView.swift; sourceTree = "<group>"; };
-		176CC7B122574C28009D576F /* MLBlackKnightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackKnightView.swift; sourceTree = "<group>"; };
-		176CC7B322574C4A009D576F /* MLBlackBishopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLBlackBishopView.swift; sourceTree = "<group>"; };
+		176CC7AD22574BCB009D576F /* CBBlackRookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBBlackRookView.swift; sourceTree = "<group>"; };
+		176CC7AF22574BF4009D576F /* CBWhiteRookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBWhiteRookView.swift; sourceTree = "<group>"; };
+		176CC7B122574C28009D576F /* CBBlackKnightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBBlackKnightView.swift; sourceTree = "<group>"; };
+		176CC7B322574C4A009D576F /* CBBlackBishopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBBlackBishopView.swift; sourceTree = "<group>"; };
 		17717744229DB98C0042A3B7 /* MLChessStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessStrategy.swift; sourceTree = "<group>"; };
 		1790F020225E619E00DC5199 /* CBChessBoardViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBChessBoardViewDataSource.swift; sourceTree = "<group>"; };
 		1790F022225E639900DC5199 /* CBChessBoardSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBChessBoardSquare.swift; sourceTree = "<group>"; };
@@ -143,7 +143,7 @@
 			children = (
 				1755602922690039006613E8 /* MLSettingsViewController.swift */,
 				174BD9A9224C0A3100C7D48A /* MLGameLogViewController.swift */,
-				174BD9A7224C0A3100C7D48A /* MainViewController.swift */,
+				174BD9A7224C0A3100C7D48A /* MLMainViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -189,20 +189,20 @@
 		174BD9BD224C0CCE00C7D48A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				174BD9BE224C0D0F00C7D48A /* MLChessBoardView.swift */,
-				174BD9C0224D598700C7D48A /* MLWhiteKingView.swift */,
-				174BD9C22253580500C7D48A /* MLBlackKingView.swift */,
-				176CC79722573878009D576F /* MLWhiteQueenView.swift */,
-				176CC799225738CD009D576F /* MLBlackQueenView.swift */,
-				176CC79D22573B0E009D576F /* MLChessPieceView.swift */,
-				176CC7A122573EE7009D576F /* MLBlackPawnView.swift */,
-				176CC7A322573F21009D576F /* MLWhitePawnView.swift */,
-				176CC7A5225747B9009D576F /* MLWhiteKnightView.swift */,
-				176CC7A9225748AB009D576F /* MLWhiteBishopView.swift */,
-				176CC7AD22574BCB009D576F /* MLBlackRookView.swift */,
-				176CC7AF22574BF4009D576F /* MLWhiteRookView.swift */,
-				176CC7B122574C28009D576F /* MLBlackKnightView.swift */,
-				176CC7B322574C4A009D576F /* MLBlackBishopView.swift */,
+				174BD9BE224C0D0F00C7D48A /* CBChessBoardView.swift */,
+				174BD9C0224D598700C7D48A /* CBWhiteKingView.swift */,
+				174BD9C22253580500C7D48A /* CBBlackKingView.swift */,
+				176CC79722573878009D576F /* CBWhiteQueenView.swift */,
+				176CC799225738CD009D576F /* CBBlackQueenView.swift */,
+				176CC79D22573B0E009D576F /* CBChessPieceView.swift */,
+				176CC7A122573EE7009D576F /* CBBlackPawnView.swift */,
+				176CC7A322573F21009D576F /* CBWhitePawnView.swift */,
+				176CC7A5225747B9009D576F /* CBWhiteKnightView.swift */,
+				176CC7A9225748AB009D576F /* CBWhiteBishopView.swift */,
+				176CC7AD22574BCB009D576F /* CBBlackRookView.swift */,
+				176CC7AF22574BF4009D576F /* CBWhiteRookView.swift */,
+				176CC7B122574C28009D576F /* CBBlackKnightView.swift */,
+				176CC7B322574C4A009D576F /* CBBlackBishopView.swift */,
 				1755602B22690C27006613E8 /* MLSegmentedCollectionViewCell.swift */,
 				1731DB0922944B2B0097E4E6 /* MLSwitchCollectionViewCell.swift */,
 				17E1A54E22A7067A00284386 /* MLSliderCollectionViewCell.swift */,
@@ -362,44 +362,44 @@
 				1731DB0A22944B2B0097E4E6 /* MLSwitchCollectionViewCell.swift in Sources */,
 				1790F021225E619E00DC5199 /* CBChessBoardViewDataSource.swift in Sources */,
 				17E1A54F22A7067A00284386 /* MLSliderCollectionViewCell.swift in Sources */,
-				174BD9BF224C0D0F00C7D48A /* MLChessBoardView.swift in Sources */,
-				176CC79E22573B0E009D576F /* MLChessPieceView.swift in Sources */,
-				174BD9C1224D598700C7D48A /* MLWhiteKingView.swift in Sources */,
+				174BD9BF224C0D0F00C7D48A /* CBChessBoardView.swift in Sources */,
+				176CC79E22573B0E009D576F /* CBChessPieceView.swift in Sources */,
+				174BD9C1224D598700C7D48A /* CBWhiteKingView.swift in Sources */,
 				174BD9AA224C0A3100C7D48A /* MLGameLogViewController.swift in Sources */,
-				176CC7A422573F21009D576F /* MLWhitePawnView.swift in Sources */,
+				176CC7A422573F21009D576F /* CBWhitePawnView.swift in Sources */,
 				1790F05A22637F6900DC5199 /* MLWhitePawnPiece.swift in Sources */,
 				175560282268F53B006613E8 /* MLGameLogManager.swift in Sources */,
 				1755602C22690C27006613E8 /* MLSegmentedCollectionViewCell.swift in Sources */,
-				176CC7AA225748AB009D576F /* MLWhiteBishopView.swift in Sources */,
+				176CC7AA225748AB009D576F /* CBWhiteBishopView.swift in Sources */,
 				174BD9D32256935400C7D48A /* MLKingPiece.swift in Sources */,
 				176CC7A82257483B009D576F /* MLKnightPiece.swift in Sources */,
-				176CC7B022574BF4009D576F /* MLWhiteRookView.swift in Sources */,
+				176CC7B022574BF4009D576F /* CBWhiteRookView.swift in Sources */,
 				176CC79C22573938009D576F /* MLQueenPiece.swift in Sources */,
 				174BD9A6224C0A3100C7D48A /* AppDelegate.swift in Sources */,
 				1755602A22690039006613E8 /* MLSettingsViewController.swift in Sources */,
 				174BD9C72253BBEC00C7D48A /* MLChessPiece.swift in Sources */,
 				1790F05C22637F7900DC5199 /* MLBlackPawnPiece.swift in Sources */,
-				176CC7AE22574BCB009D576F /* MLBlackRookView.swift in Sources */,
-				176CC7A222573EE7009D576F /* MLBlackPawnView.swift in Sources */,
+				176CC7AE22574BCB009D576F /* CBBlackRookView.swift in Sources */,
+				176CC7A222573EE7009D576F /* CBBlackPawnView.swift in Sources */,
 				174BD9CC225547C400C7D48A /* MLRookPiece.swift in Sources */,
 				171267A5229FFB3300E9B366 /* MLChessSimulatonDepth.swift in Sources */,
 				1790F025225E644200DC5199 /* CBChessBoardViewDelegate.swift in Sources */,
 				174BD9CA2253CA7F00C7D48A /* MLChessGame.swift in Sources */,
 				1790F023225E639900DC5199 /* CBChessBoardSquare.swift in Sources */,
-				176CC79822573878009D576F /* MLWhiteQueenView.swift in Sources */,
-				176CC79A225738CD009D576F /* MLBlackQueenView.swift in Sources */,
+				176CC79822573878009D576F /* CBWhiteQueenView.swift in Sources */,
+				176CC79A225738CD009D576F /* CBBlackQueenView.swift in Sources */,
 				17717745229DB98C0042A3B7 /* MLChessStrategy.swift in Sources */,
 				174BD9CE22560C9700C7D48A /* MLPieceColor.swift in Sources */,
-				176CC7B422574C4A009D576F /* MLBlackBishopView.swift in Sources */,
-				176CC7B222574C28009D576F /* MLBlackKnightView.swift in Sources */,
+				176CC7B422574C4A009D576F /* CBBlackBishopView.swift in Sources */,
+				176CC7B222574C28009D576F /* CBBlackKnightView.swift in Sources */,
 				17386439226B2F3B00C3AC05 /* MLChessTreeNode.swift in Sources */,
 				1790F027225E649A00DC5199 /* CBChessBoardPiece.swift in Sources */,
-				176CC7A6225747B9009D576F /* MLWhiteKnightView.swift in Sources */,
+				176CC7A6225747B9009D576F /* CBWhiteKnightView.swift in Sources */,
 				17553D9522733C2600D12960 /* MLChessPiecePosition.swift in Sources */,
 				176CC7A022573E84009D576F /* MLPawnPiece.swift in Sources */,
 				176CC7AC225748DA009D576F /* MLBishopPiece.swift in Sources */,
-				174BD9A8224C0A3100C7D48A /* MainViewController.swift in Sources */,
-				174BD9C32253580500C7D48A /* MLBlackKingView.swift in Sources */,
+				174BD9A8224C0A3100C7D48A /* MLMainViewController.swift in Sources */,
+				174BD9C32253580500C7D48A /* CBBlackKingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

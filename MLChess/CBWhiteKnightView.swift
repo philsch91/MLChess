@@ -1,5 +1,5 @@
 //
-//  MLWhiteQueenView.swift
+//  CBWhiteKnightView.swift
 //  MLChess
 //
 //  Created by Philipp Schunker on 05.04.19.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class MLWhiteQueenView: MLChessPieceView {
+class CBWhiteKnightView: CBChessPieceView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.text="♕"
+        self.text="♘"
     }
     
     required init?(coder decoder: NSCoder) {

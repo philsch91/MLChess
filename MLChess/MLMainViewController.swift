@@ -10,13 +10,13 @@ import UIKit
 import PSUIKitUtils
 import MonteCarloKit
 
-class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCStateDelegate {
+class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCStateDelegate {
     
     var scrollView: UIScrollView!
     var contentView: UIView!
     var timeLabel: UILabel!
     var startButton: PSButton!
-    var chessBoardView: MLChessBoardView!
+    var chessBoardView: CBChessBoardView!
     
     var game: MLChessGame!
     
@@ -112,7 +112,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
         //let testButtonItem = UIBarButtonItem(title: "Test", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.test))
         self.navigationItem.rightBarButtonItems = [saveButtonItem]
         
-        self.chessBoardView = MLChessBoardView(frame: frame)
+        self.chessBoardView = CBChessBoardView(frame: frame)
         
         frame.size.height = self.view.frame.height
         frame.size.height += 100
@@ -514,7 +514,7 @@ class MainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCS
     
     //MARK: - CBChessBoardViewDataSource
     
-    func chessBoardView(board: MLChessBoardView, chessPieceForSquare square: CBChessBoardSquare) -> CBChessBoardPiece? {
+    func chessBoardView(board: CBChessBoardView, chessPieceForSquare square: CBChessBoardSquare) -> CBChessBoardPiece? {
         print("chessPieceForSquare", square.row, square.col)
         let gamePiece: MLChessPiece? = self.game.board[square.row][square.col]
         

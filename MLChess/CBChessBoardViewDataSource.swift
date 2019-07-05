@@ -9,5 +9,5 @@
 import Foundation
 
 protocol CBChessBoardViewDataSource : class {
-    func chessBoardView(board: MLChessBoardView, chessPieceForSquare square: CBChessBoardSquare) -> CBChessBoardPiece?
+    func chessBoardView(board: CBChessBoardView, chessPieceForSquare square: CBChessBoardSquare) -> CBChessBoardPiece?
 }

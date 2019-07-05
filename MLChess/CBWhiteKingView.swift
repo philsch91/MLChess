@@ -1,24 +1,24 @@
 //
-//  MLWhiteRookView.swift
+//  CBWhiteKingView.swift
 //  MLChess
 //
-//  Created by Philipp Schunker on 05.04.19.
+//  Created by Philipp Schunker on 28.03.19.
 //  Copyright © 2019 Philipp Schunker. All rights reserved.
 //
 
 import UIKit
 
-class MLWhiteRookView: MLChessPieceView {
+class CBWhiteKingView: CBChessPieceView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.text="♖"
+        self.text="♔"
     }
     
     required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
     }
-
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

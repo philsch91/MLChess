@@ -9,5 +9,5 @@
 import Foundation
 
 protocol CBChessBoardViewDelegate : class {
-    //func chessBoardView(board: MLChessBoardView, chessPieceForSquare: ) -> <#return type#> {
+    //func chessBoardView(board: CBChessBoardView, chessPieceForSquare: ) -> <#return type#> {
 }

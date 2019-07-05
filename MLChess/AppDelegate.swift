@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        let mainViewController = MainViewController()
+        let mainViewController = MLMainViewController()
         let logViewController = MLGameLogViewController()
         let settingsViewController = MLSettingsViewController()
         
