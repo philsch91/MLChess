@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  MLMainViewController.swift
 //  MLChess
 //
 //  Created by Philipp Schunker on 27.03.19.

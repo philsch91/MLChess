@@ -1,5 +1,5 @@
 //
-//  MLChessPieceView.swift
+//  CBChessPieceView.swift
 //  MLChess
 //
 //  Created by Philipp Schunker on 05.04.19.

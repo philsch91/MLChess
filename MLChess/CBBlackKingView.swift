@@ -1,5 +1,5 @@
 //
-//  CBBlackKing.swift
+//  CBBlackKingView.swift
 //  MLChess
 //
 //  Created by Philipp Schunker on 02.04.19.
