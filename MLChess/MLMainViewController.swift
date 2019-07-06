@@ -319,10 +319,14 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, M
         self.game.moves.append(nextNode.board)
         self.chessBoardView.reloadData()
         
-        if self.checkRemis() {
+        let isRemis = self.checkRemis()
+        
+        if isRemis {
             self.handleGameEnd()
             return
         }
+        
+        print("is remis",isRemis)
         
         nextNode.nodes = NSMutableArray()
         self.mcts = nil
