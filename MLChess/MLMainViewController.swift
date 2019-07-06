@@ -245,6 +245,13 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, M
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { _ in
             NSLog("user pressed OK")
         }))
+        
+        if winnerId == 0 {
+            alert.addAction(UIAlertAction(title: "Continue Game", style: UIAlertAction.Style.default, handler: { _ in
+                self.startSearch()
+            }))
+        }
+        
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -320,15 +327,6 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, M
         //update view
         self.chessBoardView.reloadData()
         
-        let isRemis = self.checkRemis()
-        
-        if isRemis {
-            self.handleGameEnd()
-            return
-        }
-        
-        print("is remis",isRemis)
-        
         nextNode.nodes = NSMutableArray()
         self.mcts = nil
         
@@ -344,6 +342,14 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, M
             self.currTime = self.whiteCalculationDuration
         }
         
+        let isRemis = self.checkRemis()
+        
+        if isRemis {
+            self.handleGameEnd()
+            return
+        }
+        
+        print("is remis",isRemis)
         print("active player", self.game.active)
     }
     
