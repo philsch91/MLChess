@@ -222,18 +222,23 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, M
         }
         self.toggleGame()
         
-        var msg = "white lost"
+        var msg = "chess mate - white lost"
         var winnerId = -1
         
         if self.game.active == MLPieceColor.black {
-            msg = "black lost"
+            msg = "chess mate - black lost"
             winnerId = 1
+        }
+        
+        if self.checkRemis() {
+            msg = "remis"
+            winnerId = 0
         }
         
         self.game.winner = winnerId
         
-        let alert = UIAlertController(title: "Chess mate", message: msg, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "New game", style: UIAlertAction.Style.default, handler: { _ in
+        let alert = UIAlertController(title: "Game End", message: msg, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "New Game", style: UIAlertAction.Style.default, handler: { _ in
             self.setupNewGame()
             self.toggleGame()
         }))
@@ -314,6 +319,11 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, M
         self.game.moves.append(nextNode.board)
         self.chessBoardView.reloadData()
         
+        if self.checkRemis() {
+            self.handleGameEnd()
+            return
+        }
+        
         nextNode.nodes = NSMutableArray()
         self.mcts = nil
         
@@ -346,6 +356,44 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, M
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
             self.mcts.main()
         }
+    }
+    
+    func checkRemis() -> Bool {
+        let moveCount = self.game.moves.count
+        
+        if moveCount < 50 {
+            return false
+        }
+        
+        var score = 0
+        
+        let lstate = self.game.moves[moveCount-1]
+        for row in 0...7 {
+            for col in 0...7 {
+                if let piece = lstate[row][col] {
+                    score += piece.value
+                }
+            }
+        }
+        
+        for i in ((moveCount-50)...(moveCount-2)).reversed() {
+            var cscore = 0
+            let state = self.game.moves[i]
+            
+            for row in 0...7 {
+                for col in 0...7 {
+                    if let piece = state[row][col] {
+                        cscore += piece.value
+                    }
+                }
+            }
+            
+            if cscore != score {
+                return false
+            }
+        }
+        
+        return true
     }
     
     //MARK: - MCStateDelegate
