@@ -235,7 +235,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
         if indexPath.item == 9 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
             
-            self.whiteStateEvaluationSegmentedControl = UISegmentedControl(items: ["White Win","White Pawn Units"])
+            self.whiteStateEvaluationSegmentedControl = UISegmentedControl(items: ["White Win","White Pawn Units","White Neural Net"])
             segmentedControllCell.segmentedControl = self.whiteStateEvaluationSegmentedControl
             //segmentedControllCell.separatorActive = false
             //segmentedControllCell.items = ["Black Numerator","Black Denominator"]
@@ -248,7 +248,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
         if indexPath.item == 10 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
             
-            self.blackStateEvaluationSegmentedControl = UISegmentedControl(items: ["Black Win","Black Pawn Units"])
+            self.blackStateEvaluationSegmentedControl = UISegmentedControl(items: ["Black Win","Black Pawn Units","Black Neural Net"])
             segmentedControllCell.segmentedControl = self.blackStateEvaluationSegmentedControl
             //segmentedControllCell.separatorActive = false
             //segmentedControllCell.items = ["Black Numerator","Black Denominator"]
@@ -317,6 +317,8 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             value = MLChessStateEvaluation.Win
         } else if control.selectedSegmentIndex == 1 {
             value = MLChessStateEvaluation.PawnUnits
+        } else if control.selectedSegmentIndex == 2 {
+            value = MLChessStateEvaluation.NeuralNet
         }
         
         print(key,value)

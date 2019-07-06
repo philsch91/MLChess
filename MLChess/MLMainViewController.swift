@@ -317,6 +317,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, M
         
         self.game.board = nextNode.board
         self.game.moves.append(nextNode.board)
+        //update view
         self.chessBoardView.reloadData()
         
         let isRemis = self.checkRemis()
@@ -375,6 +376,10 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, M
         for row in 0...7 {
             for col in 0...7 {
                 if let piece = lstate[row][col] {
+                    if piece.value != 1 && piece.value != 10
+                        && piece.value != -1 && piece.value != -10 {
+                        return false
+                    }
                     score += piece.value
                 }
             }

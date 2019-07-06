@@ -11,4 +11,5 @@ import Foundation
 enum MLChessStateEvaluation: Int, Codable {
     case Win = 0
     case PawnUnits = 1
+    case NeuralNet = 2
 }
