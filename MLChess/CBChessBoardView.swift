@@ -12,9 +12,10 @@ import UIKit
 class CBChessBoardView: UIView {
     
     var rect: CGRect = CGRect.null
-    private var subViews: [UIView]
+    private var pieceviews: [UIView]
     private var liBackgroundColor: UIColor = UIColor.white
     private var daBackgroundColor: UIColor = UIColor.darkGray
+    //private var tapRecognizer: UITapGestureRecognizer!
     
     weak var dataSource: CBChessBoardViewDataSource?
     weak var delegate: CBChessBoardViewDelegate?
@@ -36,13 +37,15 @@ class CBChessBoardView: UIView {
     }
     
     override init(frame: CGRect) {
-        self.subViews = [UIView]()
+        self.pieceviews = [UIView]()
         super.init(frame: frame)
         self.backgroundColor = UIColor.brown
+        //self.tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        //self.tapRecognizer.numberOfTapsRequired = 1
     }
     
     required init?(coder decoder: NSCoder) {
-        self.subViews = [UIView]()
+        self.pieceviews = [UIView]()
         super.init(coder: decoder)
     }
     
@@ -73,11 +76,13 @@ class CBChessBoardView: UIView {
         //var tst: MLWhiteKingView
         
         for row in 0...7 {
-            for col in 0...7{
-                let square = CGRect(x: origin.x+(CGFloat(col)*squareSize), y: origin.y-(CGFloat(row)*squareSize), width: squareSize, height: squareSize)
-                //print(square.origin)
+            for col in 0...7 {
+                let center = CGPoint(x: origin.x+(CGFloat(col)*squareSize), y: origin.y-(CGFloat(row)*squareSize))
+                let size = CGSize(width: squareSize, height: squareSize)
+                let square = CGRect(origin: center, size: size)
+                //print(square.origin) ↓→
                 
-                if (row+col)%2 == 0{
+                if (row+col)%2 == 0 {
                     //print("row ",row," col ",col," white")
                     context?.setFillColor(self.liBackgroundColor.cgColor)
                 } else {
@@ -86,19 +91,30 @@ class CBChessBoardView: UIView {
                 }
                 
                 context?.fill(square)
+                
+                let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+                tapRecognizer.numberOfTapsRequired = 1
+                
+                let view = UIView(frame: square)
+                //view.isOpaque = false
+                view.addGestureRecognizer(tapRecognizer)
+                //view.backgroundColor = UIColor.blue
+                self.addSubview(view)
+                //self.subviews
+                
                 /*
-                 if row == 0 && col == 0 {
-                 tst = MLWhiteKingView(frame: square)
-                 tst.center = CGPoint(x: square.origin.x+(square.size.width/2), y: square.origin.y+(square.size.height/2))
-                 //print(tst.center)
-                 print(row,col,square.origin,square.size,tst.center)
-                 tst.center.x += 3
-                 self.addSubview(tst)
-                 }
-                 */
+                if row == 0 && col == 0 {
+                tst = MLWhiteKingView(frame: square)
+                tst.center = CGPoint(x: square.origin.x+(square.size.width/2), y: square.origin.y+(square.size.height/2))
+                //print(tst.center)
+                print(row,col,square.origin,square.size,tst.center)
+                tst.center.x += 3
+                self.addSubview(tst)
+                }
+                */
             }
         }
-        
+
         /*
         for col in 1...8{
             let centerx: CGPoint = CGPoint(x: squareSize*CGFloat(col), y: 5)
@@ -215,24 +231,24 @@ class CBChessBoardView: UIView {
                 if let piece = state[row][col] {
                     //if piece is MLKingPiece && piece.color == MLPieceColor.black {
                     if piece == CBChessBoardPiece.BlackKing {
-                        print(row,col,"king")
+                        //print(row,col,"king")
                         print(frame)
                         let fig = CBBlackKingView(frame: frame)
                         fig.center = CGPoint(x: frame.origin.x+(frame.size.width/2), y: frame.origin.y+(frame.size.height/2))
                         print(row,col,fig.frame.origin,fig.frame.size)
                         //fig.center.x += 3     //correction not needed with textalignment=NSTextAlignment.center
                         self.addSubview(fig)
-                        self.subViews.append(fig)
+                        self.pieceviews.append(fig)
                     }
                     //if piece is MLKingPiece && piece.color == MLPieceColor.white {
                     if piece == CBChessBoardPiece.WhiteKing {
-                        print(row,col,"king")
+                        //print(row,col,"king")
                         print(frame)
                         let fig = CBWhiteKingView(frame: frame)
                         fig.center = CGPoint(x: frame.origin.x+(frame.size.width/2), y: frame.origin.y+(frame.size.height/2))
                         print(row,col,fig.frame.origin,fig.frame.size)
                         self.addSubview(fig)
-                        self.subViews.append(fig)
+                        self.pieceviews.append(fig)
                     }
                     if piece == CBChessBoardPiece.BlackQueen {
                         let fig = CBBlackQueenView(frame: frame)
@@ -240,7 +256,7 @@ class CBChessBoardView: UIView {
                         print(row,col,fig.frame.origin,fig.frame.size)
                         //fig.center.x += 3
                         self.addSubview(fig)
-                        self.subViews.append(fig)
+                        self.pieceviews.append(fig)
                     }
                     if piece == CBChessBoardPiece.WhiteQueen {
                         let fig = CBWhiteQueenView(frame: frame)
@@ -248,7 +264,7 @@ class CBChessBoardView: UIView {
                         print(row,col,fig.frame.origin,fig.frame.size)
                         //fig.center.x += 3
                         self.addSubview(fig)
-                        self.subViews.append(fig)
+                        self.pieceviews.append(fig)
                     }
                     if piece == CBChessBoardPiece.BlackRook {
                         let fig = CBBlackRookView(frame: frame)
@@ -256,7 +272,7 @@ class CBChessBoardView: UIView {
                         print(row,col,fig.frame.origin,fig.frame.size)
                         //fig.center.x += 3
                         self.addSubview(fig)
-                        self.subViews.append(fig)
+                        self.pieceviews.append(fig)
                     }
                     if piece == CBChessBoardPiece.WhiteRook {
                         let fig = CBWhiteRookView(frame: frame)
@@ -264,7 +280,7 @@ class CBChessBoardView: UIView {
                         print(row,col,fig.frame.origin,fig.frame.size)
                         //fig.center.x += 3
                         self.addSubview(fig)
-                        self.subViews.append(fig)
+                        self.pieceviews.append(fig)
                     }
                     if piece == CBChessBoardPiece.BlackBishop {
                         let fig = CBBlackBishopView(frame: frame)
@@ -272,7 +288,7 @@ class CBChessBoardView: UIView {
                         print(row,col,fig.frame.origin,fig.frame.size)
                         //fig.center.x += 3
                         self.addSubview(fig)
-                        self.subViews.append(fig)
+                        self.pieceviews.append(fig)
                     }
                     if piece == CBChessBoardPiece.WhiteBishop {
                         let fig = CBWhiteBishopView(frame: frame)
@@ -280,7 +296,7 @@ class CBChessBoardView: UIView {
                         print(row,col,fig.frame.origin,fig.frame.size)
                         //fig.center.x += 3
                         self.addSubview(fig)
-                        self.subViews.append(fig)
+                        self.pieceviews.append(fig)
                     }
                     if piece == CBChessBoardPiece.BlackKnight {
                         let fig = CBBlackKnightView(frame: frame)
@@ -288,7 +304,7 @@ class CBChessBoardView: UIView {
                         print(row,col,fig.frame.origin,fig.frame.size)
                         //fig.center.x += 3
                         self.addSubview(fig)
-                        self.subViews.append(fig)
+                        self.pieceviews.append(fig)
                     }
                     if piece == CBChessBoardPiece.WhiteKnight {
                         let fig = CBWhiteKnightView(frame: frame)
@@ -296,7 +312,7 @@ class CBChessBoardView: UIView {
                         print(row,col,fig.frame.origin,fig.frame.size)
                         //fig.center.x += 3
                         self.addSubview(fig)
-                        self.subViews.append(fig)
+                        self.pieceviews.append(fig)
                     }
                     if piece == CBChessBoardPiece.BlackPawn {
                         let fig = CBBlackPawnView(frame: frame)
@@ -304,7 +320,7 @@ class CBChessBoardView: UIView {
                         print(row,col,fig.frame.origin,fig.frame.size)
                         //fig.center.x += 3
                         self.addSubview(fig)
-                        self.subViews.append(fig)
+                        self.pieceviews.append(fig)
                     }
                     if piece == CBChessBoardPiece.WhitePawn {
                         let fig = CBWhitePawnView(frame: frame)
@@ -312,20 +328,46 @@ class CBChessBoardView: UIView {
                         print(row,col,fig.frame.origin,fig.frame.size)
                         //fig.center.x += 3
                         self.addSubview(fig)
-                        self.subViews.append(fig)
+                        self.pieceviews.append(fig)
                     }
                 }
                 frame.origin.x += frame.size.width
             }
             frame.origin.x = self.rect.origin.x
             frame.origin.y -= frame.size.height
+            //positive values extending downward and to the right ↑→
         }
     }
     
     func reset() -> Void {
         print("reset")
-        for view in self.subViews {
+        for view in self.pieceviews {
             view.removeFromSuperview()
+        }
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer){
+        //print("pieceTapped")
+        guard let delegate = self.delegate else {
+            return
+        }
+        
+        guard let view = sender.view else {
+            return
+        }
+        
+        print(view.center)
+        
+        var i = 0
+        
+        for sview in self.subviews {
+            //print(sview.center)
+            if sview.center == view.center {
+                let boardSquare = CBChessBoardSquare(i)
+                delegate.chessBoardView(board: self, didSelectPieceAtPosition: boardSquare)
+                return
+            }
+            i += 1
         }
     }
 

@@ -10,7 +10,7 @@ import UIKit
 import PSUIKitUtils
 import MonteCarloKit
 
-class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, MCStateDelegate {
+class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, CBChessBoardViewDelegate, MCStateDelegate {
     
     var scrollView: UIScrollView!
     var contentView: UIView!
@@ -71,6 +71,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, M
         
         self.setupUI()
         self.chessBoardView.dataSource = self
+        self.chessBoardView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -641,6 +642,12 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, M
         }
         
         return nil
+    }
+    
+    //MARK: - CBChessBoardViewDelegate
+    
+    func chessBoardView(board: CBChessBoardView, didSelectPieceAtPosition square: CBChessBoardSquare) -> Void {
+        print(square)
     }
     
     //MARK: - TimerViewController
