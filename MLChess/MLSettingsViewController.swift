@@ -305,11 +305,11 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
         var value: MLChessStateEvaluation! = MLChessStateEvaluation.Win
         var key = "whiteStateEvaluation"
         
-        if control === self.whiteStrategySegmentedControl {
+        if control === self.whiteStateEvaluationSegmentedControl {
             key = "whiteStateEvaluation"
         }
         
-        if control === self.blackStrategySegmentedControl {
+        if control === self.blackStateEvaluationSegmentedControl {
             key = "blackStateEvaluation"
         }
         
@@ -329,6 +329,11 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     @objc func setSimulationMode(control: UISwitch) -> Void {
         print(control.isOn)
         UserDefaults.standard.set(control.isOn, forKey: "simulationMode")
+        
+        if control.isOn {
+            //deactivate SegmentedControls
+            return
+        }
     }
     
     @objc func setCalcDuration(control: UISlider) -> Void {
