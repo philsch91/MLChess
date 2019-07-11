@@ -371,6 +371,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         print("new.states.count",states.count)
         nextNode = states[Int.random(in: 0..<states.count)]
         print("nextNode.nodes.count",nextNode.nodes.count)
+        //print("nextNode.nid",nextNode.nid)
         
         self.game.board = nextNode.board
         self.game.moves.append(nextNode.board)
@@ -378,6 +379,12 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         self.chessBoardView.reloadData()
         
         nextNode.nodes = NSMutableArray()
+        
+        if nextNode.numerator == Double.infinity && nextNode.denominator == Double.infinity {
+            nextNode.numerator = Double(0)
+            nextNode.denominator = Double(0)
+        }
+        
         self.mcts = nil
         
         if self.game.active == MLPieceColor.white {
@@ -410,6 +417,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         } else {
             nextNode = self.whiteTree
         }
+        
         self.mcts = MCTS(nextNode, simulationCount: UInt(Int.max))
         self.treeStopFlag = false
         self.mcts.pStopFlag = self.pTreeStopFlag
@@ -714,11 +722,11 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         self.desPos = square
         self.moveLabel.text = square.id
         
-        guard let src = self.srcPos else {
+        guard let srcSquare = self.srcPos else {
             return
         }
         
-        guard let des = self.desPos else {
+        guard let destSquare = self.desPos else {
             return
         }
         
@@ -731,7 +739,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         for row in 0...7 {
             for col in 0...7 {
-                if i == src.index {
+                if i == srcSquare.index {
                     if let piece = node.board[row][col] {
                         states = piece.getPossibleMoves(state: node.board, x: col, y: row)
                     }
@@ -744,15 +752,20 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             return
         }
         
+        var nodeColor = MLPieceColor.white
+        if self.game.active == MLPieceColor.white {
+            nodeColor = MLPieceColor.black
+        }
+        
         var newNode: MLChessTreeNode?
         
         for pstate in boards {
             var i = 0
             for row in 0...7 {
                 for col in 0...7 {
-                    if i == des.index {
+                    if i == destSquare.index {
                         if pstate[row][col] != nil {
-                            let treeNode = MLChessTreeNode(board: pstate, color: self.game.active)
+                            let treeNode = MLChessTreeNode(board: pstate, color: nodeColor)
                             treeNode.numerator = Double.infinity
                             treeNode.denominator = Double.infinity
                             newNode = treeNode
@@ -766,7 +779,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         guard let childNode = newNode else {
             return
         }
-        
+        //print("childNode.nid",childNode.nid)
         node.addNode(childNode)
         self.currTime = 1
     }
