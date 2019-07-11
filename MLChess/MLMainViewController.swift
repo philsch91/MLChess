@@ -15,6 +15,8 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
     var scrollView: UIScrollView!
     var contentView: UIView!
     var timeLabel: UILabel!
+    var selectionLabel: UILabel!
+    var moveLabel: UILabel!
     var startButton: PSButton!
     var chessBoardView: CBChessBoardView!
     
@@ -46,6 +48,9 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
     var blackStateEvaluation: MLChessStateEvaluation!
     
     var evaluationCount: Int!
+    
+    var srcPos: CBChessBoardSquare?
+    var desPos: CBChessBoardSquare?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,18 +142,35 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         self.contentView.addSubview(self.chessBoardView)
         
-        let timeLabelFrame: CGRect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: frame.width, height: 44))
+        let timeLabelFrame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: frame.width, height: 44))
         self.timeLabel = UILabel(frame: timeLabelFrame)
         self.timeLabel.center = self.chessBoardView.center
         self.timeLabel.center.y += (self.chessBoardView.frame.height/2) + self.timeLabel.frame.height
         self.timeLabel.textAlignment = NSTextAlignment.center
         self.timeLabel.text = String(self.calcTime)
+        
         self.contentView.addSubview(self.timeLabel)
+        
+        let selectionLabelFrame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        self.selectionLabel = UILabel(frame: selectionLabelFrame)
+        self.selectionLabel.center = self.timeLabel.center
+        self.selectionLabel.center.x -= 44
+        self.selectionLabel.center.y += 44
+        
+        self.contentView.addSubview(self.selectionLabel)
+        
+        let moveLabelFrame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        self.moveLabel = UILabel(frame: moveLabelFrame)
+        self.moveLabel.center = self.timeLabel.center
+        self.moveLabel.center.x += 44 + self.moveLabel.frame.width
+        self.moveLabel.center.y += 44
+        
+        self.contentView.addSubview(self.moveLabel)
         
         //let origin: CGPoint = self.chessBoardView.frame.origin
         //let buttonFrame: CGRect = CGRect(x: (origin.x+10) , y: (origin.y+100), width: 44, height: 44)
-        let buttonFrame: CGRect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 44, height: 44))
-        let button: PSButton = PSButton(frame: buttonFrame, color: UIColor(red: 0.0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1), pressedColor: UIColor(red: 0.0/255.0, green: 92.0/255.0, blue:255.0/255.0, alpha: 1))
+        let buttonFrame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 44, height: 44))
+        let button = PSButton(frame: buttonFrame, color: UIColor(red: 0.0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1), pressedColor: UIColor(red: 0.0/255.0, green: 92.0/255.0, blue:255.0/255.0, alpha: 1))
         //let button: PSButton = PSButton(color: UIColor(red: 0.0/255.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1), pressedColor: UIColor(red: 0.0/255.0, green: 92.0/255.0, blue:255.0/255.0, alpha: 1))
         button.center = self.chessBoardView.center
         button.center.y += (self.chessBoardView.frame.height/2) + button.frame.height + self.timeLabel.frame.height
@@ -652,6 +674,85 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
     
     func chessBoardView(board: CBChessBoardView, didSelectPieceAtPosition square: CBChessBoardSquare) -> Void {
         print(square)
+        
+        if self.game.active != self.userColor {
+            print("not active")
+            return
+        }
+        
+        if self.srcPos == nil {
+            self.selectionLabel.text = square.id
+            self.srcPos = square
+            self.desPos = nil
+            
+            return
+        }
+        
+        self.desPos = square
+        self.moveLabel.text = square.id
+        
+        guard let src = self.srcPos else {
+            return
+        }
+        
+        guard let des = self.desPos else {
+            return
+        }
+        
+        //let state: [[MLChessPiece?]]!
+        var node: MLChessTreeNode!
+        /*
+        if self.userColor == MLPieceColor.white {
+            //state = self.whiteTree.board
+            node = self.whiteTree
+        } else {
+            //state = self.blackTree.board
+            node = self.blackTree
+        }*/
+        
+        node = self.mcts.startNode as? MLChessTreeNode
+        
+        var states: [[[MLChessPiece?]]]?
+        
+        var i = 0
+        
+        for row in 0...7 {
+            for col in 0...7 {
+                if i == src.index {
+                    if let piece = node.board[row][col] {
+                        states = piece.getPossibleMoves(state: node.board, x: col, y: row)
+                    }
+                }
+                i += 1
+            }
+        }
+        
+        guard let boards = states else {
+            return
+        }
+        
+        var newNode: MLChessTreeNode!
+        
+        for pstate in boards {
+            var i = 0
+            for row in 0...7 {
+                for col in 0...7 {
+                    if i == des.index {
+                        if pstate[row][col] != nil {
+                            newNode = MLChessTreeNode(board: pstate, color: self.game.active)
+                            newNode.numerator = Double.infinity
+                            newNode.denominator = Double.infinity
+                        }
+                    }
+                    i += 1
+                }
+            }
+        }
+        
+        node.addNode(newNode)
+        
+        self.srcPos = nil
+        self.currTime = 2
     }
     
     //MARK: - TimerViewController
