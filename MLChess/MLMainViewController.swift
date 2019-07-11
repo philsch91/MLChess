@@ -35,6 +35,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
     var blackTree: MLChessTreeNode!
     
     var simMode: Bool!
+    var userColor: MLPieceColor!
     var whiteStrategy: MLChessStrategy!
     var blackStrategy: MLChessStrategy!
     var whiteSimulationDepth: Int!
@@ -79,6 +80,9 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         self.simMode = UserDefaults.standard.bool(forKey: "simulationMode")
         print("simulationMode",self.simMode)
+        
+        self.userColor = MLPieceColor(rawValue: UserDefaults.standard.integer(forKey: "userColor"))
+        print("userColor",self.userColor)
         
         self.whiteStrategy = MLChessStrategy(rawValue: UserDefaults.standard.integer(forKey: "whiteStrategy"))
         print("whiteStrategy",self.whiteStrategy)

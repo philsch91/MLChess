@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let settings = [
             "simulationMode" : false,
+            "userColor" : MLPieceColor.white.rawValue,
             "whiteCalcDuration" : 40,
             "blackCalcDuration" : 40,
             "whiteStrategy" : MLChessStrategy.Numerator.rawValue,
