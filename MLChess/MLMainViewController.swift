@@ -294,6 +294,8 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         /*
         for node in treeNode.nodes {
             let cnode = node as! MLChessTreeNode
+            print(cnode)
+            /*
             for node in cnode.nodes {
                 let ccnode = node as! MLChessTreeNode
                 print("ccnode.nodes.count",ccnode.nodes.count)
@@ -302,6 +304,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
                     print("cccnode.nodes.count",cccnode.nodes.count)
                 }
             }
+            */
         }
         */
         
@@ -317,27 +320,46 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         var nextNode: MLChessTreeNode = treeNode.nodes[0] as! MLChessTreeNode
         var states: [MLChessTreeNode] = [MLChessTreeNode]()
+        
+        var bestNumerator: Double = 0
+        var bestDenominator: Double = 0
+        
         //Int.random(in: 0...10000)
         for node in treeNode.nodes {
             let childNode = node as! MLChessTreeNode
             //print("node.numerator",childNode.numerator,"node.denominator",childNode.denominator)
+            if childNode.numerator > bestNumerator {
+                bestNumerator = childNode.numerator
+            }
+            
+            if childNode.denominator > bestDenominator {
+                bestDenominator = childNode.denominator
+            }
+        }
+        
+        print("best numerator",bestNumerator)
+        print("best denominator",bestDenominator)
+        
+        for node in treeNode.nodes {
+            let childNode = node as! MLChessTreeNode
+            //print("node.numerator",childNode.numerator,"node.denominator",childNode.denominator)
             if strategy == MLChessStrategy.Denominator {
-                if childNode.denominator >= nextNode.denominator {
+                if childNode.denominator == bestDenominator {
                     //nextNode = childNode
-                    if childNode.numerator >= nextNode.numerator {
+                    if childNode.numerator == bestNumerator {
                         //print("add",childNode.nid)
-                        nextNode = childNode
+                        //nextNode = childNode
                         if !states.contains(childNode) {
                             states.append(childNode)
                         }
                     }
                 }
             } else {
-                if childNode.numerator >= nextNode.numerator {
+                if childNode.numerator == bestNumerator {
                     //nextNode = childNode
-                    if childNode.denominator >= nextNode.denominator {
+                    if childNode.denominator == bestDenominator {
                         //print("add",childNode.nid)
-                        nextNode = childNode
+                        //nextNode = childNode
                         if !states.contains(childNode) {
                             states.append(childNode)
                         }
@@ -346,8 +368,9 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             }
         }
         
-        print("next states.count",states.count)
+        print("new.states.count",states.count)
         nextNode = states[Int.random(in: 0..<states.count)]
+        print("nextNode.nodes.count",nextNode.nodes.count)
         
         self.game.board = nextNode.board
         self.game.moves.append(nextNode.board)
@@ -357,7 +380,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         nextNode.nodes = NSMutableArray()
         self.mcts = nil
         
-        if(self.game.active == MLPieceColor.white){
+        if self.game.active == MLPieceColor.white {
             self.whiteTree = nextNode
             self.game.active = MLPieceColor.black
             self.simulationDepth = self.blackSimulationDepth
@@ -377,12 +400,12 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         }
         
         print("is remis",isRemis)
-        print("active player", self.game.active)
+        print("active player",self.game.active)
     }
     
     func startSearch() -> Void {
         var nextNode: MCTreeNode!
-        if(self.game.active == MLPieceColor.white){
+        if self.game.active == MLPieceColor.white {
             nextNode = self.blackTree
         } else {
             nextNode = self.whiteTree
@@ -699,18 +722,8 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             return
         }
         
-        //let state: [[MLChessPiece?]]!
-        var node: MLChessTreeNode!
-        /*
-        if self.userColor == MLPieceColor.white {
-            //state = self.whiteTree.board
-            node = self.whiteTree
-        } else {
-            //state = self.blackTree.board
-            node = self.blackTree
-        }*/
-        
-        node = self.mcts.startNode as? MLChessTreeNode
+        self.srcPos = nil
+        let node: MLChessTreeNode! = self.mcts.startNode as? MLChessTreeNode
         
         var states: [[[MLChessPiece?]]]?
         
@@ -731,7 +744,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             return
         }
         
-        var newNode: MLChessTreeNode!
+        var newNode: MLChessTreeNode?
         
         for pstate in boards {
             var i = 0
@@ -739,9 +752,10 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
                 for col in 0...7 {
                     if i == des.index {
                         if pstate[row][col] != nil {
-                            newNode = MLChessTreeNode(board: pstate, color: self.game.active)
-                            newNode.numerator = Double.infinity
-                            newNode.denominator = Double.infinity
+                            let treeNode = MLChessTreeNode(board: pstate, color: self.game.active)
+                            treeNode.numerator = Double.infinity
+                            treeNode.denominator = Double.infinity
+                            newNode = treeNode
                         }
                     }
                     i += 1
@@ -749,10 +763,12 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             }
         }
         
-        node.addNode(newNode)
+        guard let childNode = newNode else {
+            return
+        }
         
-        self.srcPos = nil
-        self.currTime = 2
+        node.addNode(childNode)
+        self.currTime = 1
     }
     
     //MARK: - TimerViewController
