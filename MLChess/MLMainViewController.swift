@@ -346,23 +346,31 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             if strategy == MLChessStrategy.Denominator {
                 if childNode.denominator == bestDenominator {
                     //nextNode = childNode
+                    /*
                     if childNode.numerator == bestNumerator {
                         //print("add",childNode.nid)
                         //nextNode = childNode
                         if !states.contains(childNode) {
                             states.append(childNode)
                         }
+                    }*/
+                    if !states.contains(childNode) {
+                        states.append(childNode)
                     }
                 }
             } else {
                 if childNode.numerator == bestNumerator {
                     //nextNode = childNode
+                    /*
                     if childNode.denominator == bestDenominator {
                         //print("add",childNode.nid)
                         //nextNode = childNode
                         if !states.contains(childNode) {
                             states.append(childNode)
                         }
+                    } */
+                    if !states.contains(childNode) {
+                        states.append(childNode)
                     }
                 }
             }
