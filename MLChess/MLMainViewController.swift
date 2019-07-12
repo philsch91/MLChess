@@ -318,8 +318,8 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         print(strategy)
         
-        var nextNode: MLChessTreeNode = treeNode.nodes[0] as! MLChessTreeNode
-        var states: [MLChessTreeNode] = [MLChessTreeNode]()
+        //var nextNode: MLChessTreeNode = treeNode.nodes[0] as! MLChessTreeNode
+        var strategyNodes: [MLChessTreeNode] = [MLChessTreeNode]()
         
         var bestNumerator: Double = 0
         var bestDenominator: Double = 0
@@ -350,12 +350,12 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
                     if childNode.numerator == bestNumerator {
                         //print("add",childNode.nid)
                         //nextNode = childNode
-                        if !states.contains(childNode) {
-                            states.append(childNode)
+                        if !strategyNodes.contains(childNode) {
+                            strategyNodes.append(childNode)
                         }
                     }*/
-                    if !states.contains(childNode) {
-                        states.append(childNode)
+                    if !strategyNodes.contains(childNode) {
+                        strategyNodes.append(childNode)
                     }
                 }
             } else {
@@ -365,19 +365,48 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
                     if childNode.denominator == bestDenominator {
                         //print("add",childNode.nid)
                         //nextNode = childNode
-                        if !states.contains(childNode) {
-                            states.append(childNode)
+                        if !strategyNodes.contains(childNode) {
+                            strategyNodes.append(childNode)
                         }
                     } */
-                    if !states.contains(childNode) {
-                        states.append(childNode)
+                    if !strategyNodes.contains(childNode) {
+                        strategyNodes.append(childNode)
                     }
                 }
             }
         }
         
-        print("new.states.count",states.count)
-        nextNode = states[Int.random(in: 0..<states.count)]
+        var nextNode: MLChessTreeNode = strategyNodes[0]
+        var nodes: [MLChessTreeNode] = [MLChessTreeNode]()
+        bestNumerator = nextNode.numerator
+        bestDenominator = nextNode.denominator
+        
+        for node in strategyNodes {
+            if strategy == MLChessStrategy.Denominator {
+                if node.numerator > bestNumerator {
+                    bestNumerator = node.numerator
+                }
+            } else {
+                if node.denominator > bestDenominator {
+                    bestDenominator = node.denominator
+                }
+            }
+        }
+        
+        for node in strategyNodes {
+            if strategy == MLChessStrategy.Denominator {
+                if node.numerator == bestNumerator {
+                    nodes.append(node)
+                }
+            } else {
+                if node.denominator == bestDenominator {
+                    nodes.append(node)
+                }
+            }
+        }
+        
+        print("states.count",nodes.count)
+        nextNode = nodes[Int.random(in: 0..<nodes.count)]
         print("nextNode.nodes.count",nextNode.nodes.count)
         //print("nextNode.nid",nextNode.nid)
         
