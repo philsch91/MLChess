@@ -749,8 +749,8 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         }
         
         if self.srcPos == nil {
-            self.selectionLabel.text = square.id
             self.srcPos = square
+            self.selectionLabel.text = square.id
             self.desPos = nil
             
             return
@@ -821,7 +821,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         self.currTime = 1
     }
     
-    //MARK: - TimerViewController
+    //MARK: - PSTimerViewController
     
     override func onTick(timer: Timer) {
         //print(timer)
