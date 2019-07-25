@@ -36,7 +36,8 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
     var whiteTree: MLChessTreeNode!
     var blackTree: MLChessTreeNode!
     
-    var simMode: Bool!
+    var isTestModeEnabled: Bool!
+    var isSimModeEnabled: Bool!
     var userColor: MLPieceColor!
     var whiteStrategy: MLChessStrategy!
     var blackStrategy: MLChessStrategy!
@@ -83,8 +84,11 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.simMode = UserDefaults.standard.bool(forKey: "simulationMode")
-        print("simulationMode",self.simMode)
+        self.isTestModeEnabled = UserDefaults.standard.bool(forKey: "testMode")
+        print("testMode",self.isTestModeEnabled)
+        
+        self.isSimModeEnabled = UserDefaults.standard.bool(forKey: "simulationMode")
+        print("simulationMode",self.isSimModeEnabled)
         
         self.userColor = MLPieceColor(rawValue: UserDefaults.standard.integer(forKey: "userColor"))
         print("userColor",self.userColor)
@@ -244,9 +248,10 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
     }
     
     func handleGameEnd() -> Void {
-        if self.simMode {
-            //
+        if self.isSimModeEnabled {
+            //pause game
         }
+        
         self.toggleGame()
         
         var msg = "chess mate - white lost"
@@ -535,6 +540,13 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         var possibleStates = [[[MLChessPiece?]]]()
         //var pawnCount = 0
         
+        if self.isTestModeEnabled {
+            DispatchQueue.main.sync {
+                self.game.board = simNode.board
+                self.chessBoardView.reloadData()
+            }
+        }
+        
         var indices = stride(from: 0, through: 7, by: +1)
         if simNode.color == MLPieceColor.black {
             indices = stride(from: 7, through: 0, by: -1)
@@ -691,7 +703,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
     //MARK: - CBChessBoardViewDataSource
     
     func chessBoardView(board: CBChessBoardView, chessPieceForSquare square: CBChessBoardSquare) -> CBChessBoardPiece? {
-        print("chessPieceForSquare", square.row, square.col)
+        //print("chessPieceForSquare", square.row, square.col)
         let gamePiece: MLChessPiece? = self.game.board[square.row][square.col]
         
         guard let piece = gamePiece else {

@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         let settings = [
+            "testMode" : false,
             "simulationMode" : false,
             "userColor" : MLPieceColor.white.rawValue,
             "whiteCalcDuration" : 40,

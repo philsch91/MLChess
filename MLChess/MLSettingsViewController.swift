@@ -13,6 +13,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     
     var collectionView: UICollectionView!
     
+    var testModeSwitch: UISwitch!
     var simulationModeSwitch: UISwitch!
     
     var userColorSegmentedControl: UISegmentedControl!
@@ -86,6 +87,17 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
         
         if indexPath.item == 0 {
             let switchCell: MLSwitchCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSwitchCollectionViewCell.self.description(), for: indexPath) as! MLSwitchCollectionViewCell
+            self.testModeSwitch = UISwitch()
+            switchCell.uiswitch = self.testModeSwitch
+            switchCell.label.text = "Test Mode"
+            switchCell.uiswitch.isOn = UserDefaults.standard.bool(forKey: "testMode")
+            switchCell.uiswitch.addTarget(self, action: #selector(setTestMode(control:)), for: UIControl.Event.valueChanged)
+            
+            return switchCell
+        }
+        
+        if indexPath.item == 1 {
+            let switchCell: MLSwitchCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSwitchCollectionViewCell.self.description(), for: indexPath) as! MLSwitchCollectionViewCell
             self.simulationModeSwitch = UISwitch()
             switchCell.uiswitch = self.simulationModeSwitch
             switchCell.label.text = "Simulation Mode"   //Learning Mode
@@ -107,7 +119,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             return segmentedControllCell
         } */
         
-        if indexPath.item == 1 {
+        if indexPath.item == 2 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
             self.userColorSegmentedControl = UISegmentedControl(items: ["White","Black"])
             segmentedControllCell.segmentedControl = self.userColorSegmentedControl
@@ -125,7 +137,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             return segmentedControllCell
         }
         
-        if indexPath.item == 2 {
+        if indexPath.item == 3 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
             
             self.whiteStrategySegmentedControl = UISegmentedControl(items: ["White Numerator","White Denominator"])
@@ -138,7 +150,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             return segmentedControllCell
         }
         
-        if indexPath.item == 3 {
+        if indexPath.item == 4 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
             
             self.blackStrategySegmentedControl = UISegmentedControl(items: ["Black Numerator","Black Denominator"])
@@ -151,7 +163,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             return segmentedControllCell
         }
         
-        if indexPath.item == 4 {
+        if indexPath.item == 5 {
             let sliderCell: MLSliderCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSliderCollectionViewCell.self.description(), for: indexPath) as! MLSliderCollectionViewCell
             
             self.whiteCalcDurationSlider = UISlider()
@@ -178,7 +190,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             return sliderCell
         }
         
-        if indexPath.item == 5 {
+        if indexPath.item == 6 {
             let sliderCell: MLSliderCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSliderCollectionViewCell.self.description(), for: indexPath) as! MLSliderCollectionViewCell
             
             self.blackCalcDurationSlider = UISlider()
@@ -205,7 +217,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             return sliderCell
         }
         
-        if indexPath.item == 6 {
+        if indexPath.item == 7 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
             //segmentedControllCell.separatorActive = false
             segmentedControllCell.items = ["WDepth 20","WDepth 40","WDepth 60","WTerminal"]
@@ -226,7 +238,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             return segmentedControllCell
         }
         
-        if indexPath.item == 7 {
+        if indexPath.item == 8 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
             //segmentedControllCell.separatorActive = false
             segmentedControllCell.items = ["BDepth 20","BDepth 40","BDepth 60","BTerminal"]
@@ -247,7 +259,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             return segmentedControllCell
         }
         
-        if indexPath.item == 8 {
+        if indexPath.item == 9 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
             
             self.whiteStateEvaluationSegmentedControl = UISegmentedControl(items: ["White Win","White Pawn Units","White Neural Net"])
@@ -260,7 +272,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             return segmentedControllCell
         }
         
-        if indexPath.item == 9 {
+        if indexPath.item == 10 {
             let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
             
             self.blackStateEvaluationSegmentedControl = UISegmentedControl(items: ["Black Win","Black Pawn Units","Black Neural Net"])
@@ -281,6 +293,11 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: self.view.frame.width, height: 44)
+    }
+    
+    @objc func setTestMode(control: UISwitch) -> Void {
+        print(control.isOn)
+        UserDefaults.standard.set(control.isOn, forKey: "testMode")
     }
     
     @objc func setSimulationMode(control: UISwitch) -> Void {
