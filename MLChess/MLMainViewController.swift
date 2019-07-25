@@ -636,6 +636,15 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             
         }
         
+        let netManager = MLChessNetManager()
+        
+        for node in stateNodes {
+            let prediction: [String: Double] = netManager.predict(node.board)
+            for key in prediction.keys {
+                print(key,prediction[key]!)
+            }
+        }
+        
         //print("stateNodes.count",stateNodes.count)
         
         return stateNodes
