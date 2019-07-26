@@ -25,7 +25,7 @@ class MLChessTreeNode: MCTreeNode {
         var nid: String = ""
         for row in self.board {
             for optPiece in row {
-                if case let piece? = optPiece {
+                if let piece = optPiece {
                     nid += String(piece.id)
                 } else {
                   nid += "0"
@@ -45,6 +45,14 @@ class MLChessTreeNode: MCTreeNode {
         node.denominator = self.denominator
         node.nodes = self.nodes
         node.color = self.color
+        
+        /*
+        if let parentNode = self.parent {
+            //print("copy parent")
+            //node.parent = parentNode.copy() as! MLChessTreeNode
+        }
+        */
+        
         //TODO: NSCopying MLChessPiece
         //var i = 0
         for row in self.board {

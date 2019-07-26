@@ -460,6 +460,9 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             nextNode = self.whiteTree
         }
         
+        print("newRootNode.numerator",nextNode.numerator)
+        print("newRootNode.denominator",nextNode.denominator)
+        
         self.mcts = MCTS(nextNode, simulationCount: UInt(Int.max))
         self.treeStopFlag = false
         self.mcts.pStopFlag = self.pTreeStopFlag
@@ -515,16 +518,19 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
     
     func getStateUpdates(for node: MCTreeNode, depth: UInt) -> [MCTreeNode] {
         //print("getStateUpdates",node.nid)
-        //print("node.denominator",node.denominator)
         //print("depth",depth)
-        /*
-        if depth > 60 {
-            return [MLChessTreeNode]()
-        }*/
+        //print("node.numerator",node.numerator)
+        //print("node.denominator",node.denominator)
         
-        if self.simulationDepth > 0 && depth > self.simulationDepth {
-            return [MLChessTreeNode]()
+        /*
+        if depth == 0 {
+            if let parentNode = node.parent {
+                //print("nid",node.nid)
+                print("parentNode.numerator",parentNode.numerator)
+                print("parentNode.denominator",parentNode.denominator)
+            }
         }
+        */
         
         /*
         var parentCount = 0
@@ -533,8 +539,17 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             parentNode = pnode.parent
             parentCount += 1
         }
-        print("parents",parentCount)
+        print("parents.count",parentCount)
         */
+        
+        /*
+        if depth > 60 {
+            return [MLChessTreeNode]()
+        }*/
+        
+        if self.simulationDepth > 0 && depth > self.simulationDepth {
+            return [MLChessTreeNode]()
+        }
         
         let simNode = node as! MLChessTreeNode
         var possibleStates = [[[MLChessPiece?]]]()
@@ -635,7 +650,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             }
             
         }
-        
+        /*
         let netManager = MLChessNetManager()
         
         for node in stateNodes {
@@ -644,7 +659,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
                 print(key,prediction[key]!)
             }
         }
-        
+        */
         //print("stateNodes.count",stateNodes.count)
         
         return stateNodes
@@ -653,6 +668,18 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
     func evaluate(_ currentNode: MCTreeNode, with simNode: MCTreeNode) -> Double {
         //print("evaluate",currentNode.nid,simNode.nid)
         //print("evaluate",currentNode,simNode)
+        
+        var parentCount = 0
+        var parentNode: MCTreeNode? = currentNode.parent
+        while let pnode = parentNode {
+            //print("pnode.nid",pnode.nid)
+            print("parentNode.numerator",pnode.numerator)
+            print("parentNode.denominator",pnode.denominator)
+            parentNode = pnode.parent
+            parentCount += 1
+        }
+        print("parents.count",parentCount)
+        
         let currentState: MLChessTreeNode = currentNode as! MLChessTreeNode
         let simState: MLChessTreeNode = simNode as! MLChessTreeNode
         var currentVal = 0
