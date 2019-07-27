@@ -199,20 +199,50 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         //guard self.game != nil else {}
         self.game = MLChessGame()
-        let startNode = MLChessTreeNode(board: self.game.board, color: MLPieceColor.white)
+        
         self.evaluationCount = 0
         self.simulationDepth = self.whiteSimulationDepth
         self.currTime = self.whiteCalculationDuration
         
+        //let startNode = MLChessTreeNode(board: self.game.board, color: MLPieceColor.white)
         //startNode.nid = String(Int.random(in: 0...10000))
-        print("startNode.nid",startNode.nid)
-        self.mcts = MCTS(startNode, simulationCount: UInt(Int.max))
+        self.whiteTree = MLChessTreeNode(board: self.game.board, color: MLPieceColor.white)
+        print("startNode.nid",self.whiteTree.nid)
+        
+        
+        self.mcts = MCTS(self.whiteTree, simulationCount: UInt(Int.max))
         //self.mcts.simDepth = 60
-        //self.mcts.debug = true
         self.mcts.pStopFlag = self.pTreeStopFlag
         self.mcts.stateDelegate = self
+        //self.mcts.debug = true
             
         self.chessBoardView.reloadData()
+    }
+    
+    func startSearch(_ rootNode: MCTreeNode) -> Void {
+        /*
+        var nextNode: MCTreeNode!
+        if self.game.active == MLPieceColor.white {
+            nextNode = self.blackTree
+        } else {
+            nextNode = self.whiteTree
+        }*/
+        
+        //rootNode.numerator = Double(0)
+        //rootNode.denominator = Double(0)
+        
+        print("rootNode.numerator",rootNode.numerator)
+        print("rootNode.denominator",rootNode.denominator)
+        
+        self.mcts = MCTS(rootNode, simulationCount: UInt(Int.max))
+        self.treeStopFlag = false
+        self.mcts.pStopFlag = self.pTreeStopFlag
+        self.mcts.stateDelegate = self
+        //self.mcts.debug = true
+        
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+            self.mcts.main()
+        }
     }
     
     @objc func saveGame() -> Void {
@@ -280,7 +310,14 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         if winnerId == 0 {
             alert.addAction(UIAlertAction(title: "Continue Game", style: UIAlertAction.Style.default, handler: { _ in
-                self.startSearch()
+                var rootNode: MCTreeNode!
+                if self.game.active == MLPieceColor.white {
+                    rootNode = self.blackTree
+                } else {
+                    rootNode = self.whiteTree
+                }
+                
+                self.startSearch(rootNode)
             }))
         }
         
@@ -382,7 +419,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         }
         
         var nextNode: MLChessTreeNode = strategyNodes[0]
-        var nodes: [MLChessTreeNode] = [MLChessTreeNode]()
+        
         bestNumerator = nextNode.numerator
         bestDenominator = nextNode.denominator
         
@@ -397,6 +434,8 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
                 }
             }
         }
+        
+        var nodes: [MLChessTreeNode] = [MLChessTreeNode]()
         
         for node in strategyNodes {
             if strategy == MLChessStrategy.Denominator {
@@ -421,13 +460,17 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         self.chessBoardView.reloadData()
         
         nextNode.nodes = NSMutableArray()
+        if nextNode.parent != nil {
+            print("nextNode.parent is not nil")
+            nextNode.parent = nil
+        }
         
         if nextNode.numerator == Double.infinity && nextNode.denominator == Double.infinity {
             nextNode.numerator = Double(0)
             nextNode.denominator = Double(0)
         }
         
-        self.mcts = nil
+        //self.mcts = nil
         
         if self.game.active == MLPieceColor.white {
             self.whiteTree = nextNode
@@ -450,26 +493,6 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         print("is remis",isRemis)
         print("active player",self.game.active)
-    }
-    
-    func startSearch() -> Void {
-        var nextNode: MCTreeNode!
-        if self.game.active == MLPieceColor.white {
-            nextNode = self.blackTree
-        } else {
-            nextNode = self.whiteTree
-        }
-        
-        print("newRootNode.numerator",nextNode.numerator)
-        print("newRootNode.denominator",nextNode.denominator)
-        
-        self.mcts = MCTS(nextNode, simulationCount: UInt(Int.max))
-        self.treeStopFlag = false
-        self.mcts.pStopFlag = self.pTreeStopFlag
-        self.mcts.stateDelegate = self
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
-            self.mcts.main()
-        }
     }
     
     func checkRemis() -> Bool {
@@ -672,7 +695,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         var parentCount = 0
         var parentNode: MCTreeNode? = currentNode.parent
         while let pnode = parentNode {
-            //print("pnode.nid",pnode.nid)
+            print("parentNode.nid",pnode.nid)
             print("parentNode.numerator",pnode.numerator)
             print("parentNode.denominator",pnode.denominator)
             parentNode = pnode.parent
@@ -880,8 +903,17 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         if self.currCoolDownTime > 0 {
             self.currCoolDownTime -= 1
             print("cool down",self.currCoolDownTime)
+            
             if self.currCoolDownTime == 0 {
-                self.startSearch()
+                
+                var rootNode: MCTreeNode!
+                if self.game.active == MLPieceColor.white {
+                    rootNode = self.blackTree
+                } else {
+                    rootNode = self.whiteTree
+                }
+                
+                self.startSearch(rootNode)
             }
             return
         }
