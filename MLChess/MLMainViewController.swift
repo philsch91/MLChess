@@ -540,13 +540,13 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
     //MARK: - MCStateDelegate
     
     func getStateUpdates(for node: MCTreeNode, depth: UInt) -> [MCTreeNode] {
-        //print("getStateUpdates",node.nid)
-        //print("depth",depth)
+        //print("getStateUpdates",node.nid,depth)
         //print("node.numerator",node.numerator)
         //print("node.denominator",node.denominator)
-        
         /*
         if depth == 0 {
+            //print("getStateUpdates",node.nid,depth)
+            print("getStateUpdates",node,depth)
             if let parentNode = node.parent {
                 //print("nid",node.nid)
                 print("parentNode.numerator",parentNode.numerator)
@@ -554,7 +554,6 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             }
         }
         */
-        
         /*
         var parentCount = 0
         var parentNode: MCTreeNode? = node.parent
@@ -690,8 +689,19 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
     
     func evaluate(_ currentNode: MCTreeNode, with simNode: MCTreeNode) -> Double {
         //print("evaluate",currentNode.nid,simNode.nid)
-        //print("evaluate",currentNode,simNode)
+        //print("evaluate",currentNode)
+        //print("eval node.nodes.count",currentNode.nodes.count)
         
+        /*
+        if currentNode.nodes.count > 0 {
+            for cnode in currentNode.nodes {
+                let childNode: MCTreeNode = cnode as! MCTreeNode
+                print("cnode",childNode.nid)
+            }
+        }
+        */
+        
+        /*
         var parentCount = 0
         var parentNode: MCTreeNode? = currentNode.parent
         while let pnode = parentNode {
@@ -702,6 +712,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             parentCount += 1
         }
         print("parents.count",parentCount)
+        */
         
         let currentState: MLChessTreeNode = currentNode as! MLChessTreeNode
         let simState: MLChessTreeNode = simNode as! MLChessTreeNode
