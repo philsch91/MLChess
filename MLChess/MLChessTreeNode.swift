@@ -65,7 +65,7 @@ class MLChessTreeNode: MCTreeNode {
                 //j += 1
                 /*
                 var newPiece = piece
-                if case let exPiece? = piece {
+                if let exPiece = piece {
                     newPiece = exPiece.copy() as? MLChessPiece
                 }
                 pieceRow.append(newPiece)
