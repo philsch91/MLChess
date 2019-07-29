@@ -209,7 +209,6 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         self.whiteTree = MLChessTreeNode(board: self.game.board, color: MLPieceColor.white)
         print("startNode.nid",self.whiteTree.nid)
         
-        
         self.mcts = MCTS(self.whiteTree, simulationCount: UInt(Int.max))
         //self.mcts.simDepth = 60
         self.mcts.pStopFlag = self.pTreeStopFlag
@@ -503,6 +502,10 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         }
         
         var score = 0
+        var whiteScore = 0
+        var whitePieceCount = 0
+        var blackScore = 0
+        var blackPieceCount = 0
         
         let lstate = self.game.moves[moveCount-1]
         for row in 0...7 {
@@ -512,9 +515,28 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
                         && piece.value != -1 && piece.value != -10 {
                         return false
                     }
+                    
                     score += piece.value
+                    
+                    if piece.color == MLPieceColor.white {
+                        whiteScore += piece.value
+                        whitePieceCount += 1
+                    } else {
+                        blackScore += piece.value
+                        blackPieceCount += 1
+                    }
                 }
             }
+        }
+        
+        if whitePieceCount == 1 && blackPieceCount == 2
+            && whiteScore == 10 && blackScore == -13 {
+            return true
+        }
+        
+        if whitePieceCount == 2 && blackPieceCount == 1
+            && whiteScore == 13 && blackScore == -10 {
+            return true
         }
         
         for i in ((moveCount-50)...(moveCount-2)).reversed() {
