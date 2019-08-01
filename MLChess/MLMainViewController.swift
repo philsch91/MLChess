@@ -506,14 +506,16 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         var whitePieceCount = 0
         var blackScore = 0
         var blackPieceCount = 0
+        var isPawnRemis = true
         
         let lstate = self.game.moves[moveCount-1]
+        
         for row in 0...7 {
             for col in 0...7 {
                 if let piece = lstate[row][col] {
                     if piece.value != 1 && piece.value != 10
                         && piece.value != -1 && piece.value != -10 {
-                        return false
+                        isPawnRemis = false
                     }
                     
                     score += piece.value
@@ -536,6 +538,10 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         if whitePieceCount == 2 && blackPieceCount == 1
             && whiteScore == 13 && blackScore == -10 {
+            return true
+        }
+        
+        if isPawnRemis {
             return true
         }
         
