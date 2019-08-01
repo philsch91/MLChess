@@ -541,8 +541,8 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             return true
         }
         
-        if isPawnRemis {
-            return true
+        if !isPawnRemis {
+            return false
         }
         
         for i in ((moveCount-50)...(moveCount-2)).reversed() {
