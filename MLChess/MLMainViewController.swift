@@ -323,6 +323,16 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         self.present(alert, animated: true, completion: nil)
     }
     
+    func presentAlertController(title: String, message: String, actions: [UIAlertAction]) -> Void {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        
+        for action in actions {
+            alert.addAction(action)
+        }
+        
+        self.present(alert, animated: true, completion: nil);
+    }
+    
     func nextMove() -> Void {
         self.evaluationCount = 0
         let treeNode = self.mcts.startNode
@@ -458,16 +468,22 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         //update view
         self.chessBoardView.reloadData()
         
+        //handle nextNode
+        
         nextNode.nodes = NSMutableArray()
+        
         if nextNode.parent != nil {
             print("nextNode.parent is not nil")
             nextNode.parent = nil
         }
-        
+        /*
         if nextNode.numerator == Double.infinity && nextNode.denominator == Double.infinity {
             nextNode.numerator = Double(0)
             nextNode.denominator = Double(0)
-        }
+        }*/
+        
+        nextNode.numerator = Double(0)
+        nextNode.denominator = Double(0)
         
         //self.mcts = nil
         
@@ -855,6 +871,14 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         if self.game.active != self.userColor {
             print("not active")
+            
+            var actions = [UIAlertAction]()
+            actions.append(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { _ in
+                NSLog("user pressed OK")
+            }))
+            
+            self.presentAlertController(title: "Info", message: "Not your turn", actions: actions)
+            
             return
         }
         
@@ -879,16 +903,16 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         self.srcPos = nil
         let node: MLChessTreeNode! = self.mcts.startNode as? MLChessTreeNode
-        
+        var piece: MLChessPiece!
         var states: [[[MLChessPiece?]]]?
-        
         var i = 0
         
         for row in 0...7 {
             for col in 0...7 {
                 if i == srcSquare.index {
-                    if let piece = node.board[row][col] {
-                        states = piece.getPossibleMoves(state: node.board, x: col, y: row)
+                    if let pce = node.board[row][col] {
+                        piece = pce
+                        states = pce.getPossibleMoves(state: node.board, x: col, y: row)
                     }
                 }
                 i += 1
@@ -906,16 +930,24 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         var newNode: MLChessTreeNode?
         
-        for pstate in boards {
+        for state in boards {
             var i = 0
             for row in 0...7 {
                 for col in 0...7 {
                     if i == destSquare.index {
-                        if pstate[row][col] != nil {
-                            let treeNode = MLChessTreeNode(board: pstate, color: nodeColor)
-                            treeNode.numerator = Double.infinity
-                            treeNode.denominator = Double.infinity
-                            newNode = treeNode
+                        print("i == destSquare")
+                        //if state[row][col] != nil {
+                        //&& state[row][col] == piece
+                        //&& pce.color == piece.color
+                        //&& type(of: pce) == type(of: piece)
+                        if let pce = state[row][col] {
+                            if pce.id == piece.id {
+                                print(pce)
+                                let treeNode = MLChessTreeNode(board: state, color: nodeColor)
+                                treeNode.numerator = Double.infinity
+                                treeNode.denominator = Double.infinity
+                                newNode = treeNode
+                            }
                         }
                     }
                     i += 1
@@ -970,6 +1002,16 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         self.timeLabel.text = String(self.currTime)
     }
     
+    override func startTimer() {
+        super.startTimer()
+        print("startTimer")
+    }
+    
+    override func stopTimer() {
+        super.stopTimer()
+        print("stopTimer")
+    }
+    
     //MARK: - notifications
     
     override func appDidEnterBackground(notification: Notification) {
@@ -982,14 +1024,5 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         print("appWillEnterForeground")
     }
     
-    override func startTimer() {
-        super.startTimer()
-        print("startTimer")
-    }
-    
-    override func stopTimer() {
-        super.stopTimer()
-        print("stopTimer")
-    }
 }
 
