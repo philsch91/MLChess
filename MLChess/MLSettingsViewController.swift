@@ -31,6 +31,10 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     var whiteStateEvaluationSegmentedControl: UISegmentedControl!
     var blackStateEvaluationSegmentedControl: UISegmentedControl!
     
+    var explorationCoefficientSlider: UISlider!
+    var explorationCoefficientValueLabel: UILabel!
+    var explorationCoefficientMaximumValueLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Settings"
@@ -79,7 +83,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 11
+        return 12
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -285,6 +289,33 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             return segmentedControllCell
         }
         
+        if indexPath.item == 11 {
+            let sliderCell: MLSliderCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSliderCollectionViewCell.self.description(), for: indexPath) as! MLSliderCollectionViewCell
+            
+            self.explorationCoefficientSlider = UISlider()
+            sliderCell.slider = self.explorationCoefficientSlider
+            
+            //sliderCell.slider.isContinuous = false
+            sliderCell.slider.minimumValue = 1
+            sliderCell.slider.maximumValue = 2
+            sliderCell.slider.value = Float(UserDefaults.standard.float(forKey: "mctsExplorationCoefficient"))
+            
+            self.explorationCoefficientValueLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 72, height: 22))
+            var str = "Exp "
+            str += String(sliderCell.slider.minimumValue)
+            self.explorationCoefficientValueLabel.text = str
+            
+            self.explorationCoefficientMaximumValueLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 32, height: 22))
+            self.explorationCoefficientMaximumValueLabel.text = String(sliderCell.slider.maximumValue)
+            
+            sliderCell.slider.minimumValueImage = UIImage.imageWithLabel(label: self.explorationCoefficientValueLabel)
+            sliderCell.slider.maximumValueImage = UIImage.imageWithLabel(label: self.explorationCoefficientMaximumValueLabel)
+            
+            sliderCell.slider.addTarget(self, action: #selector(setExpCoDuration(control:)), for: UIControl.Event.valueChanged)
+            
+            return sliderCell
+        }
+        
         fatalError("exception")
     }
     
@@ -416,6 +447,16 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             
             print(value)
         }
+    }
+    
+    @objc func setExpCoDuration(control: UISlider) -> Void {
+        UserDefaults.standard.set(control.value, forKey: "mctsExplorationCoefficient")
+        
+        let value = Float(round(UserDefaults.standard.float(forKey: "mctsExplorationCoefficient")*100)/100)
+        //let value = Float(round(control.value*100)/100)
+        self.explorationCoefficientMaximumValueLabel.text = String(value)
+        self.explorationCoefficientSlider.maximumValueImage = UIImage.imageWithLabel(label: self.explorationCoefficientMaximumValueLabel)
+        //UserDefaults.standard.set(value, forKey: "mctsExplorationCoefficient")
     }
     
     func setBlackCalcDuration(control: UISlider) -> Void {

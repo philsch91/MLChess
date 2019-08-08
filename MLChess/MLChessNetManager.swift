@@ -45,4 +45,48 @@ class MLChessNetManager {
             return [String: Double]()
         }
     }
+    
+    func getBestPredictions(node: MLChessTreeNode, stateNodes: [MLChessTreeNode]) -> [MLChessTreeNode] {
+        var predKey = "white"
+        if node.color == MLPieceColor.black {
+            predKey = "black"
+        }
+        
+        //print(predKey)
+        
+        //var cnt = 0
+        var median = Double(0)
+        var array: [Double] = [Double]()
+        
+        for node in stateNodes {
+            let prediction: [String: Double] = self.predict(node.board)
+            /*
+            for key in prediction.keys {
+                //print(key,prediction[key]!)
+                if prediction[predKey]! > 0.5 {
+                    cnt += 1
+                }
+                //prediction[predKey]!
+            }*/
+            //print(prediction[predKey]!)
+            array.append(prediction[predKey]!)
+        }
+        
+        //print("value.count", array.count)
+        
+        median = array.median(array: array)
+        //print("median prediction", median)
+        
+        var bestStateNodes = [MLChessTreeNode]()
+        var i = 0
+        
+        for value in array {
+            if value >= median {
+                bestStateNodes.append(stateNodes[i])
+            }
+            i += 1
+        }
+        
+        return bestStateNodes
+    }
 }

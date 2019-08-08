@@ -53,7 +53,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "whiteSimulationDepth" : MLChessSimulationDepth.Long.rawValue,
             "blackSimulationDepth" : MLChessSimulationDepth.Long.rawValue,
             "whiteStateEvaluation" : MLChessStateEvaluation.PawnUnits.rawValue,
-            "blackStateEvaluation" : MLChessStateEvaluation.PawnUnits.rawValue
+            "blackStateEvaluation" : MLChessStateEvaluation.PawnUnits.rawValue,
+            "mctsExplorationCoefficient" : sqrt(2)
             ] as [String : Any]
         
         UserDefaults.standard.register(defaults: settings)

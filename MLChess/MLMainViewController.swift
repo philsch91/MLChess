@@ -35,6 +35,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
     var simulationDepth: Int!
     var whiteTree: MLChessTreeNode!
     var blackTree: MLChessTreeNode!
+    var explorationCoefficient: Double = sqrt(2)
     
     var isTestModeEnabled: Bool!
     var isSimModeEnabled: Bool!
@@ -116,6 +117,9 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         self.blackStateEvaluation = MLChessStateEvaluation(rawValue: UserDefaults.standard.integer(forKey: "blackStateEvaluation"))
         print("blackStateEvaluation",self.blackStateEvaluation)
+        
+        self.explorationCoefficient = Double(exactly: UserDefaults.standard.float(forKey: "mctsExplorationCoefficient"))!
+        print("explorationCoefficient",self.explorationCoefficient)
         
         self.timeLabel.text = String(self.whiteCalculationDuration)
     }
@@ -214,6 +218,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         self.mcts.pStopFlag = self.pTreeStopFlag
         self.mcts.stateDelegate = self
         //self.mcts.debug = true
+        self.mcts.explorationCoefficient = self.explorationCoefficient
             
         self.chessBoardView.reloadData()
     }
@@ -238,6 +243,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         self.mcts.pStopFlag = self.pTreeStopFlag
         self.mcts.stateDelegate = self
         //self.mcts.debug = true
+        self.mcts.explorationCoefficient = self.explorationCoefficient
         
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
             self.mcts.main()
@@ -299,6 +305,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         self.game.winner = winnerId
         
         let alert = UIAlertController(title: "Game End", message: msg, preferredStyle: UIAlertController.Style.alert)
+        
         alert.addAction(UIAlertAction(title: "New Game", style: UIAlertAction.Style.default, handler: { _ in
             self.setupNewGame()
             self.toggleGame()
@@ -716,16 +723,15 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             }
             
         }
-        /*
-        let netManager = MLChessNetManager()
         
-        for node in stateNodes {
-            let prediction: [String: Double] = netManager.predict(node.board)
-            for key in prediction.keys {
-                print(key,prediction[key]!)
-            }
+        if self.whiteStateEvaluation == MLChessStateEvaluation.NeuralNet && self.game.active == MLPieceColor.white {
+            let netManager = MLChessNetManager()
+            stateNodes = netManager.getBestPredictions(node: simNode, stateNodes: stateNodes)
+        } else if self.blackStateEvaluation == MLChessStateEvaluation.NeuralNet && self.game.active == MLPieceColor.black {
+            let netManager = MLChessNetManager()
+            stateNodes = netManager.getBestPredictions(node: simNode, stateNodes: stateNodes)
         }
-        */
+ 
         //print("stateNodes.count",stateNodes.count)
         
         return stateNodes
@@ -797,6 +803,28 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         if self.game.active == MLPieceColor.black
             && self.blackStateEvaluation == MLChessStateEvaluation.Win {
+            return 0
+        }
+        
+        if self.game.active == MLPieceColor.white
+            && self.whiteStateEvaluation == MLChessStateEvaluation.NeuralNet {
+            let netManager = MLChessNetManager()
+            let prediction: [String: Double] = netManager.predict(simState.board)
+            if prediction["white"]! > 0.5 {
+                return 1
+            }
+            
+            return 0
+        }
+        
+        if self.game.active == MLPieceColor.black
+            && self.blackStateEvaluation == MLChessStateEvaluation.NeuralNet {
+            let netManager = MLChessNetManager()
+            let prediction: [String: Double] = netManager.predict(simState.board)
+            if prediction["black"]! > 0.5 {
+                return 1
+            }
+            
             return 0
         }
         
