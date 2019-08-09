@@ -185,7 +185,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         button.setTitle("Start", for: UIControl.State.normal)
         button.sizeToFit()
         button.frame.size.width += 10
-        button.addTarget(self, action: #selector(self.toggleGame), for: UIControl.Event.touchUpInside)
+        button.addTarget(self, action: #selector(self.toggleSearch), for: UIControl.Event.touchUpInside)
         self.contentView.addSubview(button)
         self.startButton = button
         
@@ -255,7 +255,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         logManager.save(game: self.game)
     }
     
-    @objc func toggleGame() -> Void {
+    @objc func toggleSearch() -> Void {
         self.stopFlag = !self.stopFlag
         
         if self.stopFlag {
@@ -287,7 +287,7 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             //pause game
         }
         
-        self.toggleGame()
+        self.toggleSearch()
         
         var msg = "chess mate - white lost"
         var winnerId = -1
@@ -308,8 +308,9 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         alert.addAction(UIAlertAction(title: "New Game", style: UIAlertAction.Style.default, handler: { _ in
             self.setupNewGame()
-            self.toggleGame()
+            self.toggleSearch()
         }))
+        
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { _ in
             NSLog("user pressed OK")
         }))
@@ -330,16 +331,6 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         self.present(alert, animated: true, completion: nil)
     }
     
-    func presentAlertController(title: String, message: String, actions: [UIAlertAction]) -> Void {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        
-        for action in actions {
-            alert.addAction(action)
-        }
-        
-        self.present(alert, animated: true, completion: nil);
-    }
-    
     func nextMove() -> Void {
         self.evaluationCount = 0
         let treeNode = self.mcts.startNode
@@ -347,6 +338,13 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         if treeNode.nodes.count == 0 {
             self.handleGameEnd()
+            
+            if self.game.active == MLPieceColor.white {
+                self.currTime = self.blackCalculationDuration
+            } else {
+                self.currTime = self.whiteCalculationDuration
+            }
+            
             return
         }
         /*
@@ -724,6 +722,10 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             
         }
         
+        if stateNodes.count < 3 {
+            return stateNodes
+        }
+        
         if self.whiteStateEvaluation == MLChessStateEvaluation.NeuralNet && self.game.active == MLPieceColor.white {
             let netManager = MLChessNetManager()
             stateNodes = netManager.getBestPredictions(node: simNode, stateNodes: stateNodes)
@@ -1050,6 +1052,18 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
     override func appWillEnterForeground(notification: Notification) {
         super.appWillEnterForeground(notification: notification)
         print("appWillEnterForeground")
+    }
+    
+    //MARK: utility functions
+    
+    func presentAlertController(title: String, message: String, actions: [UIAlertAction]) -> Void {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        
+        for action in actions {
+            alert.addAction(action)
+        }
+        
+        self.present(alert, animated: true, completion: nil);
     }
     
 }
