@@ -35,6 +35,9 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     var explorationCoefficientValueLabel: UILabel!
     var explorationCoefficientMaximumValueLabel: UILabel!
     
+    var whiteRolloutPolicySegmentedControl: UISegmentedControl!
+    var blackRolloutPolicySegmentedControl: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Settings"
@@ -83,7 +86,7 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        return 14
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -316,6 +319,32 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
             return sliderCell
         }
         
+        if indexPath.item == 12 {
+            let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
+            
+            self.whiteRolloutPolicySegmentedControl = UISegmentedControl(items: ["White Random","White Neural Net"])
+            segmentedControllCell.segmentedControl = self.whiteRolloutPolicySegmentedControl
+            //segmentedControllCell.separatorActive = false
+            //segmentedControllCell.items = ["Black Numerator","Black Denominator"]
+            segmentedControllCell.selectedIndex = UserDefaults.standard.integer(forKey: "whiteRolloutPolicy")
+            segmentedControllCell.segmentedControl.addTarget(self, action: #selector(self.rolloutPolicyChanged(control:)), for: UIControl.Event.valueChanged)
+            
+            return segmentedControllCell
+        }
+        
+        if indexPath.item == 13 {
+            let segmentedControllCell: MLSegmentedCollectionViewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MLSegmentedCollectionViewCell.self.description(), for: indexPath) as! MLSegmentedCollectionViewCell
+            
+            self.blackRolloutPolicySegmentedControl = UISegmentedControl(items: ["Black Random","Black Neural Net"])
+            segmentedControllCell.segmentedControl = self.blackRolloutPolicySegmentedControl
+            //segmentedControllCell.separatorActive = false
+            //segmentedControllCell.items = ["Black Numerator","Black Denominator"]
+            segmentedControllCell.selectedIndex = UserDefaults.standard.integer(forKey: "blackRolloutPolicy")
+            segmentedControllCell.segmentedControl.addTarget(self, action: #selector(self.rolloutPolicyChanged(control:)), for: UIControl.Event.valueChanged)
+            
+            return segmentedControllCell
+        }
+        
         fatalError("exception")
     }
     
@@ -426,6 +455,37 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
         UserDefaults.standard.set(value.rawValue, forKey: key)
     }
     
+    @objc func rolloutPolicyChanged(control: UISegmentedControl) -> Void {
+        //print(control)
+        var value: MLChessRolloutPolicy! = MLChessRolloutPolicy.Random
+        var key = "whiteRolloutPolicy"
+        
+        if control === self.whiteRolloutPolicySegmentedControl {
+            key = "whiteRolloutPolicy"
+        }
+        
+        if control === self.blackRolloutPolicySegmentedControl {
+            key = "blackRolloutPolicy"
+        }
+        
+        if control.selectedSegmentIndex == 0 {
+            value = MLChessRolloutPolicy.Random
+        } else if control.selectedSegmentIndex == 1 {
+            value = MLChessRolloutPolicy.NeuralNet
+        }
+        
+        print(key,value)
+        
+        UserDefaults.standard.set(value.rawValue, forKey: key)
+    }
+    
+    /*
+    func setBlackCalcDuration(control: UISlider) -> Void {
+        print(control)
+        UserDefaults.standard.set(Int(control.value), forKey: "blackCalcDuration")
+    }
+    */
+    
     @objc func setCalcDuration(control: UISlider) -> Void {
         //print(control)
         if control === self.whiteCalcDurationSlider {
@@ -457,11 +517,6 @@ class MLSettingsViewController: PSViewController,UICollectionViewDataSource,UICo
         self.explorationCoefficientMaximumValueLabel.text = String(value)
         self.explorationCoefficientSlider.maximumValueImage = UIImage.imageWithLabel(label: self.explorationCoefficientMaximumValueLabel)
         //UserDefaults.standard.set(value, forKey: "mctsExplorationCoefficient")
-    }
-    
-    func setBlackCalcDuration(control: UISlider) -> Void {
-        print(control)
-        UserDefaults.standard.set(Int(control.value), forKey: "blackCalcDuration")
     }
     
     @objc func whiteDepthChanged(control: UISegmentedControl) -> Void {

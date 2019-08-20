@@ -54,6 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             "blackSimulationDepth" : MLChessSimulationDepth.Long.rawValue,
             "whiteStateEvaluation" : MLChessStateEvaluation.PawnUnits.rawValue,
             "blackStateEvaluation" : MLChessStateEvaluation.PawnUnits.rawValue,
+            "whiteRolloutPolicy" : MLChessRolloutPolicy.Random.rawValue,
+            "blackRolloutPolicy" : MLChessRolloutPolicy.Random.rawValue,
             "mctsExplorationCoefficient" : sqrt(2)
             ] as [String : Any]
         

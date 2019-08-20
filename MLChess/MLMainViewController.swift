@@ -48,6 +48,8 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
     var blackCalculationDuration: Int!
     var whiteStateEvaluation: MLChessStateEvaluation!
     var blackStateEvaluation: MLChessStateEvaluation!
+    var whiteRolloutPolicy: MLChessRolloutPolicy!
+    var blackRolloutPolicy: MLChessRolloutPolicy!
     
     var evaluationCount: Int!
     
@@ -117,6 +119,12 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
         
         self.blackStateEvaluation = MLChessStateEvaluation(rawValue: UserDefaults.standard.integer(forKey: "blackStateEvaluation"))
         print("blackStateEvaluation",self.blackStateEvaluation)
+        
+        self.whiteRolloutPolicy = MLChessRolloutPolicy(rawValue: UserDefaults.standard.integer(forKey: "whiteRolloutPolicy"))
+        print("whiteRolloutPolicy",self.whiteRolloutPolicy)
+        
+        self.blackRolloutPolicy = MLChessRolloutPolicy(rawValue: UserDefaults.standard.integer(forKey: "blackRolloutPolicy"))
+        print("blackRolloutPolicy",self.blackRolloutPolicy)
         
         self.explorationCoefficient = Double(exactly: UserDefaults.standard.float(forKey: "mctsExplorationCoefficient"))!
         print("explorationCoefficient",self.explorationCoefficient)
@@ -726,10 +734,10 @@ class MLMainViewController: PSTimerViewController, CBChessBoardViewDataSource, C
             return stateNodes
         }
         
-        if self.whiteStateEvaluation == MLChessStateEvaluation.NeuralNet && self.game.active == MLPieceColor.white {
+        if self.whiteRolloutPolicy == MLChessRolloutPolicy.NeuralNet && self.game.active == MLPieceColor.white {
             let netManager = MLChessNetManager()
             stateNodes = netManager.getBestPredictions(node: simNode, stateNodes: stateNodes)
-        } else if self.blackStateEvaluation == MLChessStateEvaluation.NeuralNet && self.game.active == MLPieceColor.black {
+        } else if self.blackRolloutPolicy == MLChessRolloutPolicy.NeuralNet && self.game.active == MLPieceColor.black {
             let netManager = MLChessNetManager()
             stateNodes = netManager.getBestPredictions(node: simNode, stateNodes: stateNodes)
         }

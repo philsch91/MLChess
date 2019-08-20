@@ -57,6 +57,7 @@
 		17E1A54F22A7067A00284386 /* MLSliderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E1A54E22A7067A00284386 /* MLSliderCollectionViewCell.swift */; };
 		17EFB14322FCAD2B00ABEAE4 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFB14222FCAD2B00ABEAE4 /* ArrayExtension.swift */; };
 		17EFB14522FCB66000ABEAE4 /* ChessNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 17EFB14422FCB65F00ABEAE4 /* ChessNet.mlmodel */; };
+		17F2B95B230BCF1B00922E1B /* MLChessRolloutPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F2B95A230BCF1B00922E1B /* MLChessRolloutPolicy.swift */; };
 		17FF9D5722A90EDE00C59CFA /* PSUIKitUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17FF9D5622A90EDE00C59CFA /* PSUIKitUtils.framework */; };
 		17FF9D5822A90EDE00C59CFA /* PSUIKitUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 17FF9D5622A90EDE00C59CFA /* PSUIKitUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -128,6 +129,7 @@
 		17E1A54E22A7067A00284386 /* MLSliderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLSliderCollectionViewCell.swift; sourceTree = "<group>"; };
 		17EFB14222FCAD2B00ABEAE4 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		17EFB14422FCB65F00ABEAE4 /* ChessNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ChessNet.mlmodel; sourceTree = "<group>"; };
+		17F2B95A230BCF1B00922E1B /* MLChessRolloutPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessRolloutPolicy.swift; sourceTree = "<group>"; };
 		17FF9D5622A90EDE00C59CFA /* PSUIKitUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PSUIKitUtils.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -262,6 +264,7 @@
 				17717744229DB98C0042A3B7 /* MLChessStrategy.swift */,
 				171267A4229FFB3300E9B366 /* MLChessSimulatonDepth.swift */,
 				17694A4522CFCC4100EC5666 /* MLChessStateEvaluation.swift */,
+				17F2B95A230BCF1B00922E1B /* MLChessRolloutPolicy.swift */,
 			);
 			name = Enums;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				174BD9D32256935400C7D48A /* MLKingPiece.swift in Sources */,
 				176CC7A82257483B009D576F /* MLKnightPiece.swift in Sources */,
 				176CC7B022574BF4009D576F /* CBWhiteRookView.swift in Sources */,
+				17F2B95B230BCF1B00922E1B /* MLChessRolloutPolicy.swift in Sources */,
 				176CC79C22573938009D576F /* MLQueenPiece.swift in Sources */,
 				174BD9A6224C0A3100C7D48A /* AppDelegate.swift in Sources */,
 				1755602A22690039006613E8 /* MLSettingsViewController.swift in Sources */,
