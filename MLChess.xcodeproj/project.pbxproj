@@ -46,6 +46,8 @@
 		176CC7B422574C4A009D576F /* CBBlackBishopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC7B322574C4A009D576F /* CBBlackBishopView.swift */; };
 		17717745229DB98C0042A3B7 /* MLChessStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17717744229DB98C0042A3B7 /* MLChessStrategy.swift */; };
 		1777E4CA22EA184500B25527 /* MLChessNetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1777E4C922EA184500B25527 /* MLChessNetManager.swift */; };
+		178EED802393BF7000B13412 /* PSUIKitUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 178EED772393B60E00B13412 /* PSUIKitUtils.framework */; };
+		178EED812393BF7000B13412 /* PSUIKitUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 178EED772393B60E00B13412 /* PSUIKitUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1790F021225E619E00DC5199 /* CBChessBoardViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F020225E619E00DC5199 /* CBChessBoardViewDataSource.swift */; };
 		1790F023225E639900DC5199 /* CBChessBoardSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F022225E639900DC5199 /* CBChessBoardSquare.swift */; };
 		1790F025225E644200DC5199 /* CBChessBoardViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1790F024225E644200DC5199 /* CBChessBoardViewDelegate.swift */; };
@@ -58,8 +60,6 @@
 		17EFB14322FCAD2B00ABEAE4 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFB14222FCAD2B00ABEAE4 /* ArrayExtension.swift */; };
 		17EFB14522FCB66000ABEAE4 /* ChessNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 17EFB14422FCB65F00ABEAE4 /* ChessNet.mlmodel */; };
 		17F2B95B230BCF1B00922E1B /* MLChessRolloutPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F2B95A230BCF1B00922E1B /* MLChessRolloutPolicy.swift */; };
-		17FF9D5722A90EDE00C59CFA /* PSUIKitUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17FF9D5622A90EDE00C59CFA /* PSUIKitUtils.framework */; };
-		17FF9D5822A90EDE00C59CFA /* PSUIKitUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 17FF9D5622A90EDE00C59CFA /* PSUIKitUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -69,7 +69,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				17FF9D5822A90EDE00C59CFA /* PSUIKitUtils.framework in Embed Frameworks */,
+				178EED812393BF7000B13412 /* PSUIKitUtils.framework in Embed Frameworks */,
 				17DBD47F228AA0E800D07805 /* MonteCarloKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -119,6 +119,7 @@
 		176CC7B322574C4A009D576F /* CBBlackBishopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBBlackBishopView.swift; sourceTree = "<group>"; };
 		17717744229DB98C0042A3B7 /* MLChessStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessStrategy.swift; sourceTree = "<group>"; };
 		1777E4C922EA184500B25527 /* MLChessNetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChessNetManager.swift; sourceTree = "<group>"; };
+		178EED772393B60E00B13412 /* PSUIKitUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSUIKitUtils.framework; path = ../PSUIKitUtils/PSUIKitUtils.framework; sourceTree = "<group>"; };
 		1790F020225E619E00DC5199 /* CBChessBoardViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBChessBoardViewDataSource.swift; sourceTree = "<group>"; };
 		1790F022225E639900DC5199 /* CBChessBoardSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBChessBoardSquare.swift; sourceTree = "<group>"; };
 		1790F024225E644200DC5199 /* CBChessBoardViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBChessBoardViewDelegate.swift; sourceTree = "<group>"; };
@@ -138,7 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17FF9D5722A90EDE00C59CFA /* PSUIKitUtils.framework in Frameworks */,
+				178EED802393BF7000B13412 /* PSUIKitUtils.framework in Frameworks */,
 				17DBD47E228AA0E800D07805 /* MonteCarloKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -163,6 +164,7 @@
 				17DBD47D228AA0E800D07805 /* MonteCarloKit.framework */,
 				174BD9A4224C0A3100C7D48A /* MLChess */,
 				174BD9A3224C0A3100C7D48A /* Products */,
+				178EED762393B60E00B13412 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -267,6 +269,14 @@
 				17F2B95A230BCF1B00922E1B /* MLChessRolloutPolicy.swift */,
 			);
 			name = Enums;
+			sourceTree = "<group>";
+		};
+		178EED762393B60E00B13412 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				178EED772393B60E00B13412 /* PSUIKitUtils.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		1790F01D225D1B4A00DC5199 /* Extensions */ = {
@@ -492,7 +502,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -547,7 +557,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -568,14 +578,14 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MLChess/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = at.ps.MLChess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -591,14 +601,14 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MLChess/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = at.ps.MLChess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
