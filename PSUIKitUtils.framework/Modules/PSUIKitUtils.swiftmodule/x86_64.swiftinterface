@@ -1,0 +1,60 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-module-flags: -target x86_64-apple-ios12.2-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name PSUIKitUtils
+import Foundation
+@_exported import PSUIKitUtils
+import Swift
+import UIKit
+extension UIImage {
+  public class func imageWithLabel(label: UIKit.UILabel) -> UIKit.UIImage?
+}
+@objc open class PSButton : UIKit.UIButton {
+  @objc override dynamic open var isHighlighted: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  public init(color: UIKit.UIColor, pressedColor: UIKit.UIColor)
+  public init(frame: CoreGraphics.CGRect, color: UIKit.UIColor, pressedColor: UIKit.UIColor)
+  @objc required dynamic public init?(coder decoder: Foundation.NSCoder)
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc deinit
+}
+@objc open class PSTimerViewController : PSUIKitUtils.PSViewController {
+  open var timer: Foundation.Timer?
+  open var timerInterval: Foundation.TimeInterval?
+  open var timerTolerance: Foundation.TimeInterval?
+  open var timerPauseDate: Foundation.Date?
+  open var timerPreviousFireDate: Foundation.Date?
+  @objc override dynamic open func viewDidLoad()
+  @objc override dynamic open func viewDidAppear(_ animated: Swift.Bool)
+  @objc override dynamic open func viewWillDisappear(_ animated: Swift.Bool)
+  @objc override open func appDidEnterBackground(notification: Foundation.Notification)
+  @objc override open func appWillEnterForeground(notification: Foundation.Notification)
+  open func startTimer()
+  open func stopTimer()
+  open func pauseTimer()
+  open func resumeTimer()
+  @objc open func onTick(timer: Foundation.Timer)
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+extension UIView {
+  public func addVisualConstraints(visualFormat: Swift.String, options: UIKit.NSLayoutConstraint.FormatOptions, metrics: [Swift.String : Any]?, views: [UIKit.UIView])
+}
+@objc open class PSViewController : UIKit.UIViewController {
+  open var notificationObservers: [Foundation.Notification]
+  @objc override dynamic open func viewDidLoad()
+  @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
+  @objc override dynamic open func viewDidAppear(_ animated: Swift.Bool)
+  @objc override dynamic open func viewWillDisappear(_ animated: Swift.Bool)
+  @objc override dynamic open func viewDidDisappear(_ animated: Swift.Bool)
+  @objc override dynamic open func didReceiveMemoryWarning()
+  @objc open func appDidEnterBackground(notification: Foundation.Notification)
+  @objc open func appWillEnterForeground(notification: Foundation.Notification)
+  @objc open func keyboardWillShow(notification: Foundation.Notification)
+  @objc open func keyboardWillHide(notification: Foundation.Notification)
+  @objc deinit
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+}
